@@ -1,0 +1,6 @@
+# weights, environments, and build noise stay local
+Ling-3.2-air-MLX-4bit/
+.venv/
+__pycache__/
+*.log
+*.npy
