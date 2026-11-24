@@ -12,7 +12,7 @@ plugin — plus the engine patch that unlocks the pack's MTP head for speculativ
 |---|---|
 | `convert_ling_to_mlx.py` | The converter. HF FP8 (e4m3 + 128×128 `weight_scale_inv`) → exact e4m3fn dequant (verified 0.0 max-diff vs torch) → mlx-lm layout (`mlp.switch_mlp.*` expert stacks, raw `kv_b_proj`, `[dim,4,1]` convs) → 4-bit g64 affine requant. Drops the vision tower, keeps the NextN head at `model.layers.42.*`, flattens the VL config to `model_type: bailing_hybrid` with `rope_interleave: true` and the per-layer SwiGLU clamp lists preserved. |
 | `check_pack_python.py` | Independent validator: loads a pack through **mlx-lm's** `bailing_moe_v3` (absorbing `kv_b_proj` into `embed_q`/`unembed_out` on the fly) and greedily generates. Coherent text here + garbage under a Zig engine ⇒ engine bug, not pack bug. |
-| `mtp-mlx-packs.patch` | mlx-serve patch (2 gates + 1 test): declares/loads the NextN MTP head for MLX packs, not just streaming EXL3 packs. Mirrors the `mimo_v2` pattern; headless packs fall back gracefully. |
+| `mtp-mlx-packs.patch` | mlx-serve patch (2 gates + 1 test): declares/loads the NextN MTP head for MLX packs, not just streaming EXL3 packs. Mirrors the `mimo_v2` pattern; headless packs fall back gracefully. Upstreamed as [mlx-serve PR #1316](https://github.com/ddalcu/mlx-serve/pull/1316). |
 
 ## Build
 
