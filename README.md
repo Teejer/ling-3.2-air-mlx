@@ -45,3 +45,21 @@ mlx-lm's `bailing_moe_v3.quant_predicate` and the published `rapid-mlx` packs.
 - Pack dirs must be passed to mlx-serve as **absolute** paths (the plugin resolves relative dirs
   against its own cwd).
 - HF blobs are extension-less; `mx.load` dispatches on suffix — read the symlinked snapshot names.
+
+## Vision (VL pack + engine branch)
+
+`convert_ling_to_mlx.py --vl` builds `Ling-3.2-air-MLX-4bit-VL` (~74 GB): the text pack plus the
+bf16 `model.visual.*` tower and `linear_proj.*` readout kept wide, `vision_config` (incl. the
+processor's pixel bounds), `mrope_section [8,12,12]`, and the vision token ids
+(`<|image_pad|>` 157157 …). Served by the mlx-serve `ling-vl` engine branch, which adds native
+`bailing_moe_v3_vl` support: the Qwen3-VL-shaped tower runs in the engine's vision encoder, rows
+splice at `<|image_pad|>`, and the trunk ropes with the checkpoint's own M-RoPE — the
+body-diagonal position table (`getRopeIndexBailing`) and the `apply_video_rope` axis layout
+(`bailingSelector`). Torch-oracle tests cover the tower rows, the position table, and the
+cos/sin goldens against the release modeling file.
+
+Verified on the VL pack (mlx-serve `ling-vl`, M3 Ultra): tower init `27 blocks, 1152d/16 heads,
+merge 2, 4608 → 2560`; single-image shape/color QA correct, with the position table compressing a
+165-token image to one step exactly as the reference delta predicts; two-image difference QA correct (delta −58 for 2×30 tokens); text
+regression coherent; decode ~98 tok/s (this branch predates the MTP merge — expect the +31%
+once both land).
