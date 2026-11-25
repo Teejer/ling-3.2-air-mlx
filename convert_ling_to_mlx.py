@@ -267,6 +267,9 @@ def main():
     ap.add_argument("--bits", type=int, default=4)
     ap.add_argument("--group-size", type=int, default=64)
     ap.add_argument("--no-head", action="store_true", help="drop the NextN layer")
+    ap.add_argument("--vl", action="store_true",
+                    help="VL pack: keep the vision tower (bf16) + linear_proj, keep vision_config/"
+                         "mrope/token ids, declare model_type bailing_moe_v3_vl")
     args = ap.parse_args()
 
     hf, out = find_hf_dir(args.hf_dir), Path(args.out)
@@ -283,9 +286,20 @@ def main():
     cfg.setdefault("num_shared_experts", 1)
     cfg.setdefault("tie_word_embeddings", False)
     cfg["torch_dtype"] = "bfloat16"
-    cfg["architectures"] = ["BailingMoeV3ForCausalLM"]
-    cfg.pop("mrope_section", None)
-    cfg.pop("vision_config", None)
+    cfg["architectures"] = ["BailingMoeV3VLForConditionalGeneration" if args.vl else "BailingMoeV3ForCausalLM"]
+    if args.vl:
+        cfg["model_type"] = "bailing_moe_v3_vl"
+        vc = dict(raw["vision_config"])
+        vc.setdefault("min_pixels", 4096)      # the release processor's resize bounds,
+        vc.setdefault("max_pixels", 4194304)   # so the engine config carries them without the preprocessor
+        cfg["vision_config"] = vc
+        for k in ("image_token_id", "video_token_id", "vision_start_token_id",
+                  "vision_end_token_id", "video_start_token_id", "video_end_token_id"):
+            if k in raw:
+                cfg[k] = raw[k]
+    else:
+        cfg.pop("mrope_section", None)
+        cfg.pop("vision_config", None)
     cfg.pop("quantization_config", None)  # the release's fp8 one; replaced below
     cfg["quantization"] = {
         "group_size": args.group_size,
@@ -311,6 +325,10 @@ def main():
         tensors = mx.load(str(shard))
         for name, arr in tensors.items():
             if name.startswith(("model.visual.", "linear_proj")):
+                if not args.vl:
+                    continue
+                # VL pack: the tower ships bf16 — route it through `loose` (kept wide, never quantized)
+                loose[name] = arr
                 continue
             if name.endswith("_scale_inv"):
                 (buckets.setdefault(layer_index(name), {}))[name] = arr
@@ -367,6 +385,8 @@ def main():
         "special_tokens_map.json",
         "chat_template.jinja",
         "generation_config.json",
+        "preprocessor_config.json",
+        "video_preprocessor_config.json",
     ):
         src_f = hf / f
         if src_f.exists():
