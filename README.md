@@ -62,4 +62,6 @@ Verified on the VL pack (mlx-serve `ling-vl`, M3 Ultra): tower init `27 blocks, 
 merge 2, 4608 → 2560`; single-image shape/color QA correct, with the position table compressing a
 165-token image to one step exactly as the reference delta predicts; two-image difference QA correct (delta −58 for 2×30 tokens); text
 regression coherent; decode ~98 tok/s (this branch predates the MTP merge — expect the +31%
-once both land).
+once both land). Published as [`teejer/Ling-3.2-air-mlx-vl`](https://huggingface.co/teejer/Ling-3.2-air-mlx-vl)
+(all 13 shards SHA-256-verified after upload; LFS dedupes against the text pack, ~138 MB actually
+transferred). Engine branch upstreamed as [mlx-serve PR #1334](https://github.com/ddalcu/mlx-serve/pull/1334).
