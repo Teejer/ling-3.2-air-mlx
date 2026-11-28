@@ -1,0 +1,51 @@
+{
+  "model": "Jundot/GLM-5.3-Flash-oQ4e-mtp",
+  "base_url": "http://127.0.0.1:11234",
+  "temperature": 0.0,
+  "max_tokens": 24576,
+  "extra": {},
+  "passed": 1,
+  "total": 4,
+  "results": [
+    {
+      "id": "render_escaped_template",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 8805,
+      "seconds": 162.3,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert render(\"Hi {{name}}!\", {\"name\": \"Bob\"}) == \"Hi Bob!\"\\nassert render(\"{{name}}\", {\"name\": \"Bob\"}) == \"Bob\"\\nassert render(\"x\", {}) == \"x\"\\nassert render(\"{{a}}{{b}}\", {\"a\": \"1\", \"b\": \"2\"}) == \"12\"\\ntry:\\n render(\"{{z}}\", {})\\n r = \"noerr\"\\nexcept KeyError:\\n r = \"err\"\\nassert r == \"err\"\\ntry:\\n render(\"abc~\", {})\\n r = \"noerr\"\\nexcept ValueError:\\n r = \"err\"\\nassert r\n--code-head--\ndef render(tpl, env):\n    out = []\n    i = 0\n    n = len(tpl)\n    while i < n:\n        c = tpl[i]\n        if c == '\\\\':\n            # Escape character: must have a following character to escape\n            if i + 1 >= n:\n                raise ValueError(\"escape character at end of template\")\n            out.append(tpl[i + 1])\n            i += 2\n        elif c == '{' and i + 1 < n and tpl[i + 1] =="
+    },
+    {
+      "id": "eulerian_trail",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 20082,
+      "seconds": 396.9,
+      "detail": "ASSERT_FAIL\n    exec('\\nfrom collections import Counter\\n\\ndef check(path, edges):\\n assert isinstance(path, list) and len(path) == len(edges) + 1\\n assert Counter(zip(path, path[1:])) == Counter(map(tuple, edges))\\n\\ne1 = [[2, 3], [1, 2], [3, 1], [1, 4], [4, 2]]\\ncheck(eulerian_trail(e1), e1)\\ne2 = [[0, 1], [1, 2], [2, 0], [1, 3], [3, 1]]\\ncheck(eulerian_trail(e2), e2)\\nassert eulerian_trail([]) \n--code-head--\ndef eulerian_trail(edges):\n    \"\"\"Return an Eulerian trail of a directed multigraph.\n\n    edges: list of [u, v] pairs; nodes are hashable; self-loops and\n    parallel edges are allowed.\n\n    Returns a list of nodes [x0, x1, ..., xm] with m == len(edges) such\n    that each consecutive pair (x_i, x_{i+1}) uses every edge exactly once\n    (as a multiset), or [] if no such trail exists (including when"
+    },
+    {
+      "id": "max_product_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR unterminated string literal (detected at line 5) (sol.py, line 5)",
+      "ok": false,
+      "completion_tokens": 24576,
+      "seconds": 475.4,
+      "detail": "SYNTAX_ERROR unterminated string literal (detected at line 5) (sol.py, line 5)\n--code-head--\nWe need to implement maximum product subarray with indices. Classic problem: max product subarray. We need to return (product, start, end) with end exclusive. Tie-breaking: among slices with equal products, choose shortest slice, then smallest start.\n\nConstraints: at most 1000 elements, integers. Products can be huge but Python handles big ints. We must use one O(n) scan and O(1) auxiliary storage"
+    },
+    {
+      "id": "expand_counted_pattern",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 6877,
+      "seconds": 123.0,
+      "detail": ""
+    }
+  ]
+}

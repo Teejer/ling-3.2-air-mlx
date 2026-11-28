@@ -51,8 +51,9 @@ KDA + gated MLA with DSA indexer, latent MoE, 1M ctx, ships its own remote code
 code-weighted calibration, top-16 of 179 routed. MLX-Serve 26.11.4 has **zero**
 `kimi_k3*` support, so it cannot be served there today.
 
-- **A. GLM first.** Run the 104-suite greedy donor pass, then `donor_value.py`:
-  `CEILING` (donor-fail ∧ every local run fail) is the true size of the Kimi ask.
+- **A. GLM first.** DONE 2026-11-28: **100/104**, and the ask is **3 ids**, not the
+  ~40 the ceiling looked like before the donor existed
+  (`max_product_slice`, `render_escaped_template`, `eulerian_trail`). See below.
 - **B. Validate the prune before spending Zig days.** Serve the REAP pack through
   the venv with `mlx_lm.server --trust-remote-code` (works today, no engine change)
   over the CEILING subset only. Two unknowns to settle: does a 20%-expert prune
@@ -60,6 +61,12 @@ code-weighted calibration, top-16 of 179 routed. MLX-Serve 26.11.4 has **zero**
   own README says each decoded token reads 70-85 GB, i.e. single-digit tok/s and an
   overnight full run, and it warns of real degradation outside code. RAM: 350 GB
   resident means Ling must be evicted; the two never co-reside.
+  **Repriced after A:** with the ask down to 3 ids, stage B buys an answer to a
+  3-problem question for 350 GB of bandwidth, an overnight run and Ling evicted,
+  while `kimi_batch_request.py` buys the same answer for cents on Moonshot's batch
+  API. B only becomes the right call if we expect to need ceiling traces *repeatedly*
+  (a second curriculum round, or a holdout-2 set the donor also fails) — then the
+  per-token bill stops and a local strong teacher starts. Parked, not cancelled.
 - **C. `kimi_k31` plugin for the fork** (authorized 2026-11-28; lands on
   `Teejer/mlx-serve`, upstream PR discussed after). Reuse is high because the
   `kda_hybrid` base already owns most of the op surface:
@@ -82,7 +89,50 @@ code-weighted calibration, top-16 of 179 routed. MLX-Serve 26.11.4 has **zero**
   B gates the *urgency*, not the value: C is upstreamable on its own because
   `kimi_k31` packs exist in the wild and the engine refuses them all.
 
-## Open
+## Donor of record, measured 2026-11-28
 
-- Delete `TensorFold/GLM-5.3-Flash-MLX-4bit-MTP` (169 GB) or keep it as the corpus
-  for an HF-layout alias loader — decide once the Jundot donor is serving.
+`Jundot/GLM-5.3-Flash-oQ4e-mtp` loads on MLX-Serve 26.11.4 in 17 s (186.4 GB resident,
+engine export layout — the schema diagnosis was the whole story) and scores
+**100/104** on the suite:
+
+| pass | settings | score | wall clock |
+|---|---|---|---|
+| A | greedy, `{"enable_thinking": false}`, 1500 tok | 92/104 | 10.5 min |
+| B | greedy, thinking on, 12288 tok, pass-A failures only | 7/12 | 12 min |
+| C | greedy, thinking on, 24576/40960 tok, remainder | 1/4 | 29 min |
+| union (`merge_eval.py`) | best-of | **100/104** | ~52 min |
+
+Reasoning lives in `reasoning_content`. `enable_thinking: false` and
+`reasoning_effort: low` are honoured per request; `thinking_mode` is NOT (silently
+ignored, still thinks). With thinking on it spends 3k-20k thinking tokens on hard
+problems, so a fixed 1500-token budget scores NO_CODE on things it can actually solve —
+that is why the donor run is two passes and why `donor_probe.py` exists.
+
+Still unsolved after 40960 tokens: `render_escaped_template` (asserts wrong at every
+budget, including no-thinking), `eulerian_trail` (asserts wrong at 20k thinking tokens),
+`max_product_slice` (truncated at 24k, client-timed-out at 40k), and
+`shortest_cycle_length` — which **Ling passes and the donor does not**.
+
+Against the students: r3 61/66 on the 66-suite, Qwen control 47/49 on the 49-suite.
+The intersection (`donor_value.py`) says 63 ids both solve, **36 ids the donor solves that
+no local run was ever measured on** (free traces), and a 3-id ask list for a paid teacher:
+`max_product_slice`, `render_escaped_template`, `eulerian_trail`.
+
+### GLM-5.4 and the bigger-GLM idea, checked 2026-11-28
+
+No GLM-5.4 exists on Hugging Face at all (0 search hits); newest from zai-org is
+GLM-5.3-Flash (2026-10-15). The non-Flash `zai-org/GLM-5.3` is the bigger teacher —
+`glm_moe_dsa`, 78 layers, 6144 hidden, 256 experts, 756 GB BF16 — but there is no
+usable MLX build of it: the only quants are AMD MXFP4-AttnFP8 (409 GB) and Intel
+AutoRound MXFP4 (403 GB), both for other stacks, and 78 layers of `glm_moe_dsa` is a
+different trunk than the `glm5_next` plugin. A ~4-bit build lands at ~400 GB, which
+does not fit resident next to anything else on this box, so it is not the local teacher.
+The Flash donor at 100/104 is close to the ceiling of what fits here; the remaining
+4 problems are worth API money, not another 200 GB.
+
+## Resolved
+
+- `TensorFold/GLM-5.3-Flash-MLX-4bit-MTP` (169 GB) deleted on 2026-11-28 after the
+  Jundot donor loaded and answered prompts: nothing references it and the engine cannot
+  read its layout, so keeping it would only be a corpus for a hypothetical alias loader.
+  NVMe free is back to 2.0 TiB.

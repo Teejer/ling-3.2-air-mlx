@@ -15,7 +15,7 @@ Donor failures are also tallied by status: a wall of NO_CODE means the token
 budget is clipping the chain of thought, not that the model cannot solve them.
 
 Usage:
-  python donor_value.py [--donor results/TensorFold_GLM...json]
+  python donor_value.py --donor results/donor-glm-merged.json   # best-of donor passes
                         [--ref GLOB ...]        # repeatable, newest match each
                         [--donor-match GLM]
 """

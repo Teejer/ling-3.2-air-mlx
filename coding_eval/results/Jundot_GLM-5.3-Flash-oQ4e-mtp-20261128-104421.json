@@ -1,0 +1,131 @@
+{
+  "model": "Jundot/GLM-5.3-Flash-oQ4e-mtp",
+  "base_url": "http://127.0.0.1:11234",
+  "temperature": 0.0,
+  "max_tokens": 12288,
+  "extra": {},
+  "passed": 7,
+  "total": 12,
+  "results": [
+    {
+      "id": "lis_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 12288,
+      "seconds": 252.1,
+      "detail": ""
+    },
+    {
+      "id": "shortest_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_CODE",
+      "ok": false,
+      "completion_tokens": 12288,
+      "seconds": 253.7,
+      "detail": "\n--code-head--\n"
+    },
+    {
+      "id": "tsp_exact_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1860,
+      "seconds": 28.4,
+      "detail": ""
+    },
+    {
+      "id": "render_escaped_template",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 3429,
+      "seconds": 60.4,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert render(\"Hi {{name}}!\", {\"name\": \"Bob\"}) == \"Hi Bob!\"\\nassert render(\"{{name}}\", {\"name\": \"Bob\"}) == \"Bob\"\\nassert render(\"x\", {}) == \"x\"\\nassert render(\"{{a}}{{b}}\", {\"a\": \"1\", \"b\": \"2\"}) == \"12\"\\ntry:\\n render(\"{{z}}\", {})\\n r = \"noerr\"\\nexcept KeyError:\\n r = \"err\"\\nassert r == \"err\"\\ntry:\\n render(\"abc~\", {})\\n r = \"noerr\"\\nexcept ValueError:\\n r = \"err\"\\nassert r\n--code-head--\ndef render(tpl, env):\n    ESC = '\\\\'\n    out = []\n    i = 0\n    n = len(tpl)\n    while i < n:\n        c = tpl[i]\n        if c == ESC:\n            # Escape character must have a following character to escape.\n            if i + 1 >= n:\n                raise ValueError(\"escape character at end of template\")\n            out.append(tpl[i + 1])\n            i += 2\n        elif c == '{':\n            if i"
+    },
+    {
+      "id": "eulerian_trail",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR invalid character '\u2014' (U+2014) (sol.py, line 89)",
+      "ok": false,
+      "completion_tokens": 12288,
+      "seconds": 246.1,
+      "detail": "SYNTAX_ERROR invalid character '\u2014' (U+2014) (sol.py, line 89)\n--code-head--\ndef eulerian_trail(edges):\n    if not edges:\n        return []\n    \n    # Build graph\n    out_deg = {}\n    in_deg = {}\n    adj = {}  # node -> list of (neighbor, edge_index)\n    for i, e in enumerate(edges):\n        u, v = e[0], e[1]\n        adj.setdefault(u, []).append((v, i))\n        adj.setdefault(v, [])\n        out_deg[u] = out_deg.get(u, 0) + 1\n        in_deg[v] = in_deg.get(v, 0) + 1\n    \n  "
+    },
+    {
+      "id": "max_product_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "NO_CODE",
+      "ok": false,
+      "completion_tokens": 12288,
+      "seconds": 236.6,
+      "detail": "\n--code-head--\n"
+    },
+    {
+      "id": "min_ragged_wrap",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 12288,
+      "seconds": 233.0,
+      "detail": ""
+    },
+    {
+      "id": "expand_counted_pattern",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR invalid syntax. Perhaps you forgot a comma? (sol.py, line 71)",
+      "ok": false,
+      "completion_tokens": 12288,
+      "seconds": 239.4,
+      "detail": "SYNTAX_ERROR invalid syntax. Perhaps you forgot a comma? (sol.py, line 71)\n--code-head--\ndef expand_counted_pattern(s):\n    result = []\n    i = 0\n    n = len(s)\n    \n    def parse_sequence(i, depth):  # returns (expanded_string, next_index)\n        out = []\n        while i < n:\n            c = s[i]\n            if c == '\\\\':\n                if i + 1 >= n:\n                    raise ValueError(\"trailing backslash\")\n                out.append(s[i+1])\n                i += 2\n            eli"
+    },
+    {
+      "id": "min_capacity_for_days",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 698,
+      "seconds": 10.9,
+      "detail": ""
+    },
+    {
+      "id": "count_grid_independent_sets",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1665,
+      "seconds": 27.8,
+      "detail": ""
+    },
+    {
+      "id": "minimum_max_lateness",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1623,
+      "seconds": 27.7,
+      "detail": ""
+    },
+    {
+      "id": "repeating_positional_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 4759,
+      "seconds": 83.0,
+      "detail": ""
+    }
+  ]
+}

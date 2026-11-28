@@ -1,0 +1,1622 @@
+{
+  "donor": "GLM-5.3-Flash donor (nothink + think)",
+  "donor_file": "results/donor-glm-merged.json",
+  "refs": {
+    "ling-r3": [
+      "anagrams",
+      "assign_rooms",
+      "balanced",
+      "balanced_code",
+      "base_neg2_conversion",
+      "bipartition_coloring",
+      "canonical_fraction",
+      "case_convert",
+      "closest_sum_pair",
+      "coin_change",
+      "combo_sum_once",
+      "count_coprime_inclusion_exclusion",
+      "course_order",
+      "csv_line",
+      "decode_escaped_fields",
+      "deduplicate_stable",
+      "edit_distance",
+      "egyptian_greedy",
+      "eval_expr",
+      "flatten",
+      "fraction_add",
+      "histogram",
+      "interval_overlap_count",
+      "kth_largest_stream",
+      "lcs_string",
+      "lis_reconstruct",
+      "longest_bounded_window",
+      "longest_consec",
+      "longest_k_distinct",
+      "longest_unique_window",
+      "lru",
+      "matrix_chain_multiplication",
+      "matrix_diagonal_sums",
+      "merge_intervals",
+      "merge_sorted_streams",
+      "min_eating_speed",
+      "min_path_effort_grid",
+      "min_stack",
+      "min_station_refuels",
+      "min_window",
+      "next_perm",
+      "normalize_identifier",
+      "normalize_path",
+      "palindrome_sub",
+      "parse_duration",
+      "parse_kv_escaped",
+      "predict_the_winner",
+      "render_escaped_template",
+      "restore_ips",
+      "retry_decorator",
+      "rle",
+      "roman",
+      "rotate_matrix",
+      "rotated_search",
+      "running_median",
+      "set_zeroes",
+      "shortest_cycle_length",
+      "shortest_path_with_count",
+      "spiral_order",
+      "stable_frequency_sort",
+      "streaming_kth_largest",
+      "subarrays_sum_equals_k",
+      "top_k_words",
+      "tsp_exact_bitmask",
+      "weighted_interval_schedule",
+      "word_break"
+    ],
+    "ling-ctl": [
+      "anagrams",
+      "assign_rooms",
+      "balanced",
+      "balanced_code",
+      "base_neg2_conversion",
+      "bipartition_coloring",
+      "canonical_fraction",
+      "case_convert",
+      "closest_sum_pair",
+      "coin_change",
+      "combo_sum_once",
+      "count_coprime_inclusion_exclusion",
+      "course_order",
+      "csv_line",
+      "decode_escaped_fields",
+      "deduplicate_stable",
+      "edit_distance",
+      "egyptian_greedy",
+      "eval_expr",
+      "flatten",
+      "fraction_add",
+      "histogram",
+      "interval_overlap_count",
+      "kth_largest_stream",
+      "lcs_string",
+      "lis_reconstruct",
+      "longest_bounded_window",
+      "longest_consec",
+      "longest_k_distinct",
+      "longest_unique_window",
+      "lru",
+      "matrix_chain_multiplication",
+      "matrix_diagonal_sums",
+      "merge_intervals",
+      "merge_sorted_streams",
+      "min_eating_speed",
+      "min_path_effort_grid",
+      "min_stack",
+      "min_station_refuels",
+      "min_window",
+      "next_perm",
+      "normalize_identifier",
+      "normalize_path",
+      "palindrome_sub",
+      "parse_duration",
+      "parse_kv_escaped",
+      "predict_the_winner",
+      "render_escaped_template",
+      "restore_ips",
+      "retry_decorator",
+      "rle",
+      "roman",
+      "rotate_matrix",
+      "rotated_search",
+      "running_median",
+      "set_zeroes",
+      "shortest_cycle_length",
+      "shortest_path_with_count",
+      "spiral_order",
+      "stable_frequency_sort",
+      "streaming_kth_largest",
+      "subarrays_sum_equals_k",
+      "top_k_words",
+      "tsp_exact_bitmask",
+      "weighted_interval_schedule",
+      "word_break"
+    ],
+    "qwen": [
+      "anagrams",
+      "assign_rooms",
+      "balanced",
+      "balanced_code",
+      "bipartition_coloring",
+      "canonical_fraction",
+      "case_convert",
+      "closest_sum_pair",
+      "coin_change",
+      "combo_sum_once",
+      "course_order",
+      "csv_line",
+      "decode_escaped_fields",
+      "deduplicate_stable",
+      "edit_distance",
+      "egyptian_greedy",
+      "eval_expr",
+      "flatten",
+      "histogram",
+      "interval_overlap_count",
+      "kth_largest_stream",
+      "lcs_string",
+      "lis_reconstruct",
+      "longest_bounded_window",
+      "longest_consec",
+      "longest_k_distinct",
+      "lru",
+      "matrix_diagonal_sums",
+      "merge_intervals",
+      "min_stack",
+      "min_window",
+      "next_perm",
+      "normalize_identifier",
+      "palindrome_sub",
+      "parse_duration",
+      "parse_kv_escaped",
+      "restore_ips",
+      "retry_decorator",
+      "rle",
+      "roman",
+      "rotate_matrix",
+      "rotated_search",
+      "running_median",
+      "set_zeroes",
+      "shortest_cycle_length",
+      "spiral_order",
+      "streaming_kth_largest",
+      "top_k_words",
+      "word_break"
+    ]
+  },
+  "counts": {
+    "BOTH": 63,
+    "LOCAL_ONLY": 1,
+    "DONOR_ONLY": 1,
+    "CEILING": 1,
+    "NEW_DONOR_PASS": 35,
+    "NEW_DONOR_FAIL": 3
+  },
+  "donor_failure_modes": {
+    "SYNTAX_ERROR unexpected indent (sol.py, line 82)": 1,
+    "ASSERT_FAIL": 3,
+    "SYNTAX_ERROR expected ':' (sol.py, line 50)": 1
+  },
+  "donor_only_ids": [],
+  "free_targets": [
+    "solve_linear_congruence",
+    "max_product_after_cut",
+    "count_digit_occurrences",
+    "count_divisible_subsets",
+    "min_assignment_cost",
+    "minimize_largest_block_sum",
+    "count_n_queens",
+    "grid_wall_escape",
+    "min_join_cost",
+    "count_domino_tilings",
+    "excel_column_title",
+    "trap_rain_water",
+    "daily_temperatures",
+    "word_pattern_bijection",
+    "count_islands",
+    "summary_ranges",
+    "knapsack_reconstruct",
+    "decode_nested_repeat",
+    "shortest_threshold_slice",
+    "glob_full_match",
+    "largest_ones_square",
+    "next_greater_steps",
+    "repeating_decimal",
+    "directed_euler_walk",
+    "min_ragged_wrap",
+    "deadline_dispatch",
+    "min_capacity_for_days",
+    "smallest_fixed_digit_sum",
+    "assignment_min_cost_bitmask",
+    "grid_keys_shortest_path",
+    "count_grid_independent_sets",
+    "first_winning_subtraction_move",
+    "minimum_max_lateness",
+    "repeating_positional_cycle_length",
+    "min_swaps_to_sorted"
+  ],
+  "kimi_ask": [
+    "render_escaped_template",
+    "eulerian_trail",
+    "max_product_slice",
+    "expand_counted_pattern"
+  ],
+  "rows": [
+    {
+      "id": "merge_intervals",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 106,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "top_k_words",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 74,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "balanced",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 75,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "rle",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 176,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "flatten",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 561,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "closest_sum_pair",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 91,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "roman",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 109,
+      "local_pass": true,
+      "locals": {
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "lru",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 385,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "csv_line",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 190,
+      "local_pass": true,
+      "locals": {
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "rotated_search",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 137,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "rotate_matrix",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 54,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "palindrome_sub",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 128,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "retry_decorator",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 187,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "anagrams",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 45,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "min_stack",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 115,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "case_convert",
+      "tier": 1,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 238,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "next_perm",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 374,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "word_break",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 94,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "edit_distance",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 134,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "histogram",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 279,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "course_order",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 146,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "running_median",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 269,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "coin_change",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 133,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "balanced_code",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 635,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "eval_expr",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 417,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "longest_consec",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 87,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "parse_duration",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1117,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "restore_ips",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 161,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "spiral_order",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 195,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "min_window",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 190,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "interval_overlap_count",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 254,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "canonical_fraction",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 96,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "deduplicate_stable",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 47,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "lis_reconstruct",
+      "tier": 3,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 12288,
+      "local_pass": true,
+      "locals": {
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "longest_k_distinct",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 142,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "egyptian_greedy",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 397,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "combo_sum_once",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 123,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "set_zeroes",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 226,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "kth_largest_stream",
+      "tier": 2,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 320,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "lcs_string",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 287,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "assign_rooms",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 303,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "bipartition_coloring",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 172,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "decode_escaped_fields",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 117,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "shortest_cycle_length",
+      "tier": 3,
+      "holdout": true,
+      "donor_pass": false,
+      "donor_status": "SYNTAX_ERROR unexpected indent (sol.py, line 82)",
+      "donor_tok": 1500,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "qwen": true
+      },
+      "bucket": "LOCAL_ONLY"
+    },
+    {
+      "id": "parse_kv_escaped",
+      "tier": 3,
+      "holdout": true,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 316,
+      "local_pass": false,
+      "locals": {},
+      "bucket": "DONOR_ONLY"
+    },
+    {
+      "id": "longest_bounded_window",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 235,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "matrix_diagonal_sums",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 293,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "normalize_identifier",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 104,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "streaming_kth_largest",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 312,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true,
+        "qwen": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "fraction_add",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 213,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "stable_frequency_sort",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 119,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "merge_sorted_streams",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 127,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "weighted_interval_schedule",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1500,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "shortest_path_with_count",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 216,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "normalize_path",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 85,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "longest_unique_window",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 203,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "count_coprime_inclusion_exclusion",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 387,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "min_eating_speed",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 89,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "tsp_exact_bitmask",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1860,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "predict_the_winner",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 184,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "base_neg2_conversion",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 67,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "min_path_effort_grid",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 261,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "matrix_chain_multiplication",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 166,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "subarrays_sum_equals_k",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 89,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "min_station_refuels",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 197,
+      "local_pass": true,
+      "locals": {
+        "ling-r3": true,
+        "ling-ctl": true
+      },
+      "bucket": "BOTH"
+    },
+    {
+      "id": "render_escaped_template",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": false,
+      "donor_status": "ASSERT_FAIL",
+      "donor_tok": 189,
+      "local_pass": false,
+      "locals": {},
+      "bucket": "CEILING"
+    },
+    {
+      "id": "solve_linear_congruence",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1500,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "max_product_after_cut",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 159,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "count_digit_occurrences",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 43,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "count_divisible_subsets",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 266,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "min_assignment_cost",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 203,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "minimize_largest_block_sum",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 192,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "count_n_queens",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 223,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "grid_wall_escape",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 255,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "min_join_cost",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 100,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "count_domino_tilings",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1500,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "excel_column_title",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 74,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "trap_rain_water",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 130,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "daily_temperatures",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 91,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "word_pattern_bijection",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 128,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "count_islands",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 238,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "summary_ranges",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 114,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "knapsack_reconstruct",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 317,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "eulerian_trail",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": false,
+      "donor_status": "SYNTAX_ERROR expected ':' (sol.py, line 50)",
+      "donor_tok": 1500,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_FAIL"
+    },
+    {
+      "id": "decode_nested_repeat",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 268,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "shortest_threshold_slice",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1500,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "glob_full_match",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 174,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "max_product_slice",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": false,
+      "donor_status": "ASSERT_FAIL",
+      "donor_tok": 652,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_FAIL"
+    },
+    {
+      "id": "largest_ones_square",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 374,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "next_greater_steps",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 204,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "repeating_decimal",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 218,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "directed_euler_walk",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 657,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "min_ragged_wrap",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 12288,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "deadline_dispatch",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 292,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "expand_counted_pattern",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": false,
+      "donor_status": "ASSERT_FAIL",
+      "donor_tok": 241,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_FAIL"
+    },
+    {
+      "id": "min_capacity_for_days",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 698,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "smallest_fixed_digit_sum",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 288,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "assignment_min_cost_bitmask",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 198,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "grid_keys_shortest_path",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1120,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "count_grid_independent_sets",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1665,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "first_winning_subtraction_move",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 93,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "minimum_max_lateness",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 1623,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "repeating_positional_cycle_length",
+      "tier": 3,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 4759,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    },
+    {
+      "id": "min_swaps_to_sorted",
+      "tier": 2,
+      "holdout": false,
+      "donor_pass": true,
+      "donor_status": "PASS",
+      "donor_tok": 340,
+      "local_pass": null,
+      "locals": {},
+      "bucket": "NEW_DONOR_PASS"
+    }
+  ]
+}

@@ -1,0 +1,1053 @@
+{
+  "model": "Jundot/GLM-5.3-Flash-oQ4e-mtp",
+  "base_url": "http://127.0.0.1:11234",
+  "temperature": 0.0,
+  "max_tokens": 1500,
+  "extra": {
+    "enable_thinking": false
+  },
+  "passed": 92,
+  "total": 104,
+  "results": [
+    {
+      "id": "merge_intervals",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 106,
+      "seconds": 1.9,
+      "detail": ""
+    },
+    {
+      "id": "top_k_words",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 74,
+      "seconds": 1.6,
+      "detail": ""
+    },
+    {
+      "id": "balanced",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 75,
+      "seconds": 1.5,
+      "detail": ""
+    },
+    {
+      "id": "rle",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 176,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "flatten",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 561,
+      "seconds": 8.8,
+      "detail": ""
+    },
+    {
+      "id": "closest_sum_pair",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 91,
+      "seconds": 1.7,
+      "detail": ""
+    },
+    {
+      "id": "roman",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 109,
+      "seconds": 2.0,
+      "detail": ""
+    },
+    {
+      "id": "lru",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 385,
+      "seconds": 6.0,
+      "detail": ""
+    },
+    {
+      "id": "csv_line",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 190,
+      "seconds": 3.1,
+      "detail": ""
+    },
+    {
+      "id": "rotated_search",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 137,
+      "seconds": 2.3,
+      "detail": ""
+    },
+    {
+      "id": "rotate_matrix",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 54,
+      "seconds": 1.2,
+      "detail": ""
+    },
+    {
+      "id": "palindrome_sub",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 128,
+      "seconds": 2.3,
+      "detail": ""
+    },
+    {
+      "id": "retry_decorator",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 187,
+      "seconds": 3.5,
+      "detail": ""
+    },
+    {
+      "id": "anagrams",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 45,
+      "seconds": 1.0,
+      "detail": ""
+    },
+    {
+      "id": "min_stack",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 115,
+      "seconds": 1.9,
+      "detail": ""
+    },
+    {
+      "id": "case_convert",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 238,
+      "seconds": 4.8,
+      "detail": ""
+    },
+    {
+      "id": "next_perm",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 374,
+      "seconds": 6.7,
+      "detail": ""
+    },
+    {
+      "id": "word_break",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 94,
+      "seconds": 1.7,
+      "detail": ""
+    },
+    {
+      "id": "edit_distance",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 134,
+      "seconds": 2.2,
+      "detail": ""
+    },
+    {
+      "id": "histogram",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 279,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "course_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 146,
+      "seconds": 2.6,
+      "detail": ""
+    },
+    {
+      "id": "running_median",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 269,
+      "seconds": 4.7,
+      "detail": ""
+    },
+    {
+      "id": "coin_change",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 133,
+      "seconds": 2.1,
+      "detail": ""
+    },
+    {
+      "id": "balanced_code",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 635,
+      "seconds": 9.7,
+      "detail": ""
+    },
+    {
+      "id": "eval_expr",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 417,
+      "seconds": 6.8,
+      "detail": ""
+    },
+    {
+      "id": "longest_consec",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 87,
+      "seconds": 1.5,
+      "detail": ""
+    },
+    {
+      "id": "parse_duration",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1117,
+      "seconds": 19.5,
+      "detail": ""
+    },
+    {
+      "id": "restore_ips",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 161,
+      "seconds": 2.6,
+      "detail": ""
+    },
+    {
+      "id": "spiral_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 195,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "min_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 190,
+      "seconds": 3.6,
+      "detail": ""
+    },
+    {
+      "id": "interval_overlap_count",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 254,
+      "seconds": 5.0,
+      "detail": ""
+    },
+    {
+      "id": "canonical_fraction",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 96,
+      "seconds": 1.9,
+      "detail": ""
+    },
+    {
+      "id": "deduplicate_stable",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 47,
+      "seconds": 1.0,
+      "detail": ""
+    },
+    {
+      "id": "lis_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 1500,
+      "seconds": 26.8,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert lis_reconstruct([3, 1, 2, 5, 4]) == [1, 2, 4]\\nassert lis_reconstruct([]) == []\\nassert lis_reconstruct([4, 3, 2, 1]) == [1]\\nassert lis_reconstruct([1, 2, 2, 3]) == [1, 2, 3]\\nassert lis_reconstruct([2, 1, 3]) == [1, 3]\\nassert lis_reconstruct([3, 1, 2, 4, 0, 5]) == [1, 2, 4, 5]\\n', ns)\n  File \"<string>\", line 2, in <module>\nAssertionError\n--code-head--\ndef lis_reconstruct(nums):\n    if not nums:\n        return []\n\n    n = len(nums)\n    # tails[k] = index of the smallest possible tail value of an increasing\n    # subsequence of length k+1\n    tails = []\n    # prev[i] = index of the previous element in the best subsequence ending at i\n    prev = [-1] * n\n\n    for i, x in enumerate(nums):\n        # Find leftmost position where tails value >= x (str"
+    },
+    {
+      "id": "longest_k_distinct",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 142,
+      "seconds": 2.3,
+      "detail": ""
+    },
+    {
+      "id": "egyptian_greedy",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 397,
+      "seconds": 7.8,
+      "detail": ""
+    },
+    {
+      "id": "combo_sum_once",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 123,
+      "seconds": 2.3,
+      "detail": ""
+    },
+    {
+      "id": "set_zeroes",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 226,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "kth_largest_stream",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 320,
+      "seconds": 5.4,
+      "detail": ""
+    },
+    {
+      "id": "lcs_string",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 287,
+      "seconds": 4.7,
+      "detail": ""
+    },
+    {
+      "id": "assign_rooms",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 303,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "bipartition_coloring",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 172,
+      "seconds": 2.8,
+      "detail": ""
+    },
+    {
+      "id": "decode_escaped_fields",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 117,
+      "seconds": 2.0,
+      "detail": ""
+    },
+    {
+      "id": "shortest_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR unexpected indent (sol.py, line 82)",
+      "ok": false,
+      "completion_tokens": 1500,
+      "seconds": 26.8,
+      "detail": "SYNTAX_ERROR unexpected indent (sol.py, line 82)\n--code-head--\nfrom collections import deque\n\n\ndef shortest_cycle_length(n, edges):\n    \"\"\"\n    Compute the length (number of edges) of the shortest simple cycle in an\n    undirected graph with vertices 0..n-1.\n\n    A self-loop counts as a cycle of length 1. Duplicate edges are ignored.\n    Returns -1 if the graph is acyclic. Raises ValueError if an edge endpoint\n    is outside the valid vertex range.\n    \"\"\"\n  "
+    },
+    {
+      "id": "parse_kv_escaped",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 316,
+      "seconds": 5.4,
+      "detail": ""
+    },
+    {
+      "id": "longest_bounded_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 235,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "matrix_diagonal_sums",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 293,
+      "seconds": 4.9,
+      "detail": ""
+    },
+    {
+      "id": "normalize_identifier",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 104,
+      "seconds": 2.0,
+      "detail": ""
+    },
+    {
+      "id": "streaming_kth_largest",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 312,
+      "seconds": 5.2,
+      "detail": ""
+    },
+    {
+      "id": "fraction_add",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 213,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "stable_frequency_sort",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 119,
+      "seconds": 2.5,
+      "detail": ""
+    },
+    {
+      "id": "merge_sorted_streams",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 127,
+      "seconds": 2.4,
+      "detail": ""
+    },
+    {
+      "id": "weighted_interval_schedule",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1500,
+      "seconds": 22.3,
+      "detail": ""
+    },
+    {
+      "id": "shortest_path_with_count",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 216,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "normalize_path",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 85,
+      "seconds": 1.8,
+      "detail": ""
+    },
+    {
+      "id": "longest_unique_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 203,
+      "seconds": 3.5,
+      "detail": ""
+    },
+    {
+      "id": "count_coprime_inclusion_exclusion",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 387,
+      "seconds": 7.2,
+      "detail": ""
+    },
+    {
+      "id": "min_eating_speed",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 89,
+      "seconds": 1.7,
+      "detail": ""
+    },
+    {
+      "id": "tsp_exact_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 276,
+      "seconds": 4.6,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert tsp_length([[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]) == 80\\nassert tsp_length([[0]]) == 0\\nassert tsp_length([[0, 5], [5, 0]]) == 10\\nassert tsp_length([[0, 1, 100], [1, 0, 1], [100, 1, 0]]) == 102\\nassert tsp_length([[0, 3, 3, 3], [3, 0, 3, 3], [3, 3, 0, 3], [3, 3, 3, 0]]) == 12\\n', ns)\n  File \"<string>\", line 2, in <module>\nAssertionErro\n--code-head--\ndef tsp_length(dist):\n    n = len(dist)\n    if n == 1:\n        return 0\n\n    # dp[mask][i] = min cost to start at 0, visit exactly the cities in mask,\n    # and end at city i (mask must contain 0 and i)\n    full = 1 << n\n    INF = float('inf')\n    dp = [[INF] * n for _ in range(full)]\n    dp[1][0] = 0\n\n    for mask in range(1, full):\n        if not (mask & 1):\n            continue  # tours must in"
+    },
+    {
+      "id": "predict_the_winner",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 184,
+      "seconds": 3.1,
+      "detail": ""
+    },
+    {
+      "id": "base_neg2_conversion",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 67,
+      "seconds": 1.5,
+      "detail": ""
+    },
+    {
+      "id": "min_path_effort_grid",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 261,
+      "seconds": 4.1,
+      "detail": ""
+    },
+    {
+      "id": "matrix_chain_multiplication",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 166,
+      "seconds": 2.7,
+      "detail": ""
+    },
+    {
+      "id": "subarrays_sum_equals_k",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 89,
+      "seconds": 1.8,
+      "detail": ""
+    },
+    {
+      "id": "min_station_refuels",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 197,
+      "seconds": 4.0,
+      "detail": ""
+    },
+    {
+      "id": "render_escaped_template",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 189,
+      "seconds": 3.2,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert render(\"Hi {{name}}!\", {\"name\": \"Bob\"}) == \"Hi Bob!\"\\nassert render(\"{{name}}\", {\"name\": \"Bob\"}) == \"Bob\"\\nassert render(\"x\", {}) == \"x\"\\nassert render(\"{{a}}{{b}}\", {\"a\": \"1\", \"b\": \"2\"}) == \"12\"\\ntry:\\n render(\"{{z}}\", {})\\n r = \"noerr\"\\nexcept KeyError:\\n r = \"err\"\\nassert r == \"err\"\\ntry:\\n render(\"abc~\", {})\\n r = \"noerr\"\\nexcept ValueError:\\n r = \"err\"\\nassert r\n--code-head--\ndef render(tpl, env):\n    out = []\n    i = 0\n    n = len(tpl)\n    while i < n:\n        c = tpl[i]\n        if c == '\\\\':\n            if i + 1 >= n:\n                raise ValueError(\"escape character at end of template\")\n            out.append(tpl[i + 1])\n            i += 2\n        elif c == '{' and i + 1 < n and tpl[i + 1] == '{':\n            j = tpl.find('}}', i + 2)\n            if j == -1:\n      "
+    },
+    {
+      "id": "solve_linear_congruence",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1500,
+      "seconds": 23.9,
+      "detail": ""
+    },
+    {
+      "id": "max_product_after_cut",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 159,
+      "seconds": 2.5,
+      "detail": ""
+    },
+    {
+      "id": "count_digit_occurrences",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 43,
+      "seconds": 1.1,
+      "detail": ""
+    },
+    {
+      "id": "count_divisible_subsets",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 266,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "min_assignment_cost",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 203,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "minimize_largest_block_sum",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 192,
+      "seconds": 3.4,
+      "detail": ""
+    },
+    {
+      "id": "count_n_queens",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 223,
+      "seconds": 4.3,
+      "detail": ""
+    },
+    {
+      "id": "grid_wall_escape",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 255,
+      "seconds": 4.3,
+      "detail": ""
+    },
+    {
+      "id": "min_join_cost",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 100,
+      "seconds": 2.0,
+      "detail": ""
+    },
+    {
+      "id": "count_domino_tilings",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1500,
+      "seconds": 25.6,
+      "detail": ""
+    },
+    {
+      "id": "excel_column_title",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 74,
+      "seconds": 1.6,
+      "detail": ""
+    },
+    {
+      "id": "trap_rain_water",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 130,
+      "seconds": 2.3,
+      "detail": ""
+    },
+    {
+      "id": "daily_temperatures",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 91,
+      "seconds": 1.8,
+      "detail": ""
+    },
+    {
+      "id": "word_pattern_bijection",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 128,
+      "seconds": 2.6,
+      "detail": ""
+    },
+    {
+      "id": "count_islands",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 238,
+      "seconds": 4.0,
+      "detail": ""
+    },
+    {
+      "id": "summary_ranges",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 114,
+      "seconds": 2.2,
+      "detail": ""
+    },
+    {
+      "id": "knapsack_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 317,
+      "seconds": 6.0,
+      "detail": ""
+    },
+    {
+      "id": "eulerian_trail",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR expected ':' (sol.py, line 50)",
+      "ok": false,
+      "completion_tokens": 1500,
+      "seconds": 25.9,
+      "detail": "SYNTAX_ERROR expected ':' (sol.py, line 50)\n--code-head--\nfrom collections import defaultdict\n\ndef eulerian_trail(edges):\n    if not edges:\n        return []\n\n    # Build adjacency structure: node -> list of (neighbor, edge_id)\n    adj = defaultdict(list)\n    indeg = defaultdict(int)\n    outdeg = defaultdict(int)\n    nodes = set()\n    for i, (u, v) in enumerate(edges):\n        adj[u].append((v, i))\n        outdeg[u] += 1\n        indeg[v] += 1\n        nod"
+    },
+    {
+      "id": "decode_nested_repeat",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 268,
+      "seconds": 4.6,
+      "detail": ""
+    },
+    {
+      "id": "shortest_threshold_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1500,
+      "seconds": 24.7,
+      "detail": ""
+    },
+    {
+      "id": "glob_full_match",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 174,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "max_product_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 652,
+      "seconds": 11.5,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert max_product_slice([2, 3, -2, 4]) == (6, 0, 2)\\nassert max_product_slice([]) is None\\nassert max_product_slice([-2, 3, -4]) == (24, 0, 3)\\nassert max_product_slice([0, -2, 0]) == (0, 0, 1)\\nassert max_product_slice([1, 2, 1]) == (2, 1, 2)\\nassert max_product_slice([-1, -1, -1]) == (1, 0, 2)\\nassert max_product_slice([-5]) == (-5, 0, 1)\\n', ns)\n  File \"<string>\", line \n--code-head--\ndef max_product_slice(nums):\n    \"\"\"\n    Find a nonempty contiguous slice of `nums` with the largest possible product.\n\n    Returns (product, start, end) where start is inclusive and end is exclusive\n    (zero-based indices). Among slices with equal products, the shortest slice\n    is preferred, then the one with the smallest start index. Returns None for\n    an empty list.\n\n    Uses a single O(n)"
+    },
+    {
+      "id": "largest_ones_square",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 374,
+      "seconds": 6.8,
+      "detail": ""
+    },
+    {
+      "id": "next_greater_steps",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 204,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "repeating_decimal",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 218,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "directed_euler_walk",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 657,
+      "seconds": 12.2,
+      "detail": ""
+    },
+    {
+      "id": "min_ragged_wrap",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR invalid syntax. Perhaps you forgot a comma? (sol.py, line 95)",
+      "ok": false,
+      "completion_tokens": 1415,
+      "seconds": 25.9,
+      "detail": "SYNTAX_ERROR invalid syntax. Perhaps you forgot a comma? (sol.py, line 95)\n--code-head--\ndef min_ragged_wrap(words, width):\n    if width <= 0:\n        raise ValueError(\"width must be positive\")\n    for w in words:\n        if len(w) > width:\n            raise ValueError(\"word longer than width\")\n\n    n = len(words)\n    if n == 0:\n        return []\n\n    # lengths[i] = length of words[i]\n    lengths = [len(w) for w in words]\n\n    # prefix sums of lengths\n    # total_len(i, j) = sum of le"
+    },
+    {
+      "id": "deadline_dispatch",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 292,
+      "seconds": 5.5,
+      "detail": ""
+    },
+    {
+      "id": "expand_counted_pattern",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 241,
+      "seconds": 4.2,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert expand_counted_pattern(\"2[a3[b]]\") == \"abbbabbb\"\\nassert expand_counted_pattern(\"\") == \"\"\\nassert expand_counted_pattern(\"0[abc]2[]x\") == \"x\"\\nassert expand_counted_pattern(r\"2[a\\\\]b]\\\\3\\\\\\\\\") == \"a]ba]b3\\\\\\\\\"\\nassert expand_counted_pattern(\"02[a] 1[b]\") == \"aa b\"\\nassert expand_counted_pattern(\"10[z]\") == \"zzzzzzzzzz\"\\ndef rejects_pattern(s):\\n    try: expand_counte\n--code-head--\ndef expand_counted_pattern(s):\n    def parse(i):\n        parts = []\n        while i < len(s):\n            c = s[i]\n            if c == '\\\\':\n                if i + 1 >= len(s):\n                    raise ValueError(\"trailing backslash\")\n                parts.append(s[i + 1])\n                i += 2\n            elif c == '[':\n                raise ValueError(\"bare '['\")\n            elif c == ']':\n   "
+    },
+    {
+      "id": "min_capacity_for_days",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR expected ':' (sol.py, line 19)",
+      "ok": false,
+      "completion_tokens": 343,
+      "seconds": 5.4,
+      "detail": "SYNTAX_ERROR expected ':' (sol.py, line 19)\n--code-head--\ndef min_capacity_for_days(weights, days):\n    def can_ship(capacity):\n        days_needed = 1\n        current = 0\n        for w in weights:\n            if current + w > capacity:\n                days_needed += 1\n                current = w\n            else:\n                current += w\n        return days_needed <= days\n\n    lo = max(weights)\n    hi = sum(weights)\n    while lo < hi:\n        mid = "
+    },
+    {
+      "id": "smallest_fixed_digit_sum",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 288,
+      "seconds": 5.1,
+      "detail": ""
+    },
+    {
+      "id": "assignment_min_cost_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 198,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "grid_keys_shortest_path",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1120,
+      "seconds": 15.5,
+      "detail": ""
+    },
+    {
+      "id": "count_grid_independent_sets",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR cannot assign to expression here. Maybe you meant '==' instead of '='? (sol.py, line 25)",
+      "ok": false,
+      "completion_tokens": 1500,
+      "seconds": 26.3,
+      "detail": "SYNTAX_ERROR cannot assign to expression here. Maybe you meant '==' instead of '='? (sol.py, line 25)\n--code-head--\ndef count_grid_independent_sets(rows, cols):\n    MOD = 1000000007\n    if rows == 0 or cols == 0:\n        return 1\n    if cols > rows:\n        rows, cols = rows, cols\n    # Ensure cols is the smaller dimension to keep the number of masks small.\n    if cols > rows:\n        rows, cols = cols, rows\n    if cols > rows:\n        rows, cols = rows, cols\n    if cols > rows:\n        rows, cols = cols, rows\n"
+    },
+    {
+      "id": "first_winning_subtraction_move",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 93,
+      "seconds": 2.2,
+      "detail": ""
+    },
+    {
+      "id": "minimum_max_lateness",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 233,
+      "seconds": 4.5,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert minimum_max_lateness([(3, 6), (2, 8), (1, 9), (4, 9), (3, 14), (2, 15)]) == 1\\nassert minimum_max_lateness([]) == 0\\nassert minimum_max_lateness([(5, 3)]) == 2\\nassert minimum_max_lateness([(1, 10), (1, 20)]) == -9\\nassert minimum_max_lateness([(4, 100), (1, 1)]) == 0\\nassert minimum_max_lateness([(2, 5), (3, 5)]) == 0\\n', ns)\n  File \"<string>\", line 5, in <module>\nA\n--code-head--\ndef minimum_max_lateness(jobs):\n    if not jobs:\n        return 0\n    ordered = sorted(jobs, key=lambda j: j[1])\n    time = 0\n    max_lateness = 0\n    for duration, deadline in ordered:\n        time += duration\n        lateness = time - deadline\n        if lateness > max_lateness:\n            max_lateness = lateness\n    return max_lateness"
+    },
+    {
+      "id": "repeating_positional_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_OUTPUT",
+      "ok": false,
+      "completion_tokens": 565,
+      "seconds": 11.1,
+      "detail": "\n--code-head--\ndef repeating_positional_cycle_length(numerator, denominator, base):\n    if numerator == 0:\n        return 0\n    from math import gcd\n    g = gcd(numerator, denominator)\n    denominator //= g\n    # Remove factors of base from denominator: those contribute to the\n    # nonrepeating prefix, not the repeating cycle.\n    while denominator % base == 0:\n        denominator //= base\n    if denominator =="
+    },
+    {
+      "id": "min_swaps_to_sorted",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 340,
+      "seconds": 5.0,
+      "detail": ""
+    }
+  ]
+}

@@ -227,7 +227,9 @@ def main():
     ap.add_argument("--ingest", default=None, help="batch response JSONL")
     ap.add_argument("--ask-file", default=None, help="donor-value-*.json (default newest)")
     ap.add_argument("--ids", default=None, help="explicit comma list, skips the ask-file")
-    ap.add_argument("--model", default="kimi-k2.6")
+    ap.add_argument("--model", default="kimi-k3.1-pro",
+                    help="the served id on the Kimi API; kimi-k3.1-pro and kimi-k3 are "
+                         "the two that support Batch (60%% of list)")
     ap.add_argument("--effort", default="low", choices=["low", "max"],
                     help="low first; max only for ids the cheap round missed")
     ap.add_argument("--n", type=int, default=1, help="samples per problem")
