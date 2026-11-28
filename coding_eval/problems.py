@@ -881,3 +881,14 @@ assert normalize_path("/a\\\\b/../c") == "/c"
 """,
     ),
 ]
+
+# Held-out test split — never in LoRA training data; run_eval --harvest
+# excludes these by default. Carved 2026-11-27 before distillation began:
+# tier mix + the shared failure ceiling (parse_kv_escaped, lis_reconstruct).
+# The scoreboard's honest generalization number = held-out subset only.
+HOLDOUT_IDS = {
+    "eval_expr", "running_median", "histogram", "word_break",
+    "min_window", "egyptian_greedy", "combo_sum_once", "kth_largest_stream",
+    "canonical_fraction", "parse_kv_escaped", "lis_reconstruct",
+    "shortest_cycle_length",
+}

@@ -22,7 +22,7 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from problems import PROBLEMS  # noqa: E402
+from problems import HOLDOUT_IDS, PROBLEMS  # noqa: E402
 
 SYSTEM = (
     "You are an expert Python programmer. Implement exactly what is asked, "
@@ -116,7 +116,19 @@ def main():
                     help="1 or 2 to run one tier; 0 (default) runs all")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--reps", type=int, default=1)
+    ap.add_argument("--harvest", action="store_true",
+                    help="LoRA Phase-0 mode: sample each train-pool problem "
+                         "--samples times, keep execution-PASSING solutions as "
+                         "chat-template JSONL (held-out split excluded)")
+    ap.add_argument("--samples", type=int, default=8)
+    ap.add_argument("--max-per-problem", type=int, default=6,
+                    help="cap distinct passing traces per problem (overfit guard)")
+    ap.add_argument("--keep-holdout", action="store_true",
+                    help="harvest held-out problems too (NOT recommended)")
     args = ap.parse_args()
+    if args.harvest and args.temperature == 0.0:
+        args.temperature = 0.8  # sampling needs heat; greedy harvest = 1 unique trace
+        print("harvest: defaulting temperature to 0.8")
 
     model = loaded_model(args.base_url)
     if args.expect and args.expect.lower() not in model.lower():
@@ -132,6 +144,73 @@ def main():
         probs = [p for p in probs if p["id"] in want]
     if args.limit:
         probs = probs[: args.limit]
+
+    if args.harvest:
+        if not args.keep_holdout:
+            probs = [p for p in probs if p["id"] not in HOLDOUT_IDS]
+        hdir = Path(__file__).parent / "harvest"
+        hdir.mkdir(exist_ok=True)
+        stamp = time.strftime("%Y%m%d-%H%M%S")
+        hpath = hdir / f"{slug}-{stamp}.jsonl"
+        tally, total = {}, 0
+        consec_err = 0
+        with hpath.open("a") as fh:
+            for prob in probs:
+                seen_codes, kept = set(), 0
+                for s in range(args.samples):
+                    if kept >= args.max_per_problem:
+                        break
+                    try:
+                        resp = post(args.base_url, {
+                            "model": model,
+                            "messages": [
+                                {"role": "system", "content": SYSTEM},
+                                {"role": "user", "content": prob["prompt"]},
+                            ],
+                            "temperature": args.temperature,
+                            "max_tokens": args.max_tokens,
+                            "stream": False,
+                        })
+                    except Exception as e:
+                        consec_err += 1
+                        print(f"{prob['id']:<18} sample{s} REQUEST_ERROR {e}")
+                        if consec_err >= 3:
+                            print("SERVER_LOST — aborting harvest")
+                            sys.exit(2)
+                        continue
+                    consec_err = 0
+                    ch = resp["choices"][0]
+                    content = ch["message"].get("content") or ""
+                    if not content.strip():
+                        content = (ch["message"].get("reasoning_content")
+                                   or ch["message"].get("reasoning") or "")
+                    code = extract_code(content)
+                    if not code:
+                        continue
+                    with tempfile.TemporaryDirectory(dir="/private/tmp/opencode") as wd:
+                        status, _ = run_tests(wd, code, prob["tests"])
+                    norm = re.sub(r"\s+", " ", code).strip()
+                    if status != "PASS" or norm in seen_codes:
+                        continue
+                    seen_codes.add(norm)
+                    kept += 1
+                    total += 1
+                    tally[prob["id"]] = kept
+                    fh.write(json.dumps({
+                        "messages": [
+                            {"role": "system", "content": SYSTEM},
+                            {"role": "user", "content": prob["prompt"]},
+                            {"role": "assistant",
+                             "content": "```python\n" + code + "\n```"},
+                        ],
+                        "meta": {"id": prob["id"], "tier": prob.get("tier", 1),
+                                 "model": model, "sample": s,
+                                 "temperature": args.temperature},
+                    }, ensure_ascii=False) + "\n")
+                    fh.flush()
+                print(f"{prob['id']:<18} kept {kept}/{args.samples}")
+        print(f"\nharvested {total} verified traces over {len(tally)} problems -> {hpath}")
+        return
 
     results, passed = [], 0
     consec_err = 0
