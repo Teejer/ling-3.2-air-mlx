@@ -84,11 +84,19 @@ implementation on CUDA. Only worth it if Phase 0–2 plateau.
    only under permissive account terms.
 3. **Qwen3.8-Flash-Next** — parity, not more capable; the right teacher for
    efficiency/consistency, wrong one for a capability jump.
-4. **Unranked locals (GLM-5.3-Flash, MiniMax-M3)** — serve on :11250, run the
-   suite eval, promote whichever actually beats Qwen. **laya is excluded** (user:
-   it cannot chat at all — pure decision model, so it can neither author nor
-   solve nor donate traces; no eval run is worth its time). Note the HF cache
-   spells it MiniMax-M3-oQ3, not H3.
+4. **GLM-5.3-Flash — MEASURED, it is the donor (2026-11-28).** Not "unranked"
+   anymore: `Jundot/GLM-5.3-Flash-oQ4e-mtp` scores **100/104** on the suite
+   (92/104 greedy with thinking off in 10.5 min, +7 of the misses with thinking,
+   +1 at a 24k budget) against r3's 61/66 and the Qwen control's 47/49. It is the
+   local teacher of record; details and the two-pass protocol are in
+   `coding_eval/DONORS.md`. **GLM-5.4 does not exist** (0 hits on HF; newest from
+   zai-org is GLM-5.3-Flash, 2026-10-15). The bigger non-Flash `zai-org/GLM-5.3`
+   (78 layers, `glm_moe_dsa`, 756 GB BF16) has no MLX build — only AMD/Intel MXFP4
+   at ~400 GB for other stacks — so a ~4-bit version would not fit resident next to
+   the student either. The 4 problems the donor cannot solve are worth API cents,
+   not another 200 GB. **laya stays excluded** (user: it cannot chat at all — pure
+   decision model, so it can neither author nor solve nor donate traces). Note the
+   HF cache spells MiniMax as MiniMax-M3-oQ3, not H3.
 
 **Curriculum-author standings (first-pass validated rate, batches 1-1):**
 Claude 9/10 then 10/10 with corrections — most reliable author.
@@ -159,6 +167,35 @@ i.e. real transfer, not memorization. Verdict: scale data, not capacity.
 Remaining fails are mechanism-blocked: 2 ceiling problems +
 `render_escaped_template` (zero-trace) → Phase-1 teacher traces;
 `csv_line`/`roman` flaky.
+
+## Round-4 (started 2026-11-28 ~11:50): the donor's data, same capacity
+
+Data is the only variable: **438 verified traces** (the 307 self-harvested that made
+r3 the champion + **131 GLM-5.3-Flash donor traces** covering the 38 problems the bank
+had never touched — every one of the 38 contributed at least one, 417 train / 21
+valid, 90 problems). Capacity is byte-identical to r3 — last 16 layers, `self_attn` +
+`shared_experts`, rank 8, scale 20, lr 5e-5, batch 1, seed 0, 660.5M trainable
+(0.531%) — with iters scaled to the data (250 × 438/307 ≈ 350, still ~0.85 of one
+epoch, the same fraction r3 saw). `coding_eval/lora_round4.yaml`.
+
+The donor traces were harvested at temp 0.8 with `{"enable_thinking": false}` so they
+look like what the student produces at inference (the student has no thinking phase),
+and every trace was kept only because its extracted code passed that problem's tests
+on this machine.
+
+**Gotcha that cost 15 minutes:** `mlx_lm.lora` (and plain `mlx_lm.load`) died twice at
+`mx.eval(model.parameters())` with `[METAL] Command buffer execution failed: Caused GPU
+Timeout Error (kIOGPUCommandBufferCallbackErrorTimeout)` — after this box had served
+186 GB of GLM. Not memory (119 GB free, 0 swap), not another GPU client (unloading Tess
+did not help), not the disk (900 MB/s), not a broken pack: it is the **cold mmap
+page-in path** — the GPU touching memory-mapped shard pages that are no longer in the
+unified cache blows the command-buffer watchdog. Fix is one line and takes 10 s when
+the cache is warm:
+
+    cat Ling-3.2-air-MLX-mixed-4-8bit/*.safetensors > /dev/null
+
+Warm the pack before any training run that follows a big serve/evict cycle; r1–r3 never
+hit this because they ran right after an eval that had just read the same files.
 
 ## Immediate next steps
 

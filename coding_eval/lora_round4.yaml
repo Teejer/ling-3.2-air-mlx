@@ -1,0 +1,13 @@
+# Round-4 config: EXACT round-3 capacity — the only change is the data.
+# r3 = 307 self-harvested traces -> 61/66 (champion).
+# r4 = 438 traces: the same 307 plus 131 verified GLM-5.3-Flash donor traces on the
+# 38 problems the bank had never covered (90 problems, 417 train / 21 valid).
+# "Scale data, not capacity" (r2 proved what happens the other way: 3.3 GB of
+# trainable weights on 307 traces scored 44/66). Iterations scale with the data,
+# 250 * 438/307 ~= 350, so each example is still seen about once.
+# Note the key MUST be lora_parameters (mlx-lm ignores 'lora:').
+lora_parameters:
+  rank: 8
+  scale: 20.0
+  dropout: 0.0
+  layer_keys: ["self_attn", "shared_experts"]
