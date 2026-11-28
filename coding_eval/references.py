@@ -846,3 +846,441 @@ def render(tpl, env):
             out.append(c)
             i += 1
     return "".join(out)
+
+
+# --- solve_linear_congruence (intake) ---
+def solve_linear_congruence(a, b, m):
+    from math import gcd
+    g = gcd(a, m)
+    if b % g: return -1
+    mod = m // g
+    a_reduced = (a // g) % mod
+    b_reduced = (b // g) % mod
+    def extended(x, y):
+        if y == 0: return (1, 0)
+        u, v = extended(y, x % y)
+        return v, u - (x // y) * v
+    inverse = extended(a_reduced, mod)[0] % mod
+    return (b_reduced * inverse) % mod
+
+# --- max_product_after_cut (intake) ---
+def max_product_after_cut(n):
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    for i in range(2, n + 1):
+        dp[i] = max(max(j, dp[j]) * max(i - j, dp[i - j]) for j in range(1, i))
+    return dp[n]
+
+# --- count_digit_occurrences (intake) ---
+def count_digit_occurrences(n, d):
+    total, factor = 0, 1
+    while factor <= n:
+        lower = n % factor
+        current = (n // factor) % 10
+        higher = n // (factor * 10)
+        if current < d:
+            total += higher * factor
+        elif current == d:
+            total += higher * factor + lower + 1
+        else:
+            total += (higher + 1) * factor
+        factor *= 10
+    return total
+
+# --- count_divisible_subsets (intake) ---
+def count_divisible_subsets(nums, m, target):
+    mod = 1000000007
+    dp = [0] * m
+    dp[0] = 1
+    for x in nums:
+        nxt = dp[:]
+        for r, count in enumerate(dp):
+            destination = (r + x) % m
+            nxt[destination] = (nxt[destination] + count) % mod
+        dp = nxt
+    return dp[target]
+
+# --- min_assignment_cost (intake) ---
+def min_assignment_cost(cost):
+    n = len(cost)
+    dp = [None] * (1 << n)
+    dp[0] = 0
+    for mask in range(1 << n):
+        if dp[mask] is None: continue
+        row = bin(mask).count("1")
+        if row == n: continue
+        for col in range(n):
+            bit = 1 << col
+            if mask & bit: continue
+            new_mask = mask | bit
+            value = dp[mask] + cost[row][col]
+            if dp[new_mask] is None or value < dp[new_mask]:
+                dp[new_mask] = value
+    return dp[-1]
+
+# --- minimize_largest_block_sum (intake) ---
+def minimize_largest_block_sum(nums, k):
+    def feasible(limit):
+        groups, current = 1, 0
+        for x in nums:
+            if current + x > limit:
+                groups += 1
+                current = x
+            else:
+                current += x
+        return groups <= k
+    lo, hi = max(nums), sum(nums)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if feasible(mid):
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo
+
+# --- count_n_queens (intake) ---
+def count_n_queens(n):
+    full = (1 << n) - 1
+    def search(row, columns, down_left, down_right):
+        if row == n: return 1
+        free = full & ~(columns | down_left | down_right)
+        total = 0
+        while free:
+            bit = free & -free
+            free -= bit
+            total += search(row + 1, columns | bit, ((down_left | bit) << 1) & full, (down_right | bit) >> 1)
+        return total
+    return search(0, 0, 0, 0)
+
+# --- grid_wall_escape (intake) ---
+def grid_wall_escape(grid, k):
+    from collections import deque
+    rows, cols = len(grid), len(grid[0])
+    queue = deque([(0, 0, 0, 0)])
+    seen = {(0, 0, 0)}
+    while queue:
+        r, c, used, distance = queue.popleft()
+        if (r, c) == (rows - 1, cols - 1): return distance
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nr, nc = r + dr, c + dc
+            if not (0 <= nr < rows and 0 <= nc < cols): continue
+            new_used = used + (grid[nr][nc] == "#")
+            state = (nr, nc, new_used)
+            if new_used <= k and state not in seen:
+                seen.add(state)
+                queue.append((nr, nc, new_used, distance + 1))
+    return -1
+
+# --- min_join_cost (intake) ---
+def min_join_cost(lengths):
+    import heapq
+    heap = list(lengths)
+    heapq.heapify(heap)
+    total = 0
+    while len(heap) > 1:
+        cost = heapq.heappop(heap) + heapq.heappop(heap)
+        total += cost
+        heapq.heappush(heap, cost)
+    return total
+
+# --- count_domino_tilings (intake) ---
+def count_domino_tilings(rows, cols):
+    if rows * cols % 2: return 0
+    board = [False] * (rows * cols)
+    def search():
+        try:
+            start = board.index(False)
+        except ValueError:
+            return 1
+        r, c = divmod(start, cols)
+        board[start] = True
+        total = 0
+        if c + 1 < cols and not board[start + 1]:
+            board[start + 1] = True
+            total += search()
+            board[start + 1] = False
+        if r + 1 < rows and not board[start + cols]:
+            board[start + cols] = True
+            total += search()
+            board[start + cols] = False
+        board[start] = False
+        return total
+    return search()
+
+
+# --- excel_column_title (intake) ---
+def excel_column_title(n):
+ if n < 1: raise ValueError("n must be >= 1")
+ out = []
+ while n: n, r = divmod(n - 1, 26); out.append(chr(65 + r))
+ return "".join(reversed(out))
+
+# --- trap_rain_water (intake) ---
+def trap_rain_water(heights):
+ from itertools import accumulate
+ left = list(accumulate(heights, max))
+ right = list(accumulate(reversed(heights), max))[::-1]
+ return sum(min(a, b) - x for a, b, x in zip(left, right, heights))
+
+# --- daily_temperatures (intake) ---
+def daily_temperatures(temps):
+    res, stack = [0] * len(temps), []
+    for i, x in enumerate(temps):
+        while stack and temps[stack[-1]] < x: j = stack.pop(); res[j] = i - j
+        stack.append(i)
+    return res
+
+# --- word_pattern_bijection (intake) ---
+def word_pattern_bijection(pattern, s):
+ words = s.split()
+ if len(words) != len(pattern): return False
+ return len(set(pattern)) == len(set(words)) == len(set(zip(pattern, words)))
+
+# --- count_islands (intake) ---
+def count_islands(grid):
+    land = {(r, c) for r, row in enumerate(grid) for c, v in enumerate(row) if v == 1}
+    count = 0
+    while land:
+        count += 1; stack = [land.pop()]
+        while stack:
+            r, c = stack.pop()
+            nbs = [p for p in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)) if p in land]
+            land.difference_update(nbs); stack.extend(nbs)
+    return count
+
+# --- summary_ranges (intake) ---
+def summary_ranges(nums):
+    from itertools import groupby
+    vals = sorted(set(nums))
+    runs = [[x for _, x in g] for _, g in groupby(enumerate(vals), key=lambda p: p[1] - p[0])]
+    return [str(r[0]) if len(r) == 1 else f"{r[0]}->{r[-1]}" for r in runs]
+
+# --- knapsack_reconstruct (intake) ---
+def knapsack_reconstruct(weights, values, capacity):
+    n = len(weights)
+    if n != len(values) or capacity < 0 or any(x < 0 for x in list(weights) + list(values)): raise ValueError("bad input")
+    dp = [[0] * (capacity + 1) for _ in range(n + 1)]
+    for i in range(1, n + 1):
+        w, v = weights[i - 1], values[i - 1]
+        dp[i] = [max(dp[i - 1][c], dp[i - 1][c - w] + v) if w <= c else dp[i - 1][c] for c in range(capacity + 1)]
+    chosen, c = [], capacity
+    for i in range(n, 0, -1):
+        if dp[i][c] != dp[i - 1][c]: chosen.append(i - 1); c -= weights[i - 1]
+    return dp[n][capacity], sorted(chosen)
+
+# --- eulerian_trail (intake) ---
+def eulerian_trail(edges):
+    from collections import defaultdict
+    if not edges: return []
+    adj, diff = defaultdict(list), defaultdict(int)
+    for u, v in edges: adj[u].append(v); diff[u] += 1; diff[v] -= 1
+    starts = [x for x, d in diff.items() if d == 1]
+    if any(abs(d) > 1 for d in diff.values()) or len(starts) > 1: return []
+    for u in list(adj): adj[u].reverse()
+    stack, path = [starts[0] if starts else edges[0][0]], []
+    while stack:
+        u = stack[-1]
+        if adj[u]: stack.append(adj[u].pop())
+        else: path.append(stack.pop())
+    path.reverse()
+    return path if len(path) == len(edges) + 1 else []
+
+
+# --- decode_nested_repeat (intake) ---
+def decode_nested_repeat(s):
+    stack, cur, num, i = [], [], None, 0
+    while i < len(s):
+        ch = s[i]
+        if ch == "\\":
+            if num is not None or i + 1 == len(s): raise ValueError("bad escape")
+            cur.append(s[i + 1]); i += 2; continue
+        if ch in "0123456789": num = (num or 0) * 10 + int(ch)
+        elif ch == "[":
+            if num is None: raise ValueError("'[' without count")
+            stack.append((cur, num)); cur, num = [], None
+        elif num is not None: raise ValueError("count not followed by '['")
+        elif ch == "]":
+            if not stack: raise ValueError("unmatched ']'")
+            prev, k = stack.pop(); prev.append("".join(cur) * k); cur = prev
+        else: cur.append(ch)
+        i += 1
+    if stack or num is not None: raise ValueError("unclosed '['")
+    return "".join(cur)
+
+
+# --- shortest_threshold_slice (intake) ---
+def shortest_threshold_slice(nums, threshold):
+    from collections import deque
+    prefixes = [0]
+    for value in nums: prefixes.append(prefixes[-1] + value)
+    candidates, best = deque(), len(nums) + 1
+    for end, total in enumerate(prefixes):
+        while candidates and total - prefixes[candidates[0]] >= threshold:
+            best = min(best, end - candidates.popleft())
+        while candidates and prefixes[candidates[-1]] >= total: candidates.pop()
+        candidates.append(end)
+    return best if best <= len(nums) else 0
+
+# --- glob_full_match (intake) ---
+def glob_full_match(text, pattern):
+    previous = [True] + [False] * len(pattern)
+    for j, token in enumerate(pattern, 1): previous[j] = previous[j - 1] and token == "*"
+    for letter in text:
+        current = [False] * (len(pattern) + 1)
+        for j, token in enumerate(pattern, 1):
+            current[j] = (current[j - 1] or previous[j]) if token == "*" else (previous[j - 1] and (token == "?" or token == letter))
+        previous = current
+    return previous[-1]
+
+# --- max_product_slice (intake) ---
+def max_product_slice(nums):
+    if not nums: return None
+    high = low = (nums[0], 0)
+    best = (nums[0], 0, 1)
+    for i in range(1, len(nums)):
+        value = nums[i]
+        candidates = [(value, i), (high[0] * value, high[1]), (low[0] * value, low[1])]
+        high = max(candidates, key=lambda item: (item[0], item[1]))
+        low = min(candidates, key=lambda item: (item[0], -item[1]))
+        candidate = (high[0], high[1], i + 1)
+        if (candidate[0], candidate[1] - candidate[2], -candidate[1]) > (best[0], best[1] - best[2], -best[1]): best = candidate
+    return best
+
+# --- largest_ones_square (intake) ---
+def largest_ones_square(grid):
+    if not grid: return (0, -1, -1)
+    cols = len(grid[0])
+    if any(len(row) != cols for row in grid): raise ValueError("ragged grid")
+    previous, best = [0] * (cols + 1), (0, -1, -1)
+    for r, row in enumerate(grid):
+        current = [0] * (cols + 1)
+        for c, value in enumerate(row):
+            if value:
+                current[c + 1] = 1 + min(previous[c], previous[c + 1], current[c])
+                side = current[c + 1]
+                if side > best[0]: best = (side, r - side + 1, c - side + 1)
+        previous = current
+    return best
+
+# --- next_greater_steps (intake) ---
+def next_greater_steps(nums):
+    n = len(nums)
+    answer, stack = [0] * n, []
+    for k in range(2 * n):
+        while stack and nums[stack[-1]] < nums[k % n]:
+            index = stack.pop()
+            answer[index] = k - index
+        if k < n: stack.append(k)
+    return answer
+
+# --- repeating_decimal (intake) ---
+def repeating_decimal(numerator, denominator):
+    if denominator == 0: raise ZeroDivisionError("zero denominator")
+    if numerator == 0: return "0"
+    sign = "-" if (numerator < 0) != (denominator < 0) else ""
+    whole, remainder = divmod(abs(numerator), abs(denominator))
+    prefix = sign + str(whole)
+    if remainder == 0: return prefix
+    digits, seen = [], {}
+    while remainder and remainder not in seen:
+        seen[remainder] = len(digits)
+        digit, remainder = divmod(remainder * 10, abs(denominator))
+        digits.append(str(digit))
+    if remainder:
+        digits.insert(seen[remainder], "(")
+        digits.append(")")
+    return prefix + "." + "".join(digits)
+
+# --- directed_euler_walk (intake) ---
+def directed_euler_walk(n, edges):
+    if not edges: return [0] if n else []
+    adjacency, balance = [[] for _ in range(n)], [0] * n
+    for u, v in edges:
+        adjacency[u].append(v)
+        balance[u] += 1
+        balance[v] -= 1
+    starts = [v for v in range(n) if balance[v] == 1]
+    ends = [v for v in range(n) if balance[v] == -1]
+    if any(abs(value) > 1 for value in balance): return None
+    if not ((not starts and not ends) or (len(starts) == len(ends) == 1)): return None
+    start = starts[0] if starts else next(v for v in range(n) if adjacency[v])
+    stack, trail = [start], []
+    while stack:
+        vertex = stack[-1]
+        if adjacency[vertex]: stack.append(adjacency[vertex].pop())
+        else: trail.append(stack.pop())
+    return trail[::-1] if len(trail) == len(edges) + 1 else None
+
+# --- min_ragged_wrap (intake) ---
+def min_ragged_wrap(words, width):
+    if width <= 0 or any(len(word) > width for word in words): raise ValueError('invalid width')
+    n = len(words)
+    costs, following = [0] * (n + 1), [n] * n
+    for i in range(n - 1, -1, -1):
+        used, best = 0, None
+        for j in range(i, n):
+            used += len(words[j]) + (j > i)
+            if used > width: break
+            cost = (0 if j == n - 1 else (width - used) ** 2) + costs[j + 1]
+            if best is None or cost < best: best, following[i] = cost, j + 1
+        costs[i] = best
+    lines, i = [], 0
+    while i < n:
+        j = following[i]
+        lines.append(' '.join(words[i:j]))
+        i = j
+    return lines
+
+# --- deadline_dispatch (intake) ---
+def deadline_dispatch(events):
+    import heapq
+    heap, pending, out = [], {}, []
+    for serial, event in enumerate(events):
+        op = event[0] if event else None
+        if op == 'set' and len(event) == 3:
+            _, task, due = event
+            if due < 0: raise ValueError('negative timestamp')
+            pending[task] = (due, serial)
+            heapq.heappush(heap, (due, serial, task))
+        elif op == 'cancel' and len(event) == 2: pending.pop(event[1], None)
+        elif op == 'run' and len(event) == 2:
+            t = event[1]
+            if t < 0: raise ValueError('negative timestamp')
+            emitted = []
+            while heap and heap[0][0] <= t:
+                due, stamp, task = heapq.heappop(heap)
+                if pending.get(task) != (due, stamp): continue
+                del pending[task]
+                emitted.append(task)
+            out.append(emitted)
+        else: raise ValueError('invalid event')
+    return out
+
+
+# --- expand_counted_pattern (intake) ---
+def expand_counted_pattern(s):
+    stack, current, i = [], "", 0
+    while i < len(s):
+        ch = s[i]
+        if ch == "\\":
+            if i + 1 == len(s): raise ValueError("dangling escape")
+            current += s[i + 1]
+            i += 2
+        elif "0" <= ch <= "9":
+            j = i
+            while i < len(s) and "0" <= s[i] <= "9": i += 1
+            if i == len(s) or s[i] != "[": raise ValueError("missing [")
+            stack.append((current, int(s[j:i])))
+            current = ""
+            i += 1
+        elif ch == "[": raise ValueError("missing count")
+        elif ch == "]":
+            if not stack: raise ValueError("unmatched ]")
+            prefix, count = stack.pop()
+            current = prefix + count * current
+            i += 1
+        else:
+            current += ch
+            i += 1
+    if stack: raise ValueError("unclosed [")
+    return current

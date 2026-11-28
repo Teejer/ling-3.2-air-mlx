@@ -1044,4 +1044,500 @@ assert r == "err"
 assert render("a{b}c", {}) == "a{b}c"
 """,
     ),
+
+    dict(
+        id='solve_linear_congruence', tier=2, intaked=True, tag='math',
+        title='Smallest solution of a linear congruence',
+        prompt="""Implement `solve_linear_congruence(a, b, m)` for integers a and b and a positive integer m. Return the smallest nonnegative integer x satisfying a*x ≡ b (mod m), or -1 if no solution exists. When m = 1 every integer is a solution, so the answer is 0. Inputs satisfy m <= 1000; behavior outside the stated constraints is unspecified.""",
+        tests="""
+assert solve_linear_congruence(3, 4, 7) == 6
+assert solve_linear_congruence(4, 8, 12) == 2
+assert solve_linear_congruence(6, 4, 9) == -1
+assert solve_linear_congruence(5, 0, 10) == 0
+assert solve_linear_congruence(7, 3, 1) == 0
+assert solve_linear_congruence(-3, 4, 7) == 1
+assert solve_linear_congruence(6, 3, 9) == 2
+""",
+    ),
+    dict(
+        id='max_product_after_cut', tier=2, intaked=True, tag='dp',
+        title='Maximum product after cutting an integer',
+        prompt="""Implement `max_product_after_cut(n)` for an integer n with 2 <= n <= 1000. Split n into at least two positive integers whose sum is n, and return the maximum possible product of those integers. The number and sizes of the parts are otherwise unrestricted.""",
+        tests="""
+assert max_product_after_cut(10) == 36
+assert max_product_after_cut(2) == 1
+assert max_product_after_cut(3) == 2
+assert max_product_after_cut(4) == 4
+assert max_product_after_cut(8) == 18
+assert max_product_after_cut(12) == 81
+""",
+    ),
+    dict(
+        id='count_digit_occurrences', tier=2, intaked=True, tag='math',
+        title='Count a nonzero digit up to n',
+        prompt="""Implement `count_digit_occurrences(n, d)` for 0 <= n <= 1000 and a decimal digit d with 1 <= d <= 9. Return the total number of occurrences of d in the ordinary decimal representations of all integers from 0 through n inclusive. There are no leading zeros, and 0 is represented as '0'.""",
+        tests="""
+assert count_digit_occurrences(12, 1) == 5
+assert count_digit_occurrences(0, 1) == 0
+assert count_digit_occurrences(9, 1) == 1
+assert count_digit_occurrences(99, 1) == 20
+assert count_digit_occurrences(100, 1) == 21
+assert count_digit_occurrences(1000, 9) == 300
+assert count_digit_occurrences(22, 2) == 6
+""",
+    ),
+    dict(
+        id='count_divisible_subsets', tier=3, intaked=True, tag='dp',
+        title='Count subsets by modular sum',
+        prompt="""Implement `count_divisible_subsets(nums, m, target)`, where nums contains at most 1000 integers, m is positive, and 0 <= target < m. Count subsets whose element sum is congruent to target modulo m, returning the count modulo 1000000007. Include the empty subset. Elements at different positions are distinct even when their values are equal, and negative values may occur.""",
+        tests="""
+assert count_divisible_subsets([1, 2, 3], 3, 0) == 4
+assert count_divisible_subsets([1, 1], 2, 0) == 2
+assert count_divisible_subsets([], 5, 0) == 1
+assert count_divisible_subsets([], 5, 3) == 0
+assert count_divisible_subsets([2, 4, 6], 2, 1) == 0
+assert count_divisible_subsets([0, 0], 3, 0) == 4
+assert count_divisible_subsets([5, 7, 9], 3, 0) == 4
+""",
+    ),
+    dict(
+        id='min_assignment_cost', tier=3, intaked=True, tag='dp',
+        title='Minimum square assignment cost',
+        prompt="""Implement `min_assignment_cost(cost)` for an n by n matrix of integers with 0 <= n <= 8. Choose exactly one entry from each row so that no column is chosen twice, and return the minimum possible sum of the chosen entries. Costs may be negative. For the empty 0 by 0 matrix, return 0; if several assignments attain the minimum, their common sum is the answer.""",
+        tests="""
+assert min_assignment_cost([[9, 2, 7], [6, 4, 3], [5, 8, 1]]) == 9
+assert min_assignment_cost([]) == 0
+assert min_assignment_cost([[5]]) == 5
+assert min_assignment_cost([[1, 2], [3, 4]]) == 5
+assert min_assignment_cost([[0, -1], [-2, 3]]) == -3
+assert min_assignment_cost([[1, 100, 100], [100, 1, 100], [100, 100, 1]]) == 3
+""",
+    ),
+    dict(
+        id='minimize_largest_block_sum', tier=3, intaked=True, tag='algorithms',
+        title='Minimize the largest contiguous block sum',
+        prompt="""Implement `minimize_largest_block_sum(nums, k)` for a nonempty list of at most 1000 positive integers and 1 <= k <= len(nums). Partition nums into exactly k nonempty contiguous blocks, preserving order, and return the minimum possible value of the largest block sum. Block boundaries do not otherwise affect the answer.""",
+        tests="""
+assert minimize_largest_block_sum([7, 2, 5, 10, 8], 2) == 18
+assert minimize_largest_block_sum([1, 2, 3], 3) == 3
+assert minimize_largest_block_sum([1, 2, 3], 1) == 6
+assert minimize_largest_block_sum([5], 1) == 5
+assert minimize_largest_block_sum([1, 1, 1, 1], 2) == 2
+assert minimize_largest_block_sum([2, 1, 1, 3], 2) == 4
+assert minimize_largest_block_sum([4, 2, 4, 1], 3) == 5
+""",
+    ),
+    dict(
+        id='count_n_queens', tier=3, intaked=True, tag='backtracking',
+        title='Count n-queens arrangements',
+        prompt="""Implement `count_n_queens(n)` for 0 <= n <= 10. Return the number of ways to place n queens on an n by n chessboard so that no two queens share a row, column, or diagonal. Reflections and rotations count as different arrangements. By convention, the empty 0 by 0 board has exactly one arrangement.""",
+        tests="""
+assert count_n_queens(4) == 2
+assert count_n_queens(0) == 1
+assert count_n_queens(1) == 1
+assert count_n_queens(2) == 0
+assert count_n_queens(5) == 10
+assert count_n_queens(6) == 4
+assert count_n_queens(8) == 92
+""",
+    ),
+    dict(
+        id='grid_wall_escape', tier=3, intaked=True, tag='graphs',
+        title='Shortest grid path with limited wall entries',
+        prompt="""Implement `grid_wall_escape(grid, k)` for a nonempty rectangular grid of strings containing only '.' and '#', with nonnegative k. Start at the top-left cell and finish at the bottom-right cell; both are guaranteed open. Moving orthogonally to an adjacent cell costs one step, and a '#' cell may be entered only if doing so does not make the total number of entered wall cells exceed k. Return the shortest path length in steps, or -1 if no permitted path exists. Entering the same wall cell on separate visits counts separately, and staying at the start when it is also the finish takes 0 steps.""",
+        tests="""
+assert grid_wall_escape(["..#", "##.", "..."], 1) == 4
+assert grid_wall_escape(["..#", "##.", "..."], 0) == -1
+assert grid_wall_escape(["."], 3) == 0
+assert grid_wall_escape(["..."], 0) == 2
+assert grid_wall_escape([".#", "#."], 1) == 2
+assert grid_wall_escape([".#", "#."], 0) == -1
+assert grid_wall_escape(["...", "###", "..."], 1) == 4
+""",
+    ),
+    dict(
+        id='min_join_cost', tier=3, intaked=True, tag='data-structures',
+        title='Minimum cost to join all lengths',
+        prompt="""Implement `min_join_cost(lengths)` for a list of at most 1000 positive integers. Repeatedly choose any two current lengths and replace them by their sum, paying a cost equal to that sum, until one length remains. Return the minimum possible total cost. An empty list or a list containing one length requires no joins and returns 0.""",
+        tests="""
+assert min_join_cost([4, 3, 2, 6]) == 29
+assert min_join_cost([]) == 0
+assert min_join_cost([7]) == 0
+assert min_join_cost([5, 5, 5]) == 25
+assert min_join_cost([1, 1, 1, 1]) == 8
+assert min_join_cost([3, 1, 4, 1, 5]) == 30
+assert min_join_cost([2, 8]) == 10
+""",
+    ),
+    dict(
+        id='count_domino_tilings', tier=3, intaked=True, tag='matrix',
+        title='Count domino tilings of a small board',
+        prompt="""Implement `count_domino_tilings(rows, cols)` for nonnegative integers whose product is at most 16. Return the number of ways to cover a rows by cols rectangle exactly with 2 by 1 or 1 by 2 dominoes, without overlaps or overhang. Dominoes are indistinguishable, and different placements count separately. If either dimension is 0, the board has no cells and exactly one empty tiling.""",
+        tests="""
+assert count_domino_tilings(2, 3) == 3
+assert count_domino_tilings(2, 2) == 2
+assert count_domino_tilings(1, 1) == 0
+assert count_domino_tilings(1, 2) == 1
+assert count_domino_tilings(3, 4) == 11
+assert count_domino_tilings(4, 4) == 36
+assert count_domino_tilings(0, 5) == 1
+""",
+    ),
+
+    dict(
+        id='excel_column_title', tier=2, intaked=True, tag='math',
+        title='Spreadsheet column label',
+        prompt="""Implement excel_column_title(n) that returns the spreadsheet-style column label for the
+1-based column number n (an int): 1 -> "A", 2 -> "B", ..., 26 -> "Z", 27 -> "AA",
+28 -> "AB", and so on (bijective base-26 using uppercase A-Z; there is no zero digit).
+Raise ValueError if n < 1.""",
+        tests="""
+assert excel_column_title(28) == "AB"
+assert excel_column_title(1) == "A"
+assert excel_column_title(26) == "Z"
+assert excel_column_title(52) == "AZ"
+assert excel_column_title(702) == "ZZ"
+assert excel_column_title(703) == "AAA"
+try: r = excel_column_title(0)
+except ValueError: r = "err"
+assert r == "err"
+""",
+    ),
+    dict(
+        id='trap_rain_water', tier=2, intaked=True, tag='algorithms',
+        title='Trapped rain water',
+        prompt="""Implement trap_rain_water(heights) where heights is a list of non-negative ints giving
+the heights of adjacent bars of width 1. Return the total units of rain water trapped.
+The water level above bar i is min(max(heights[:i+1]), max(heights[i:])); water above
+that level spills off either end. An empty list returns 0.""",
+        tests="""
+assert trap_rain_water([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]) == 6
+assert trap_rain_water([]) == 0
+assert trap_rain_water([4, 2, 0, 3, 2, 5]) == 9
+assert trap_rain_water([5, 4, 3, 2, 1]) == 0
+assert trap_rain_water([2, 0, 2]) == 2
+assert trap_rain_water([5, 0, 0, 1, 0, 6]) == 19
+""",
+    ),
+    dict(
+        id='daily_temperatures', tier=2, intaked=True, tag='data-structures',
+        title='Days until warmer',
+        prompt="""Implement daily_temperatures(temps) (a list of ints). Return a list of the same length
+where entry i is j - i for the smallest j > i with temps[j] STRICTLY greater than temps[i],
+or 0 if no such j exists. Equal temperatures do not count as warmer. Empty input returns [].""",
+        tests="""
+assert daily_temperatures([73, 74, 75, 71, 69, 72, 76, 73]) == [1, 1, 4, 2, 1, 1, 0, 0]
+assert daily_temperatures([]) == []
+assert daily_temperatures([70, 70, 70]) == [0, 0, 0]
+assert daily_temperatures([70, 70, 71]) == [2, 1, 0]
+assert daily_temperatures([80, 60, 70, 90]) == [3, 1, 1, 0]
+assert daily_temperatures([5, 3, 5, 3, 6]) == [4, 1, 2, 1, 0]
+""",
+    ),
+    dict(
+        id='word_pattern_bijection', tier=2, intaked=True, tag='dicts',
+        title='Word pattern bijection',
+        prompt="""Implement word_pattern_bijection(pattern, s) returning True iff the words of s follow
+pattern via a bijection, else False (return a bool). Words are obtained with s.split()
+(runs of whitespace separate words; leading/trailing whitespace is ignored). The number of
+words must equal len(pattern); each pattern character must always map to the same word and
+no two distinct characters may map to the same word. Matching is case-sensitive.
+word_pattern_bijection("", "") is True.""",
+        tests="""
+assert word_pattern_bijection("abba", "dog cat cat dog") is True
+assert word_pattern_bijection("abba", "dog dog dog dog") is False
+assert word_pattern_bijection("aaaa", "dog cat cat dog") is False
+assert word_pattern_bijection("ab", "dog cat cat") is False
+assert word_pattern_bijection("", "") is True
+assert word_pattern_bijection("abc", " b c a ") is True
+assert word_pattern_bijection("aA", "x x") is False
+""",
+    ),
+    dict(
+        id='count_islands', tier=2, intaked=True, tag='matrix',
+        title='Count islands (4-connected)',
+        prompt="""Implement count_islands(grid) where grid is a rectangular list of rows of 0/1 ints.
+Return the number of islands: maximal groups of 1-cells connected horizontally or
+vertically. Diagonal neighbours are NOT connected. [] and [[]] contain 0 islands.
+The input grid must not be modified.""",
+        tests="""
+assert count_islands([[1, 1, 0, 0, 0], [1, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 1]]) == 3
+g = [[1, 0, 1], [0, 1, 0], [1, 0, 1]]
+assert count_islands(g) == 5 and g == [[1, 0, 1], [0, 1, 0], [1, 0, 1]]
+assert count_islands([]) == 0
+assert count_islands([[]]) == 0
+assert count_islands([[1, 1, 1], [0, 1, 0], [1, 1, 1]]) == 1
+assert count_islands([[1, 0, 1, 0, 1]]) == 3
+""",
+    ),
+    dict(
+        id='summary_ranges', tier=2, intaked=True, tag='lists',
+        title='Summarize consecutive runs',
+        prompt="""Implement summary_ranges(nums) where nums is a list of ints sorted in non-decreasing
+order; duplicates may appear and count as a single value. Return a list of strings, in
+ascending order, describing the maximal runs of consecutive integers: a run from a to b
+with b > a is written "a->b", a single value as "a". Negative numbers keep their minus
+sign (e.g. "-3->-1"). Empty input returns [].""",
+        tests="""
+assert summary_ranges([0, 1, 2, 4, 5, 7]) == ["0->2", "4->5", "7"]
+assert summary_ranges([]) == []
+assert summary_ranges([-3, -2, -1, 1]) == ["-3->-1", "1"]
+assert summary_ranges([1, 1, 2, 2, 4, 4]) == ["1->2", "4"]
+assert summary_ranges([5]) == ["5"]
+assert summary_ranges([0, 2, 4]) == ["0", "2", "4"]
+assert summary_ranges([3, 3]) == ["3"]
+""",
+    ),
+    dict(
+        id='knapsack_reconstruct', tier=3, intaked=True, tag='dp',
+        title='0/1 knapsack with item reconstruction',
+        prompt="""Implement knapsack_reconstruct(weights, values, capacity) for the 0/1 knapsack: item i has
+weight weights[i] and value values[i] (non-negative ints) and may be taken at most once.
+Return a tuple (best, indices) where best is the maximum total value with total weight
+<= capacity, and indices is an ascending list of distinct item indices whose values sum to
+exactly best and whose weights sum to at most capacity. If several selections achieve best,
+any one is accepted (zero-value items may be included or omitted). Empty item lists return
+(0, []). Raise ValueError if len(weights) != len(values), capacity < 0, or any weight or
+value is negative.""",
+        tests="""
+def check(res, w, v, cap, best):
+ assert isinstance(res, tuple) and len(res) == 2
+ total, idx = res
+ assert total == best and idx == sorted(set(idx)) and all(0 <= i < len(w) for i in idx)
+ assert sum(w[i] for i in idx) <= cap and sum(v[i] for i in idx) == best
+
+check(knapsack_reconstruct([1, 3, 4, 5], [1, 4, 5, 7], 7), [1, 3, 4, 5], [1, 4, 5, 7], 7, 9)
+assert knapsack_reconstruct([], [], 10) == (0, [])
+assert knapsack_reconstruct([2, 3], [3, 4], 4) == (4, [1])
+assert knapsack_reconstruct([0, 1], [4, 9], 0) == (4, [0])
+check(knapsack_reconstruct([2, 2, 3], [3, 3, 1], 2), [2, 2, 3], [3, 3, 1], 2, 3)
+try: r = knapsack_reconstruct([1], [1, 2], 5)
+except ValueError: r = "err"
+assert r == "err"
+try: r = knapsack_reconstruct([1], [1], -1)
+except ValueError: r = "err"
+assert r == "err"
+""",
+    ),
+    dict(
+        id='eulerian_trail', tier=3, intaked=True, tag='graphs',
+        title='Directed Eulerian trail',
+        prompt="""Implement eulerian_trail(edges) for a directed multigraph given as a list of [u, v]
+edges (nodes are hashable, e.g. ints or strings; self-loops and parallel edges are allowed).
+Return a list of nodes [x0, x1, ..., xm] with m == len(edges) such that the consecutive
+pairs (x_i, x{i+1}) use every edge exactly once (as a multiset). Return [] if no such trail
+exists (in/out-degree imbalance, or edges that cannot all be reached in one trail) and also
+when edges is empty. If several trails exist, any one is accepted.""",
+        tests="""
+from collections import Counter
+
+def check(path, edges):
+ assert isinstance(path, list) and len(path) == len(edges) + 1
+ assert Counter(zip(path, path[1:])) == Counter(map(tuple, edges))
+
+e1 = [[2, 3], [1, 2], [3, 1], [1, 4], [4, 2]]
+check(eulerian_trail(e1), e1)
+e2 = [[0, 1], [1, 2], [2, 0], [1, 3], [3, 1]]
+check(eulerian_trail(e2), e2)
+assert eulerian_trail([]) == []
+assert eulerian_trail([[1, 2], [2, 1], [3, 4], [4, 3]]) == []
+assert eulerian_trail([[1, 2], [1, 3]]) == []
+e3 = [["a", "a"], ["a", "b"], ["b", "a"], ["a", "b"]]
+check(eulerian_trail(e3), e3)
+""",
+    ),
+
+    dict(
+        id='decode_nested_repeat', tier=3, intaked=True, tag='parsing',
+        title='Nested repeat decoder with escapes',
+        prompt="""Implement decode_nested_repeat(s) that expands repeat groups. A count is one or more ASCII
+digits read as a decimal integer (0 is allowed, leading zeros are allowed) and MUST be
+immediately followed by [; k[X] expands to the decoded X repeated k times, and groups
+nest. A backslash makes the next character literal, so \\\\[, \\\\], \\\\\\\\ and \\\\7 produce
+[, ], \\\\ and 7. Every other character is literal. Raise ValueError on: a [ not
+immediately preceded by a count, a count followed by anything other than [ (including a
+backslash or the end of input), an unmatched ], an unclosed [, or a backslash as the
+last character. Empty input returns "".""",
+        tests="""
+def bad(s):
+ try: decode_nested_repeat(s)
+ except ValueError: return True
+ return False
+
+assert decode_nested_repeat("3[a2[c]]") == "accaccacc"
+assert decode_nested_repeat("ab2[cd]e10[x]") == "abcdcde" + "x" * 10
+assert decode_nested_repeat("2[a0[b]c]03[z]") == "acaczzz"
+assert decode_nested_repeat(r"2[\\[\\]]\\3\\\\") == "[][]3\\\\"
+assert decode_nested_repeat("") == ""
+assert all(bad(s) for s in ["3[a", "a]", "[a]", "3a", "2[a]3", "ab\\\\", "2\\\\[a]"])
+""",
+    ),
+
+    dict(
+        id='shortest_threshold_slice', tier=2, intaked=True, tag='algorithms',
+        title='Shortest slice reaching a signed threshold',
+        prompt="""Implement shortest_threshold_slice(nums, threshold). Return the length of the shortest nonempty contiguous slice of nums whose sum is at least threshold. Return 0 if no such slice exists, including when nums is empty. Values and the threshold may be negative or zero; an empty slice never qualifies, even when the threshold is nonpositive. Inputs are guaranteed to be a list of at most 1000 integers and an integer threshold. Do not modify the input. Use O(n) time and O(n) auxiliary space.""",
+        tests="""
+assert shortest_threshold_slice([2, -1, 2], 3) == 3
+assert shortest_threshold_slice([], 0) == 0
+assert shortest_threshold_slice([1, 2], 4) == 0
+assert shortest_threshold_slice([1, 2, 3], 3) == 1
+assert shortest_threshold_slice([84, -37, 32, 40, 95], 167) == 3
+assert shortest_threshold_slice([-5], -5) == 1
+assert shortest_threshold_slice([-2, -3], 0) == 0
+""",
+    ),
+    dict(
+        id='glob_full_match', tier=2, intaked=True, tag='strings',
+        title='Whole-string wildcard matching',
+        prompt="""Implement glob_full_match(text, pattern) returning a bool indicating whether the entire text matches the entire pattern. Text contains only lowercase ASCII letters. A pattern contains lowercase ASCII letters, '?' matching exactly one letter, and '*' matching any sequence of letters, including the empty sequence. Consecutive stars are allowed and have the same effect as one star. There are no escapes. Both inputs may be empty and have length at most 1000. Thus two empty inputs match, and an empty text matches a nonempty pattern exactly when every pattern character is '*'. Inputs are guaranteed valid; do not perform substring matching.""",
+        tests="""
+assert glob_full_match("adceb", "*a*b") is True
+assert glob_full_match("", "") is True
+assert glob_full_match("", "**") is True
+assert glob_full_match("", "?*") is False
+assert glob_full_match("abc", "a?") is False
+assert glob_full_match("acdcb", "a*c?b") is False
+assert glob_full_match("ab", "*?*?*") is True
+""",
+    ),
+    dict(
+        id='max_product_slice', tier=2, intaked=True, tag='dp',
+        title='Maximum-product slice with precise ties',
+        prompt="""Implement max_product_slice(nums). For a nonempty list of integers, return (product, start, end) describing a nonempty contiguous slice with the largest possible product; start is inclusive and end is exclusive, using zero-based indices. Among slices with equal products, choose the shortest slice, then the one with the smallest start index. Negative numbers, zeros, and repeated values are allowed. Return None for an empty list. Inputs are guaranteed valid with at most 1000 elements. Do not modify the input. Use one O(n) scan and O(1) auxiliary storage, treating integer arithmetic as a single operation.""",
+        tests="""
+assert max_product_slice([2, 3, -2, 4]) == (6, 0, 2)
+assert max_product_slice([]) is None
+assert max_product_slice([-2, 3, -4]) == (24, 0, 3)
+assert max_product_slice([0, -2, 0]) == (0, 0, 1)
+assert max_product_slice([1, 2, 1]) == (2, 1, 2)
+assert max_product_slice([-1, -1, -1]) == (1, 0, 2)
+assert max_product_slice([-5]) == (-5, 0, 1)
+""",
+    ),
+    dict(
+        id='largest_ones_square', tier=2, intaked=True, tag='matrix',
+        title='Largest solid square with a location',
+        prompt="""Implement largest_ones_square(grid). The input is a list of rows containing only integers 0 and 1, with at most 1000 rows and at most 1000 total entries. Return (side, top, left) for the largest axis-aligned square containing only 1s; side is its side length and top, left are its zero-based top-left coordinates. Among equally large squares choose the smallest top coordinate, then the smallest left coordinate. If there are no 1s, including an empty grid or rows of width zero, return (0, -1, -1). Raise ValueError if row lengths differ. Other input types and values are guaranteed valid. Do not modify grid.""",
+        tests="""
+assert largest_ones_square([[1, 0, 1, 1, 1], [0, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]]) == (3, 0, 2)
+assert largest_ones_square([]) == (0, -1, -1)
+assert largest_ones_square([[], []]) == (0, -1, -1)
+assert largest_ones_square([[0, 0], [0, 0]]) == (0, -1, -1)
+assert largest_ones_square([[1, 1, 0, 1, 1], [1, 1, 0, 1, 1]]) == (2, 0, 0)
+assert largest_ones_square([[0, 1], [1, 1], [1, 1]]) == (2, 1, 0)
+def rejects_ragged():
+    try: largest_ones_square([[], [1]])
+    except ValueError: return True
+    return False
+assert rejects_ragged()
+""",
+    ),
+    dict(
+        id='next_greater_steps', tier=2, intaked=True, tag='lists',
+        title='Circular distances to strictly greater values',
+        prompt="""Implement next_greater_steps(nums) for a list of at most 1000 integers. For each index i, find the smallest distance d satisfying 1 <= d < len(nums) and nums[(i + d) % len(nums)] > nums[i]. Return these distances as a list in index order, using 0 whenever no such distance exists. Equal values do not qualify. Thus a single-element list returns [0], and an empty list returns []. Inputs are guaranteed valid. Do not modify nums. Use O(n) time and O(n) auxiliary space.""",
+        tests="""
+assert next_greater_steps([2, 1, 2, 4, 3]) == [3, 1, 1, 0, 4]
+assert next_greater_steps([]) == []
+assert next_greater_steps([7]) == [0]
+assert next_greater_steps([5, 5, 5]) == [0, 0, 0]
+assert next_greater_steps([5, 4, 3, 2, 1]) == [0, 4, 3, 2, 1]
+assert next_greater_steps([-2, -1, -2]) == [1, 0, 2]
+assert next_greater_steps([1, 3, 1, 3]) == [1, 0, 1, 0]
+""",
+    ),
+    dict(
+        id='repeating_decimal', tier=2, intaked=True, tag='math',
+        title='Exact decimal expansion with repeating digits',
+        prompt="""Implement repeating_decimal(numerator, denominator) for integers whose absolute values are at most 1000. Return the exact base-ten representation of their quotient as a string. Use a leading '-' exactly when the nonzero quotient is negative; do not use '+'. Zero is '0'. An integer quotient has no decimal point. A terminating fractional expansion has no parentheses or trailing fractional zeros. Otherwise, write the shortest nonrepeating fractional prefix followed by the shortest repeating block in parentheses, preserving all necessary zero digits; for example, 1/6 becomes '0.1(6)' and 1/90 becomes '0.0(1)'. The integer part has no unnecessary leading zeros. Raise ZeroDivisionError if the denominator is zero. Other inputs are guaranteed valid; use exact integer arithmetic.""",
+        tests="""
+assert repeating_decimal(1, 6) == "0.1(6)"
+assert repeating_decimal(1, 90) == "0.0(1)"
+assert repeating_decimal(-22, 7) == "-3.(142857)"
+assert repeating_decimal(-50, -8) == "6.25"
+assert repeating_decimal(0, -7) == "0"
+assert repeating_decimal(4, 2) == "2"
+def rejects_zero_denominator():
+    try: repeating_decimal(1, 0)
+    except ZeroDivisionError: return True
+    return False
+assert rejects_zero_denominator()
+""",
+    ),
+    dict(
+        id='directed_euler_walk', tier=3, intaked=True, tag='graphs',
+        title='A walk using every directed edge',
+        prompt="""Implement directed_euler_walk(n, edges). Vertices are the integers 0 through n-1, and each (u, v) in edges is a directed edge from u to v. Parallel edges and self-loops are allowed, and each occurrence is a separate edge. Return any list of vertices describing one continuous walk that traverses every edge occurrence exactly once, or None if impossible. The walk may revisit vertices. For nonempty edges it must contain len(edges)+1 vertices; isolated vertices need not occur. Any valid start and edge order are acceptable. If edges is empty, return [0] when n>0 and [] when n=0. Inputs are guaranteed valid: 0<=n<=1000, at most 1000 edges, and every endpoint is in range. Do not modify edges.""",
+        tests="""
+def valid_euler_walk(walk, n, edges):
+    from collections import Counter
+    if not edges: return walk == ([0] if n else [])
+    if not isinstance(walk, list) or len(walk) != len(edges) + 1: return False
+    if any(not isinstance(v, int) or not 0 <= v < n for v in walk): return False
+    return Counter(zip(walk, walk[1:])) == Counter(map(tuple, edges))
+assert valid_euler_walk(directed_euler_walk(5, [(0, 1), (1, 2), (2, 0), (0, 3)]), 5, [(0, 1), (1, 2), (2, 0), (0, 3)])
+assert directed_euler_walk(0, []) == []
+assert directed_euler_walk(3, []) == [0]
+assert valid_euler_walk(directed_euler_walk(3, [(1, 1), (1, 2), (1, 2), (2, 1), (2, 1)]), 3, [(1, 1), (1, 2), (1, 2), (2, 1), (2, 1)])
+assert directed_euler_walk(3, [(0, 1), (0, 2)]) is None
+assert directed_euler_walk(4, [(0, 1), (1, 0), (2, 3), (3, 2)]) is None
+assert directed_euler_walk(4, [(0, 1), (2, 3), (3, 2)]) is None
+""",
+    ),
+    dict(
+        id='min_ragged_wrap', tier=3, intaked=True, tag='dp',
+        title='Optimal word wrapping with earliest breaks',
+        prompt="""Implement min_ragged_wrap(words, width), returning a list of strings that wraps the words without changing their order. Each output line contains consecutive words separated by exactly one ASCII space, with no leading or trailing spaces, and has length at most width. The cost is the sum of (width - len(line)) ** 2 over every line except the final line, whose cost is always zero. Minimize this cost. On equal costs, choose the lexicographically smallest list of 1-based indices of the last words on the lines; equivalently, prefer the earliest first differing line break. Return [] for an empty word list when width is positive. Raise ValueError if width is not positive or any word is longer than width, including checking width for an empty list. Input types are guaranteed: words is a list of nonempty lowercase ASCII strings, width is an integer, and there are at most 1000 words and 1000 total letters. Do not modify words.""",
+        tests="""
+def bad_wrap(words, width):
+    try: min_ragged_wrap(words, width)
+    except ValueError: return True
+    return False
+assert min_ragged_wrap(['aaa', 'bb', 'cc', 'ddddd'], 6) == ['aaa', 'bb cc', 'ddddd']
+assert min_ragged_wrap([], 4) == []
+assert min_ragged_wrap(['aa', 'b', 'cc', 'ddd'], 4) == ['aa', 'b cc', 'ddd']
+assert min_ragged_wrap(['aaa', 'bb', 'cc'], 6) == ['aaa bb', 'cc']
+assert min_ragged_wrap(['ab', 'cd'], 5) == ['ab cd']
+assert min_ragged_wrap(['a', 'b', 'c'], 1) == ['a', 'b', 'c']
+assert bad_wrap(['abc'], 2) and bad_wrap([], 0)
+""",
+    ),
+    dict(
+        id='deadline_dispatch', tier=3, intaked=True, tag='data-structures',
+        title='Deadline queue with cancellation and replacement',
+        prompt="""Implement deadline_dispatch(events), processing event tuples from left to right. ('set', task, deadline) creates or replaces that task's pending schedule. ('cancel', task) removes its pending schedule if present, otherwise does nothing. ('run', threshold) executes and removes every currently pending task whose deadline is at most threshold, returning its task ID in that run's result. Execution order is increasing deadline, with ties ordered by the positions of the tasks' most recent 'set' events, earlier first. Replacing a task resets its tie priority even if the deadline stays the same. Return a list containing one result list for each 'run', including empty results; with no runs return []. Tasks remaining pending at the end produce no output. An executed or cancelled ID may be scheduled again. Run thresholds need not increase: a run examines only tasks currently pending, and earlier runs never consume newly scheduled tasks. Raise ValueError for an unknown operation, an incorrect tuple length, or a negative deadline or threshold. Input is a list of at most 1000 tuples. Nonempty tuples start with a string; for correctly shaped recognized operations, task IDs are nonempty lowercase ASCII strings and timestamps are integers. Do not modify events. Target O(m log m) time and O(m) space for m events.""",
+        tests="""
+def bad_events(events):
+    try: deadline_dispatch(events)
+    except ValueError: return True
+    return False
+assert deadline_dispatch([('set', 'b', 4), ('set', 'a', 4), ('set', 'c', 2), ('run', 3), ('run', 4)]) == [['c'], ['b', 'a']]
+assert deadline_dispatch([]) == [] and deadline_dispatch([('set', 'a', 3)]) == []
+assert deadline_dispatch([('cancel', 'ghost'), ('run', 0), ('run', 0)]) == [[], []]
+assert deadline_dispatch([('set', 'a', 2), ('set', 'a', 5), ('set', 'b', 3), ('run', 3), ('run', 5), ('run', 9)]) == [['b'], ['a'], []]
+assert deadline_dispatch([('set', 'a', 8), ('set', 'a', 2), ('set', 'b', 2), ('set', 'a', 2), ('set', 'c', 2), ('set', 'd', 2), ('cancel', 'c'), ('set', 'c', 2), ('run', 2), ('run', 8)]) == [['b', 'a', 'd', 'c'], []]
+assert deadline_dispatch([('set', 'x', 0), ('run', 0), ('set', 'x', 0), ('run', 0), ('set', 'z', 9), ('run', 8), ('cancel', 'z'), ('run', 9), ('set', 'x', 1), ('run', 1)]) == [['x'], ['x'], [], [], ['x']]
+assert all(bad_events(events) for events in [[('set', 'a', -1)], [('run', -1)], [('noop',)], [('cancel',)], [()], [('set', 'a')], [('run', 1, 2)]])
+""",
+    ),
+
+    dict(
+        id='expand_counted_pattern', tier=3, intaked=True, tag='parsing',
+        title='Nested repetition with literal escapes',
+        prompt="""Implement expand_counted_pattern(s). Parse a sequence of literals and repeats of the form count[sequence], allowing nested repeats. A count is one or more ASCII decimal digits representing a nonnegative integer; leading zeros are allowed. Backslash quotes exactly the following character, so an escaped digit or bracket is literal and two backslashes produce one. Every unescaped character other than a digit, bracket, or backslash is a literal, including spaces. An unescaped digit run must be immediately followed by '['; a bare '[' is invalid. Empty sequences and zero repetitions are allowed, and empty input returns ''. Raise ValueError for any malformed syntax, including unmatched brackets and a trailing backslash. Syntax inside a zero repetition must still be validated. Inputs are ASCII strings of length at most 1000; digit runs have values at most 1000, and every expanded nested sequence and the final output of any syntactically valid input have length at most 1000.""",
+        tests="""
+assert expand_counted_pattern("2[a3[b]]") == "abbbabbb"
+assert expand_counted_pattern("") == ""
+assert expand_counted_pattern("0[abc]2[]x") == "x"
+assert expand_counted_pattern(r"2[a\\]b]\\3\\\\") == "a]ba]b3\\\\"
+assert expand_counted_pattern("02[a] 1[b]") == "aa b"
+assert expand_counted_pattern("10[z]") == "zzzzzzzzzz"
+def rejects_pattern(s):
+    try: expand_counted_pattern(s)
+    except ValueError: return True
+    return False
+assert all(rejects_pattern(s) for s in ("[a]", "2a", "1[a", "a]", "\\\\", "0[2a]"))
+""",
+    ),
 ]

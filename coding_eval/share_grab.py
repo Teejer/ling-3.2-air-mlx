@@ -3,6 +3,10 @@
   ChatGPT: https://chatgpt.com/share/<id>  (must be created while logged in,
            but is then world-readable)  -> FULLY AUTOMATED here via the
            public backend-api/share/<id> JSON endpoint.
+           NEW (2026-11-28): OpenAI started issuing /share/e/<id> links whose
+           content is fetched client-side behind a Cloudflare-gated call —
+           curl gets an empty SPA shell and the render proxy bounces to login.
+           Those must be copy-pasted manually; old-format links still work.
   Claude:  https://claude.ai/share/<id>   -> API is Cloudflare-gated; falls
            back to rendering the SSR page, which usually lacks the messages.
            Keep copy-pasting Claude replies manually for now.
@@ -82,7 +86,13 @@ def main():
         sys.exit(__doc__)
     url, out_name = args[0], args[1]
     if "chatgpt.com/share/" in url:
-        replies = from_chatgpt(url.rstrip("/").rsplit("/", 1)[1])
+        share_id = url.rstrip("/").rsplit("/", 1)[1]
+        if share_id.startswith("e/"):
+            share_id = share_id[2:]
+        if "/share/e/" in url:
+            sys.exit("unsupported /e/ share format (client-side content) — "
+                     "copy-paste the reply into coding_eval/batches/ instead")
+        replies = from_chatgpt(share_id)
     elif "claude.ai/share/" in url:
         replies = from_claude(url.rstrip("/").rsplit("/", 1)[1])
     else:

@@ -99,6 +99,17 @@ For trace *donors* (Phase 1), note Kimi K3's license is permissive below
 the MaaS/attribution gates (verified 2026-11-27), unlike ChatGPT/Claude
 consumer terms.
 
+**Day-2 batches (2026-11-28, suite 66 → 95).** Kimi K3 **10/10** clean on the
+math/tier-3 variant — one ChatHub glyph drop (`≡`) restored, no teacher error.
+ChatGPT 9/10 plus `expand_counted_pattern` recovered by `repair_element.py`,
+so 10/10 *after* repair; its `ref`s arrived correctly indented this time, the
+only damage was half-escaped backslashes. Claude 8/10 clean, 1 recovered
+(`decode_nested_repeat`, ref hand-restored from prompt semantics, passes all
+its asserts), 1 dropped (`full_justify`) — 5 of its asserts contradict its own
+prompt ("every line exactly width chars" but expects a 10-char line at width
+16), and rewriting that many expected values is authoring, so forward-only
+policy dropped it rather than spending a correction message. Net +29.
+
 Honest ceiling: LoRA transfers style, consistency and edge-case discipline —
 not pretraining knowledge. Expect tier-2 movement and token-economy gains,
 not a frontier leap. The 12 coding-specialist expert layers identified by
