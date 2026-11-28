@@ -783,4 +783,101 @@ except ValueError: r = "err"
 assert r == "err"
 """,
     ),
+
+    dict(
+        id='fraction_add', tier=2, intaked=True, tag='math',
+        title='Add and normalize fractions',
+        prompt="""Implement `fraction_add(a, b)` where each argument is a pair `(numerator, denominator)` of integers representing a rational number. Return the sum as a reduced pair `(numerator, denominator)`. The denominator must be positive, and numerator and denominator must be coprime. Return (0, 1) for a zero result. Raise ValueError if either denominator is zero. Use exact integer arithmetic only.""",
+        tests="""
+assert fraction_add((1, 2), (1, 3)) == (5, 6)
+assert fraction_add((1, 2), (-1, 2)) == (0, 1)
+assert fraction_add((1, -2), (1, 3)) == (-1, 6)
+assert fraction_add((2, 4), (2, 4)) == (1, 1)
+assert fraction_add((0, 7), (3, 9)) == (1, 3)
+try:
+    fraction_add((1, 0), (1, 2))
+    assert False
+except ValueError:
+    pass
+""",
+    ),
+    dict(
+        id='stable_frequency_sort', tier=2, intaked=True, tag='lists',
+        title='Stable frequency ordering',
+        prompt="""Implement `stable_frequency_sort(nums)` returning the elements sorted by descending frequency. Elements with equal frequencies must retain the order in which their values first appeared in the input. Repeated occurrences of each value must remain grouped together. The input contains integers and may be empty. Return a new list without modifying the input.""",
+        tests="""
+assert stable_frequency_sort([4, 6, 4, 6, 4, 2]) == [4, 4, 4, 6, 6, 2]
+assert stable_frequency_sort([]) == []
+assert stable_frequency_sort([3, 2, 1]) == [3, 2, 1]
+assert stable_frequency_sort([2, 2, 1, 1, 3, 3]) == [2, 2, 1, 1, 3, 3]
+assert stable_frequency_sort([5, 5, 4, 4, 4, 5]) == [5, 5, 5, 4, 4, 4]
+assert stable_frequency_sort([-1, 0, -1, 0, -1]) == [-1, -1, -1, 0, 0]
+""",
+    ),
+    dict(
+        id='merge_sorted_streams', tier=2, intaked=True, tag='data-structures',
+        title='Merge sorted streams',
+        prompt="""Implement `merge_sorted_streams(streams)` where streams is a list of individually nondecreasing integer lists. Return one globally nondecreasing list containing every element. Duplicate values must be preserved. Empty streams are allowed. The input may be empty, and the result must not modify the input.""",
+        tests="""
+assert merge_sorted_streams([[1, 4, 7], [2, 5], [3, 6]]) == [1, 2, 3, 4, 5, 6, 7]
+assert merge_sorted_streams([]) == []
+assert merge_sorted_streams([[], []]) == []
+assert merge_sorted_streams([[1, 1], [1], [1, 1]]) == [1, 1, 1, 1, 1]
+assert merge_sorted_streams([[5], [-1, 0], [2, 9]]) == [-1, 0, 2, 5, 9]
+assert merge_sorted_streams([[1, 3, 3], [2, 3, 4]]) == [1, 2, 3, 3, 3, 4]
+""",
+    ),
+    dict(
+        id='weighted_interval_schedule', tier=3, intaked=True, tag='dp',
+        title='Weighted interval scheduling with reconstruction',
+        prompt="""Implement `weighted_interval_schedule(intervals)` where each interval is [start, end, weight], with integer start <= end and integer weight. Return a list of original interval indices forming a non-overlapping schedule with maximum total weight. Intervals are half-open [start, end), so touching endpoints are compatible. Empty intervals (start == end) are allowed and are compatible with every interval. The returned indices must be in chronological order by start, then end, then original index. On equal maximum total weight, choose the schedule with fewer intervals; if still tied, choose the lexicographically smallest list of original indices after sorting by the required chronological order. Empty input returns [].""",
+        tests="""
+def check_schedule(intervals, indices):
+    assert indices == sorted(indices, key=lambda i: (intervals[i][0], intervals[i][1], i))
+    total = sum(intervals[i][2] for i in indices)
+    for p in range(len(indices)):
+        for q in range(p + 1, len(indices)):
+            a, b = intervals[indices[p]], intervals[indices[q]]
+            assert a[1] <= b[0] or b[1] <= a[0]
+    return total
+
+x = [[1, 3, 5], [3, 5, 6], [1, 5, 10]]
+r = weighted_interval_schedule(x)
+assert check_schedule(x, r) == 11
+assert weighted_interval_schedule([]) == []
+x = [[0, 2, 5], [2, 4, 5], [0, 4, 10]]
+assert weighted_interval_schedule(x) == [2]
+x = [[0, 1, 0], [1, 2, 0]]
+assert weighted_interval_schedule(x) == []
+x = [[0, 2, 5], [2, 4, 5], [4, 6, 10]]
+r = weighted_interval_schedule(x)
+assert r == [0, 1, 2] and check_schedule(x, r) == 20
+""",
+    ),
+    dict(
+        id='shortest_path_with_count', tier=3, intaked=True, tag='graphs',
+        title='Shortest path and number of shortest paths',
+        prompt="""Implement `shortest_path_with_count(n, edges, source, target)` for an undirected, unweighted graph with vertices 0 through n-1. Edges are pairs [u, v]; duplicate edges are ignored. Return `(distance, count)` where distance is the number of edges in a shortest path and count is the number of distinct shortest vertex sequences from source to target. If target is unreachable, return (-1, 0). If source == target, return (0, 1). Vertices and endpoints are guaranteed valid.""",
+        tests="""
+assert shortest_path_with_count(5, [[0, 1], [1, 4], [0, 2], [2, 4], [0, 3]], 0, 4) == (2, 2)
+assert shortest_path_with_count(1, [], 0, 0) == (0, 1)
+assert shortest_path_with_count(3, [[0, 1]], 0, 2) == (-1, 0)
+assert shortest_path_with_count(4, [[0, 1], [1, 2], [2, 3], [0, 2]], 0, 3) == (2, 1)
+assert shortest_path_with_count(4, [[0, 1], [0, 1], [1, 2], [0, 2]], 0, 2) == (1, 1)
+assert shortest_path_with_count(6, [[0, 1], [0, 2], [1, 3], [2, 3], [1, 4], [2, 4], [3, 5], [4, 5]], 0, 5) == (3, 4)
+""",
+    ),
+    dict(
+        id='normalize_path', tier=3, intaked=True, tag='strings',
+        title='Normalize a Unix-style path',
+        prompt="""Implement `normalize_path(path)` for an absolute Unix-style path. The input starts with '/'. Collapse repeated slashes, remove '.' components, and resolve '..' by removing the preceding ordinary component when one exists. Attempts to move above the root leave the path at root. Return '/' for an empty resulting component list. Do not interpret backslashes as separators. No filesystem access is allowed.""",
+        tests="""
+assert normalize_path("/a/b/../c") == "/a/c"
+assert normalize_path("/") == "/"
+assert normalize_path("/../../a") == "/a"
+assert normalize_path("/a//b/./c/../") == "/a/b"
+assert normalize_path("/a/../../..") == "/"
+assert normalize_path("/a\\\\b/../c") == "/c"
+""",
+    ),
 ]

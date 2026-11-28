@@ -565,3 +565,100 @@ def streaming_kth_largest(nums, k):
         if len(heap) > k: heapq.heappop(heap)
         if len(heap) == k: out.append(heap[0])
     return out
+
+
+# --- fraction_add (intake) ---
+def fraction_add(a, b):
+    from math import gcd
+    n1, d1 = a
+    n2, d2 = b
+    if d1 == 0 or d2 == 0:
+        raise ValueError("zero denominator")
+    n = n1 * d2 + n2 * d1
+    d = d1 * d2
+    if d < 0:
+        n, d = -n, -d
+    g = gcd(abs(n), d)
+    return n // g, d // g
+
+# --- stable_frequency_sort (intake) ---
+def stable_frequency_sort(nums):
+    counts = {}
+    first = {}
+    for i, x in enumerate(nums):
+        counts[x] = counts.get(x, 0) + 1
+        if x not in first:
+            first[x] = i
+    result = []
+    for x in sorted(counts, key=lambda x: (-counts[x], first[x])):
+        result.extend([x] * counts[x])
+    return result
+
+# --- merge_sorted_streams (intake) ---
+def merge_sorted_streams(streams):
+    import heapq
+    heap = []
+    for i, stream in enumerate(streams):
+        if stream:
+            heapq.heappush(heap, (stream[0], i, 0))
+    result = []
+    while heap:
+        value, i, j = heapq.heappop(heap)
+        result.append(value)
+        j += 1
+        if j < len(streams[i]):
+            heapq.heappush(heap, (streams[i][j], i, j))
+    return result
+
+# --- weighted_interval_schedule (intake) ---
+def weighted_interval_schedule(intervals):
+    from functools import cmp_to_key
+    items = sorted([(e, s, i, w) for i, (s, e, w) in enumerate(intervals)])
+    states = [(0, 0, ())]
+    for e, s, i, w in items:
+        compatible = [j for j, (end, _, _, _) in enumerate(items[:len(states)-1]) if end <= s]
+        base = states[max(compatible) + 1] if compatible else states[0]
+        candidate = (base[0] + w, base[1] + 1, base[2] + (i,))
+        previous = states[-1]
+        if candidate[0] > previous[0] or (candidate[0] == previous[0] and (candidate[1], tuple(sorted(candidate[2]))) < (previous[1], tuple(sorted(previous[2])))):
+            states.append(candidate)
+        else:
+            states.append(previous)
+    chosen = list(states[-1][2])
+    return sorted(chosen, key=lambda i: (intervals[i][0], intervals[i][1], i))
+
+# --- shortest_path_with_count (intake) ---
+def shortest_path_with_count(n, edges, source, target):
+    from collections import deque
+    adj = [set() for _ in range(n)]
+    for u, v in edges:
+        adj[u].add(v)
+        adj[v].add(u)
+    dist = [-1] * n
+    count = [0] * n
+    dist[source] = 0
+    count[source] = 1
+    q = deque([source])
+    while q:
+        u = q.popleft()
+        for v in adj[u]:
+            if dist[v] == -1:
+                dist[v] = dist[u] + 1
+                count[v] = count[u]
+                q.append(v)
+            elif dist[v] == dist[u] + 1:
+                count[v] += count[u]
+    return (dist[target], count[target]) if dist[target] != -1 else (-1, 0)
+
+# --- normalize_path (intake) ---
+def normalize_path(path):
+    stack = []
+    for part in path.split("/"):
+        if part == "" or part == ".":
+            continue
+        if part == "..":
+            if stack:
+                stack.pop()
+        else:
+            stack.append(part)
+    return "/" + "/".join(stack)
