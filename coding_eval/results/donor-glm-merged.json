@@ -11,7 +11,7 @@
   "extra": {
     "enable_thinking": false
   },
-  "timestamp": "20261128-111730",
+  "timestamp": "20261128-135358",
   "passed": 100,
   "total": 104,
   "results": [
@@ -25,7 +25,9 @@
         "Jundot_GLM-5.3-Flash-oQ4e-mtp-20261128-110635.json",
         "Jundot_GLM-5.3-Flash-oQ4e-mtp-20261128-104421.json",
         "Jundot_GLM-5.3-Flash-oQ4e-mtp-20261128-101551.json"
-      ]
+      ],
+      "ok": false,
+      "detail": "timed out"
     },
     {
       "id": "render_escaped_template",

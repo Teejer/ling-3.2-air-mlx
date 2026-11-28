@@ -86,17 +86,34 @@ def main():
     ref_patterns = args.ref or DEFAULT_REFS
     refs = {}
     for pat in ref_patterns:
-        p = newest(pat)
-        if not p:
+        # UNION every match, oldest first. A pattern can legitimately span several runs
+        # (the champion was measured as a 66-id run plus a 38-id run); taking only the
+        # newest silently turns "we never ran this id" into "no local run solves this",
+        # which is exactly how a 3-problem paid ask got built out of 1 real gap.
+        paths = sorted((HERE / "results").glob(pat), key=lambda p: p.name)
+        if not paths:
             print(f"note: no results match {pat}")
             continue
-        md, per = load(p)
-        refs[label(p, md.get("model", ""))] = per
+        per, md = {}, {}
+        for p in paths:
+            m, one = load(p)
+            if m:
+                md = m
+            for pid, row in one.items():
+                prev = per.get(pid)
+                if prev is None or (row["ok"] and not prev["ok"]):
+                    per[pid] = row
+        refs[label(paths[-1], md.get("model", ""))] = per
+        if len(paths) > 1:
+            print(f"note: {pat} merged {len(paths)} files -> {len(per)} ids")
     print(f"donor: {donor_path}\n       {dd.get('model')}  "
           f"{dd.get('passed')}/{dd.get('total')}  temp={dd.get('temperature')} "
           f"max_tokens={dd.get('max_tokens')} extra={dd.get('extra')}")
     for name, per in refs.items():
-        print(f"ref  : {name:9s} {sum(r['ok'] for r in per.values())}/{len(per)} covered")
+        gap = len(donor) - len(per)
+        print(f"ref  : {name:9s} {sum(r['ok'] for r in per.values())}/{len(per)} covered"
+              + (f"  [!! {gap} ids the donor ran are UNMEASURED here: a CEILING/DONOR_ONLY"
+                 f" call on those is a coverage hole, not a result]" if gap > 0 else ""))
 
     ids = list(dict.fromkeys(list(donor) + [i for per in refs.values() for i in per]))
     tiers = {}

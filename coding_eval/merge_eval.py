@@ -49,7 +49,17 @@ def main():
             if row.get("ok") and not prev.get("ok"):
                 per[pid] = dict(row, runs=per[pid]["runs"])
 
-    rows = [per[p] for p in order]
+    # Normalise every row: a transport failure is recorded by run_eval as {err, status}
+    # with NO ok key, and a missing key reads as False in some consumers and raises in
+    # others. One schema, always present.
+    rows = []
+    for pid in order:
+        row = per[pid]
+        row.setdefault("ok", False)
+        if not row.get("detail") and row.get("err"):
+            row["detail"] = str(row["err"])[:200]
+        row.setdefault("status", "REQUEST_ERROR")
+        rows.append(row)
     passed = sum(1 for r in rows if r.get("ok"))
     out = {
         "model": args.label or f"merge({len(runs)})",

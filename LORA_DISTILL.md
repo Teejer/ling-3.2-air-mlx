@@ -183,6 +183,54 @@ look like what the student produces at inference (the student has no thinking ph
 and every trace was kept only because its extracted code passed that problem's tests
 on this machine.
 
+**Result: NEGATIVE.** Champion stays r3.
+
+Scoreboard, all four rows measured on the **identical 104-id coverage** (greedy, same
+system prompt, executed tests, `mlx_lm.server` + adapter — the 38-problem holes in the
+older runs are now filled: `results/Ling-3.2-air-MLX-mixed-4-8bit-r3-104.json` is the
+union of r3's two runs, `CONTROL-untrained-104` is the untrained pack):
+
+| model | 104 suite | trainable 92 | held-out 12 |
+|---|---|---|---|
+| control — untrained pack | 81 | 73 | 8 |
+| **r3 — 307 self-harvested traces** | **92** | **82** | **10** |
+| r4 — r3's bank + 131 GLM donor traces | 88 | 79 | 9 |
+| GLM-5.3-Flash donor (the teacher) | 100 | 89 | — |
+
+So distillation is worth **+11 over the untrained pack** (81 → 92, and +2 on problems it
+never saw), and r4 gave 4 of that back. r4 lost on *both* kinds of material: −2 on the
+66 ids r3 was trained on (`egyptian_greedy`, `stable_frequency_sort`,
+`weighted_interval_schedule` out; `csv_line` in) and −2 on the 38 new ones (4 gained, 6
+lost) **despite** 131 traces aimed at exactly those problems. Deterministic re-runs at
+temp 0 confirmed the 9 consistent failures are capability, not sampling.
+
+The reason is visible in the baseline: the r3 champion already solved **31 of the 38**
+problems the donor traces were harvested for. Gradient steps spent imitating a teacher on
+material the student already pass buy nothing and cost distribution — plus a style tax,
+mean completion 184 → 222 tokens as the student picks up GLM's idiom.
+
+**The headroom, now that a control exists** (`donor_value.py` with full-coverage refs).
+Of the 92 trainable problems, r3 fails 10, and they split three ways:
+
+| bucket | n | ids | what to do |
+|---|---|---|---|
+| **A additive** — r3 fails, untrained fails, donor passes | 4 | `csv_line`, `decode_nested_repeat`, `expand_counted_pattern`, `shortest_threshold_slice` | harvest donor traces for these **only** |
+| **B training regression** — r3 fails but the *untrained pack* passes | 5 | `directed_euler_walk`, `grid_keys_shortest_path`, `min_assignment_cost`, `roman`, `solve_linear_congruence` | anti-drift replay, see below |
+| **C ceiling** — no local model solves it | 1 | `render_escaped_template` | the entire remaining paid ask (~$0.22) |
+
+Bucket B is the uncomfortable finding: **r1–r3's +9 was paid for partly by breaking 5
+problems the base model could already do.** That is the same failure as r2 and r4, just
+milder — collateral from LoRA drift on problems the training set didn't cover. It also
+suggests the cheapest fix in the project: for B, harvest the *untrained* pack's own
+passing samples (temp 0.8, executor-verified) and add them as replay anchors. Those are
+the student's own outputs, so no rights question, and the target is "stop drifting", not
+"learn a new style".
+
+**Round-5 design** (one variable at a time, after r3e): r3's bank of 307 + ~4 donors per
+A problem + ~6 self-replay per B problem (≈350 traces, not 438), iters back to 250,
+capacity frozen at the r1/r3 footprint. If that recovers B without losing the 82, drift
+replay is real and becomes a standing part of the pipeline.
+
 **Gotcha that cost 15 minutes:** `mlx_lm.lora` (and plain `mlx_lm.load`) died twice at
 `mx.eval(model.parameters())` with `[METAL] Command buffer execution failed: Caused GPU
 Timeout Error (kIOGPUCommandBufferCallbackErrorTimeout)` — after this box had served
