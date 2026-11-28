@@ -115,9 +115,20 @@ the quant story and the training story point at the same tensors.
    that tensor at load time (everything else trains QLoRA-style on the
    quantized pack, matching serving). Adapters must therefore target
    shared experts + attention projections that keep their serving names —
-   NOT embed_q/unembed_out (the Zig engine serves kv_b_proj directly), and
-   NOT the SwitchGLU routed-expert stacks (not nn.Linear; needs a custom
-   adapter patch for a future round).
+   NOT embed_q/unembed_out (the Zig engine serves kv_b_proj directly; and
+    mlx-lm FUSE saves embed_q/unembed_out into the fused pack, so the
+    engine rejects it with "MISSING WEIGHT: kv_b_proj" — fix is lossless
+    pack rename surgery, kv_b_proj = concat(swapaxes(embed_q), unembed_out)
+    (round 1 put no adapter on those tensors), or an engine-side loader
+    alias. Serving-with-adapter fallback meanwhile: mlx_lm.server
+    --adapter-path (reports model id inclusionAI/Ling-3.2-air).
+    REVISION after round 1: the adapter manifest proves mlx-lm 0.32.2 DOES
+    wrap SwitchGLU — per-expert LoRA [512, r, in] on the routed stacks.
+    Round 2 should target the 12 promoted coding layers
+    {11,12,17,20,23,24,27,29,30,32,35,36} via a custom layer-selection
+    script (CLI --num-layers only takes the last N; round 1 covered
+    layers 26-41). Note: --config yaml rank was not honored (rank 8
+    applied despite rank 16 requested).
 1. `--harvest` mode in run_eval.py: emit JSONL of passing traces
    (messages-formatted with Ling's chat template) for Phase 0 data.
 2. mlx-lm LoRA support check for `bailing_moe_v3` (adapter targets: attention,
