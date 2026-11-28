@@ -10,8 +10,10 @@ python coding_eval/intake.py coding_eval/batches/batchNkimi.json            # va
 python coding_eval/intake.py coding_eval/batches/batchNkimi.json --promote  # survivors only
 ```
 
-If anything is BROKEN, paste the correction message from
-`curriculum_seed_prompt.md` → *Daily follow-up* back into the same Kimi chat.
+If anything is BROKEN, default is to skip it (forward-only — tomorrow's batch
+supersedes); only paste the correction message from
+`curriculum_seed_prompt.md` → *Correction message* if a broken problem tests a
+mechanism nothing else in the suite covers.
 Note: ChatHub flattens ref indentation — intake's repair ladder handles it.
 
 ## First message (paste everything between the fences)
