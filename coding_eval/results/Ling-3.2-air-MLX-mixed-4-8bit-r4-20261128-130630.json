@@ -1,0 +1,1051 @@
+{
+  "model": "inclusionAI/Ling-3.2-air",
+  "base_url": "http://127.0.0.1:11250",
+  "temperature": 0.0,
+  "max_tokens": 1400,
+  "extra": {},
+  "passed": 88,
+  "total": 104,
+  "results": [
+    {
+      "id": "merge_intervals",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 116,
+      "seconds": 5.9,
+      "detail": ""
+    },
+    {
+      "id": "top_k_words",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 92,
+      "seconds": 2.4,
+      "detail": ""
+    },
+    {
+      "id": "balanced",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 95,
+      "seconds": 2.4,
+      "detail": ""
+    },
+    {
+      "id": "rle",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 199,
+      "seconds": 5.0,
+      "detail": ""
+    },
+    {
+      "id": "flatten",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 140,
+      "seconds": 3.6,
+      "detail": ""
+    },
+    {
+      "id": "closest_sum_pair",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 118,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "roman",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR invalid syntax (sol.py, line 1)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 34.7,
+      "detail": "SYNTAX_ERROR invalid syntax (sol.py, line 1)\n--code-head--\n```python\ndef roman_to_int(s):\n    \"\"\"Convert a standard Roman numeral string (with subtractive notation)\n    to its integer value.\n\n    I=1, V=5, X=10, L=50, C=100, D=500, M=1000\n    \"\"\"\n    values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}\n    total = 0\n    for i, ch in enumerate(s):\n        v = values[ch]\n        # If a smaller value precedes a larger one, it was subtra"
+    },
+    {
+      "id": "lru",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 429,
+      "seconds": 10.8,
+      "detail": ""
+    },
+    {
+      "id": "csv_line",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 243,
+      "seconds": 6.1,
+      "detail": ""
+    },
+    {
+      "id": "rotated_search",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 338,
+      "seconds": 8.5,
+      "detail": ""
+    },
+    {
+      "id": "rotate_matrix",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 44,
+      "seconds": 1.2,
+      "detail": ""
+    },
+    {
+      "id": "palindrome_sub",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 257,
+      "seconds": 6.5,
+      "detail": ""
+    },
+    {
+      "id": "retry_decorator",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 101,
+      "seconds": 2.6,
+      "detail": ""
+    },
+    {
+      "id": "anagrams",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 84,
+      "seconds": 2.2,
+      "detail": ""
+    },
+    {
+      "id": "min_stack",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 175,
+      "seconds": 4.5,
+      "detail": ""
+    },
+    {
+      "id": "case_convert",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 119,
+      "seconds": 3.1,
+      "detail": ""
+    },
+    {
+      "id": "next_perm",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 126,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "word_break",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 105,
+      "seconds": 2.7,
+      "detail": ""
+    },
+    {
+      "id": "edit_distance",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 199,
+      "seconds": 5.1,
+      "detail": ""
+    },
+    {
+      "id": "histogram",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 116,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "course_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 201,
+      "seconds": 5.1,
+      "detail": ""
+    },
+    {
+      "id": "running_median",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 302,
+      "seconds": 7.6,
+      "detail": ""
+    },
+    {
+      "id": "coin_change",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 212,
+      "seconds": 5.4,
+      "detail": ""
+    },
+    {
+      "id": "balanced_code",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 264,
+      "seconds": 6.7,
+      "detail": ""
+    },
+    {
+      "id": "eval_expr",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 433,
+      "seconds": 10.9,
+      "detail": ""
+    },
+    {
+      "id": "longest_consec",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 116,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "parse_duration",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 161,
+      "seconds": 4.1,
+      "detail": ""
+    },
+    {
+      "id": "restore_ips",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 311,
+      "seconds": 7.9,
+      "detail": ""
+    },
+    {
+      "id": "spiral_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 214,
+      "seconds": 5.4,
+      "detail": ""
+    },
+    {
+      "id": "min_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 259,
+      "seconds": 6.6,
+      "detail": ""
+    },
+    {
+      "id": "interval_overlap_count",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 145,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "canonical_fraction",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 131,
+      "seconds": 3.4,
+      "detail": ""
+    },
+    {
+      "id": "deduplicate_stable",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 57,
+      "seconds": 1.5,
+      "detail": ""
+    },
+    {
+      "id": "lis_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 225,
+      "seconds": 5.7,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert lis_reconstruct([3, 1, 2, 5, 4]) == [1, 2, 4]\\nassert lis_reconstruct([]) == []\\nassert lis_reconstruct([4, 3, 2, 1]) == [1]\\nassert lis_reconstruct([1, 2, 2, 3]) == [1, 2, 3]\\nassert lis_reconstruct([2, 1, 3]) == [1, 3]\\nassert lis_reconstruct([3, 1, 2, 4, 0, 5]) == [1, 2, 4, 5]\\n', ns)\n  File \"<string>\", line 2, in <module>\nAssertionError\n--code-head--\ndef lis_reconstruct(nums):\n    n = len(nums)\n    if n == 0:\n        return []\n    # dp[i] = length of LIS ending at index i\n    dp = [1] * n\n    for i in range(n):\n        for j in range(i):\n            if nums[j] < nums[i] and dp[j] + 1 > dp[i]:\n                dp[i] = dp[j] + 1\n    L = max(dp)\n    # Greedy: pick smallest value at each step that can extend to a full LIS\n    result = []\n    prev ="
+    },
+    {
+      "id": "longest_k_distinct",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 150,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "egyptian_greedy",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 126,
+      "seconds": 3.3,
+      "detail": "ASSERT_FAIL\n    exec('\\ndef raises(*a):\\n    try:\\n        egyptian(*a)\\n    except ValueError:\\n        return True\\n    return False\\nassert egyptian(2, 3) == [2, 6]\\nassert egyptian(4, 13) == [4, 18, 468]\\nassert egyptian(6, 14) == [3, 11, 231]\\nassert egyptian(1, 5) == [5]\\nassert egyptian(0, 5) == []\\nassert egyptian(3, 4) == [2, 4]\\nassert raises(5, 5) and raises(1, 0) and raises(-1, 3)\\n', \n--code-head--\ndef egyptian(num, den):\n    if den <= 0 or num < 0 or num >= den:\n        raise ValueError(\"num must be non-negative and less than den, and den must be positive\")\n    if num == 0:\n        return []\n    result = []\n    while num > 0:\n        k = (num + den - 1) // den  # ceil(den/num)\n        result.append(k)\n        num = num * k - den\n        den = den * k\n    return result"
+    },
+    {
+      "id": "combo_sum_once",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 143,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "set_zeroes",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 122,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "kth_largest_stream",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 113,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "lcs_string",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 288,
+      "seconds": 7.3,
+      "detail": ""
+    },
+    {
+      "id": "assign_rooms",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 227,
+      "seconds": 5.9,
+      "detail": ""
+    },
+    {
+      "id": "bipartition_coloring",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 166,
+      "seconds": 4.3,
+      "detail": ""
+    },
+    {
+      "id": "decode_escaped_fields",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 150,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "shortest_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 253,
+      "seconds": 6.5,
+      "detail": ""
+    },
+    {
+      "id": "parse_kv_escaped",
+      "rep": 0,
+      "tier": 3,
+      "status": "RUNTIME_ERROR ValueError trailing backslash",
+      "ok": false,
+      "completion_tokens": 288,
+      "seconds": 7.4,
+      "detail": "RUNTIME_ERROR ValueError trailing backslash\n--code-head--\ndef parse_kv(s):\n    result = {}\n    for entry in s.split(';'):\n        if not entry:\n            continue\n        key = []\n        value = []\n        i = 0\n        n = len(entry)\n        # Find the first unescaped '='\n        while i < n:\n            c = entry[i]\n            if c == '\\\\':\n                if i + 1 >= n:\n                    raise ValueError(\"trailing backslash\")\n                key"
+    },
+    {
+      "id": "longest_bounded_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 268,
+      "seconds": 6.8,
+      "detail": ""
+    },
+    {
+      "id": "matrix_diagonal_sums",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 93,
+      "seconds": 2.5,
+      "detail": ""
+    },
+    {
+      "id": "normalize_identifier",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 117,
+      "seconds": 3.1,
+      "detail": ""
+    },
+    {
+      "id": "streaming_kth_largest",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 116,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "fraction_add",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 167,
+      "seconds": 4.3,
+      "detail": ""
+    },
+    {
+      "id": "stable_frequency_sort",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 55,
+      "seconds": 1.5,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert stable_frequency_sort([4, 6, 4, 6, 4, 2]) == [4, 4, 4, 6, 6, 2]\\nassert stable_frequency_sort([]) == []\\nassert stable_frequency_sort([3, 2, 1]) == [3, 2, 1]\\nassert stable_frequency_sort([2, 2, 1, 1, 3, 3]) == [2, 2, 1, 1, 3, 3]\\nassert stable_frequency_sort([5, 5, 4, 4, 4, 5]) == [5, 5, 5, 4, 4, 4]\\nassert stable_frequency_sort([-1, 0, -1, 0, -1]) == [-1, -1, -1, 0\n--code-head--\ndef stable_frequency_sort(nums):\n    counts = {}\n    for n in nums:\n        counts[n] = counts.get(n, 0) + 1\n    return sorted(nums, key=lambda x: -counts[x])"
+    },
+    {
+      "id": "merge_sorted_streams",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 62,
+      "seconds": 1.7,
+      "detail": ""
+    },
+    {
+      "id": "weighted_interval_schedule",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 402,
+      "seconds": 10.2,
+      "detail": "ASSERT_FAIL\n    exec('\\ndef check_schedule(intervals, indices):\\n    assert indices == sorted(indices, key=lambda i: (intervals[i][0], intervals[i][1], i))\\n    total = sum(intervals[i][2] for i in indices)\\n    for p in range(len(indices)):\\n        for q in range(p + 1, len(indices)):\\n            a, b = intervals[indices[p]], intervals[indices[q]]\\n            assert a[1] <= b[0] or b[1] <= a[0\n--code-head--\ndef weighted_interval_schedule(intervals):\n    n = len(intervals)\n    if n == 0:\n        return []\n    order = sorted(range(n), key=lambda i: (intervals[i][0], intervals[i][1], i))\n    starts = [intervals[i][0] for i in order]\n    ends = [intervals[i][1] for i in order]\n    weights = [intervals[i][2] for i in order]\n\n    # p[j] = largest index j' < j with ends[j'] <= starts[j] (0 means none)\n    p"
+    },
+    {
+      "id": "shortest_path_with_count",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 245,
+      "seconds": 6.3,
+      "detail": ""
+    },
+    {
+      "id": "normalize_path",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 78,
+      "seconds": 2.1,
+      "detail": ""
+    },
+    {
+      "id": "longest_unique_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 133,
+      "seconds": 3.5,
+      "detail": ""
+    },
+    {
+      "id": "count_coprime_inclusion_exclusion",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 255,
+      "seconds": 6.5,
+      "detail": ""
+    },
+    {
+      "id": "min_eating_speed",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 107,
+      "seconds": 2.9,
+      "detail": ""
+    },
+    {
+      "id": "tsp_exact_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 308,
+      "seconds": 7.8,
+      "detail": ""
+    },
+    {
+      "id": "predict_the_winner",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 139,
+      "seconds": 3.6,
+      "detail": ""
+    },
+    {
+      "id": "base_neg2_conversion",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 90,
+      "seconds": 2.4,
+      "detail": ""
+    },
+    {
+      "id": "min_path_effort_grid",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 320,
+      "seconds": 8.2,
+      "detail": ""
+    },
+    {
+      "id": "matrix_chain_multiplication",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 177,
+      "seconds": 4.6,
+      "detail": ""
+    },
+    {
+      "id": "subarrays_sum_equals_k",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 120,
+      "seconds": 3.1,
+      "detail": ""
+    },
+    {
+      "id": "min_station_refuels",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 222,
+      "seconds": 5.8,
+      "detail": ""
+    },
+    {
+      "id": "render_escaped_template",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 234,
+      "seconds": 6.1,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert render(\"Hi {{name}}!\", {\"name\": \"Bob\"}) == \"Hi Bob!\"\\nassert render(\"{{name}}\", {\"name\": \"Bob\"}) == \"Bob\"\\nassert render(\"x\", {}) == \"x\"\\nassert render(\"{{a}}{{b}}\", {\"a\": \"1\", \"b\": \"2\"}) == \"12\"\\ntry:\\n render(\"{{z}}\", {})\\n r = \"noerr\"\\nexcept KeyError:\\n r = \"err\"\\nassert r == \"err\"\\ntry:\\n render(\"abc~\", {})\\n r = \"noerr\"\\nexcept ValueError:\\n r = \"err\"\\nassert r\n--code-head--\ndef render(tpl, env):\n    result = []\n    i = 0\n    n = len(tpl)\n    while i < n:\n        c = tpl[i]\n        if c == '\\\\':\n            if i + 1 >= n:\n                raise ValueError(\"trailing backslash\")\n            result.append(tpl[i + 1])\n            i += 2\n        elif c == '{' and i + 1 < n and tpl[i + 1] == '{':\n            start = i + 2\n            j = start\n            while j < n and not"
+    },
+    {
+      "id": "solve_linear_congruence",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 77,
+      "seconds": 2.1,
+      "detail": ""
+    },
+    {
+      "id": "max_product_after_cut",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 72,
+      "seconds": 1.9,
+      "detail": ""
+    },
+    {
+      "id": "count_digit_occurrences",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 55,
+      "seconds": 1.5,
+      "detail": ""
+    },
+    {
+      "id": "count_divisible_subsets",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 131,
+      "seconds": 3.4,
+      "detail": ""
+    },
+    {
+      "id": "min_assignment_cost",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 190,
+      "seconds": 4.9,
+      "detail": ""
+    },
+    {
+      "id": "minimize_largest_block_sum",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 142,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "count_n_queens",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 262,
+      "seconds": 6.7,
+      "detail": ""
+    },
+    {
+      "id": "grid_wall_escape",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 352,
+      "seconds": 9.0,
+      "detail": ""
+    },
+    {
+      "id": "min_join_cost",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 237,
+      "seconds": 6.0,
+      "detail": ""
+    },
+    {
+      "id": "count_domino_tilings",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_OUTPUT",
+      "ok": false,
+      "completion_tokens": 291,
+      "seconds": 7.4,
+      "detail": "\n--code-head--\ndef count_domino_tilings(rows, cols):\n    if rows * cols == 0:\n        return 1\n    if (rows * cols) % 2 == 1:\n        return 0\n    if rows > cols:\n        rows, cols = cols, rows\n    # DP over columns with bitmask of cells already filled by horizontal\n    # dominoes protruding from the previous column.\n    dp = {0: 1}\n    for _ in range(cols):\n        ndp = {}\n        for mask, count in dp.items("
+    },
+    {
+      "id": "excel_column_title",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 144,
+      "seconds": 4.6,
+      "detail": ""
+    },
+    {
+      "id": "trap_rain_water",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 193,
+      "seconds": 5.0,
+      "detail": ""
+    },
+    {
+      "id": "daily_temperatures",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 195,
+      "seconds": 5.0,
+      "detail": ""
+    },
+    {
+      "id": "word_pattern_bijection",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 147,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "count_islands",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 259,
+      "seconds": 6.6,
+      "detail": ""
+    },
+    {
+      "id": "summary_ranges",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 135,
+      "seconds": 3.5,
+      "detail": ""
+    },
+    {
+      "id": "knapsack_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 342,
+      "seconds": 8.8,
+      "detail": "ASSERT_FAIL\n    exec('\\ndef check(res, w, v, cap, best):\\n assert isinstance(res, tuple) and len(res) == 2\\n total, idx = res\\n assert total == best and idx == sorted(set(idx)) and all(0 <= i < len(w) for i in idx)\\n assert sum(w[i] for i in idx) <= cap and sum(v[i] for i in idx) == best\\n\\ncheck(knapsack_reconstruct([1, 3, 4, 5], [1, 4, 5, 7], 7), [1, 3, 4, 5], [1, 4, 5, 7], 7, 9)\\nassert knapsac\n--code-head--\ndef knapsack_reconstruct(weights, values, capacity):\n    if len(weights) != len(values):\n        raise ValueError(\"weights and values must have the same length\")\n    if capacity < 0:\n        raise ValueError(\"capacity must be non-negative\")\n    for w in weights:\n        if w < 0:\n            raise ValueError(\"weights must be non-negative\")\n    for v in values:\n        if v < 0:\n            raise V"
+    },
+    {
+      "id": "eulerian_trail",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 479,
+      "seconds": 12.1,
+      "detail": ""
+    },
+    {
+      "id": "decode_nested_repeat",
+      "rep": 0,
+      "tier": 3,
+      "status": "RUNTIME_ERROR TypeError can only concatenate tuple (not \"list\") to tuple",
+      "ok": false,
+      "completion_tokens": 296,
+      "seconds": 7.6,
+      "detail": "RUNTIME_ERROR TypeError can only concatenate tuple (not \"list\") to tuple\n--code-head--\ndef decode_nested_repeat(s):\n    stack = []\n    current = []\n    i = 0\n    n = len(s)\n    while i < n:\n        c = s[i]\n        if c == '\\\\':\n            if i + 1 >= n:\n                raise ValueError(\"backslash at end of input\")\n            current.append(s[i + 1])\n            i += 2\n        elif c == '[':\n            raise ValueError(\"'[' not preceded by a count\")\n        elif c == ']':\n       "
+    },
+    {
+      "id": "shortest_threshold_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 392,
+      "seconds": 9.9,
+      "detail": ""
+    },
+    {
+      "id": "glob_full_match",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 189,
+      "seconds": 4.9,
+      "detail": ""
+    },
+    {
+      "id": "max_product_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 707,
+      "seconds": 17.7,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert max_product_slice([2, 3, -2, 4]) == (6, 0, 2)\\nassert max_product_slice([]) is None\\nassert max_product_slice([-2, 3, -4]) == (24, 0, 3)\\nassert max_product_slice([0, -2, 0]) == (0, 0, 1)\\nassert max_product_slice([1, 2, 1]) == (2, 1, 2)\\nassert max_product_slice([-1, -1, -1]) == (1, 0, 2)\\nassert max_product_slice([-5]) == (-5, 0, 1)\\n', ns)\n  File \"<string>\", line \n--code-head--\ndef max_product_slice(nums):\n    if not nums:\n        return None\n    n = len(nums)\n    best = None\n    # Track the best slice ending at the current index for each of the\n    # three possible \"kinds\" of product: positive, negative, zero.\n    # For each kind we keep (product, start, end) with the largest\n    # product; ties are broken by shortest slice then smallest start.\n    pos = neg = zero = No"
+    },
+    {
+      "id": "largest_ones_square",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 273,
+      "seconds": 7.0,
+      "detail": ""
+    },
+    {
+      "id": "next_greater_steps",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 215,
+      "seconds": 5.6,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert next_greater_steps([2, 1, 2, 4, 3]) == [3, 1, 1, 0, 4]\\nassert next_greater_steps([]) == []\\nassert next_greater_steps([7]) == [0]\\nassert next_greater_steps([5, 5, 5]) == [0, 0, 0]\\nassert next_greater_steps([5, 4, 3, 2, 1]) == [0, 4, 3, 2, 1]\\nassert next_greater_steps([-2, -1, -2]) == [1, 0, 2]\\nassert next_greater_steps([1, 3, 1, 3]) == [1, 0, 1, 0]\\n', ns)\n  Fil\n--code-head--\ndef next_greater_steps(nums):\n    n = len(nums)\n    if n == 0:\n        return []\n    result = [0] * n\n    stack = []\n    for k in range(2 * n):\n        i = k % n\n        while stack and nums[stack[-1]] < nums[i]:\n            result[stack.pop()] = i - stack[-1] if False else i - stack[-1]\n        stack.append(i)\n    return result\n\ndef next_greater_steps(nums):\n    n = len(nums)\n    if n == 0:\n     "
+    },
+    {
+      "id": "repeating_decimal",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 262,
+      "seconds": 6.8,
+      "detail": ""
+    },
+    {
+      "id": "directed_euler_walk",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 329,
+      "seconds": 8.4,
+      "detail": "ASSERT_FAIL\n    exec('\\ndef valid_euler_walk(walk, n, edges):\\n    from collections import Counter\\n    if not edges: return walk == ([0] if n else [])\\n    if not isinstance(walk, list) or len(walk) != len(edges) + 1: return False\\n    if any(not isinstance(v, int) or not 0 <= v < n for v in walk): return False\\n    return Counter(zip(walk, walk[1:])) == Counter(map(tuple, edges))\\nassert valid_e\n--code-head--\ndef directed_euler_walk(n, edges):\n    if not edges:\n        return [0] if n > 0 else []\n\n    adj = [[] for _ in range(n)]\n    in_degree = [0] * n\n    out_degree = [0] * n\n    for u, v in edges:\n        adj[u].append(v)\n        out_degree[u] += 1\n        in_degree[v] += 1\n\n    start = None\n    for v in range(n):\n        if out_degree[v] - in_degree[v] == 1:\n            start = v\n            break\n"
+    },
+    {
+      "id": "min_ragged_wrap",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 618,
+      "seconds": 15.6,
+      "detail": "ASSERT_FAIL\n    exec(\"\\ndef bad_wrap(words, width):\\n    try: min_ragged_wrap(words, width)\\n    except ValueError: return True\\n    return False\\nassert min_ragged_wrap(['aaa', 'bb', 'cc', 'ddddd'], 6) == ['aaa', 'bb cc', 'ddddd']\\nassert min_ragged_wrap([], 4) == []\\nassert min_ragged_wrap(['aa', 'b', 'cc', 'ddd'], 4) == ['aa', 'b cc', 'ddd']\\nassert min_ragged_wrap(['aaa', 'bb', 'cc'], 6) == ['\n--code-head--\ndef min_ragged_wrap(words, width):\n    if not isinstance(width, int) or isinstance(width, bool) or width <= 0:\n        raise ValueError(\"width must be positive\")\n    for word in words:\n        if len(word) > width:\n            raise ValueError(\"word longer than width\")\n    n = len(words)\n    if n == 0:\n        return []\n    lengths = [len(w) for w in words]\n    # prefix[i] = sum of lengths of word"
+    },
+    {
+      "id": "deadline_dispatch",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 459,
+      "seconds": 11.7,
+      "detail": ""
+    },
+    {
+      "id": "expand_counted_pattern",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 270,
+      "seconds": 7.0,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert expand_counted_pattern(\"2[a3[b]]\") == \"abbbabbb\"\\nassert expand_counted_pattern(\"\") == \"\"\\nassert expand_counted_pattern(\"0[abc]2[]x\") == \"x\"\\nassert expand_counted_pattern(r\"2[a\\\\]b]\\\\3\\\\\\\\\") == \"a]ba]b3\\\\\\\\\"\\nassert expand_counted_pattern(\"02[a] 1[b]\") == \"aa b\"\\nassert expand_counted_pattern(\"10[z]\") == \"zzzzzzzzzz\"\\ndef rejects_pattern(s):\\n    try: expand_counte\n--code-head--\ndef expand_counted_pattern(s):\n    stack = []\n    current = []\n    i = 0\n    n = len(s)\n    while i < n:\n        c = s[i]\n        if c == '\\\\':\n            if i + 1 >= n:\n                raise ValueError(\"trailing backslash\")\n            current.append(s[i + 1])\n            i += 2\n        elif c == '[':\n            raise ValueError(\"bare '['\")\n        elif c == ']':\n            if not stack:\n     "
+    },
+    {
+      "id": "min_capacity_for_days",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 154,
+      "seconds": 4.0,
+      "detail": ""
+    },
+    {
+      "id": "smallest_fixed_digit_sum",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 147,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "assignment_min_cost_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 251,
+      "seconds": 6.4,
+      "detail": ""
+    },
+    {
+      "id": "grid_keys_shortest_path",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 425,
+      "seconds": 10.8,
+      "detail": ""
+    },
+    {
+      "id": "count_grid_independent_sets",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 312,
+      "seconds": 7.9,
+      "detail": ""
+    },
+    {
+      "id": "first_winning_subtraction_move",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 102,
+      "seconds": 2.7,
+      "detail": ""
+    },
+    {
+      "id": "minimum_max_lateness",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 207,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "repeating_positional_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_OUTPUT",
+      "ok": false,
+      "completion_tokens": 337,
+      "seconds": 8.6,
+      "detail": "\n--code-head--\ndef repeating_positional_cycle_length(numerator, denominator, base):\n    if numerator == 0:\n        return 0\n    d = denominator\n    # Strip factors of the base from the denominator: these produce the\n    # nonrepeating prefix. Remaining factors determine the cycle length.\n    while d % base == 0:\n        d //= base\n    # For each prime factor p of the remaining denominator (p does not divide\n    "
+    },
+    {
+      "id": "min_swaps_to_sorted",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 149,
+      "seconds": 4.7,
+      "detail": ""
+    }
+  ]
+}
