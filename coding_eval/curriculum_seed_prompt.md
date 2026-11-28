@@ -38,6 +38,11 @@ RULES
 OUTPUT FORMAT
 Return ONLY a JSON array (no markdown fences, no commentary). Each element:
 {"id": "unique_snake_case", "tier": 2, "tag": "dp|graphs|parsing|strings|algorithms|data-structures|matrix|backtracking|math|lists|dicts", "title": "...", "prompt": "...", "tests": "assert ...\nassert ...", "ref": "def ...: ..."}
+CRITICAL: `ref` and `tests` must carry real Python indentation INSIDE the JSON
+strings — after every \n write the exact literal spaces (4 per nesting level),
+e.g. "def f(xs):\n    total = 0\n    for x in xs:\n        if x > 0:\n            total += x\n    return total"
+A ref whose lines all start with a single space is silently broken and will be
+rejected by the harness without review.
 
 EXAMPLES (note how eval_expr pins division semantics, and course_order uses a checker
 because the answer is non-unique):
