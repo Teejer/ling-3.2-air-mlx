@@ -149,8 +149,13 @@ memorization for generalization; (4) rank 16 actually applied.
     Round 2 should target the 12 promoted coding layers
     {11,12,17,20,23,24,27,29,30,32,35,36} via a custom layer-selection
     script (CLI --num-layers only takes the last N; round 1 covered
-    layers 26-41). Note: --config yaml rank was not honored (rank 8
-    applied despite rank 16 requested).
+    layers 26-41). NOTE (resolved): the rank gotcha was MY yaml key — mlx-lm
+    reads `lora_parameters:`, not `lora:`. Corollary: if a custom trainer
+    forces different rank/scale at wrap time (train_round2 does: 16/32),
+    EDIT adapters/*/adapter_config.json lora_parameters to match, or
+    mlx_lm.server/load_adapters wraps with defaults and rejects the
+    weights (server then 404s every request).
+
 1. `--harvest` mode in run_eval.py: emit JSONL of passing traces
    (messages-formatted with Ling's chat template) for Phase 0 data.
 2. mlx-lm LoRA support check for `bailing_moe_v3` (adapter targets: attention,

@@ -1,7 +1,7 @@
 # Round-1 LoRA config: adapters on attention + shared experts (serving-name
 # layers; SwitchGLU routed stacks and embed_q/unembed_out are not valid
 # targets — see LORA_DISTILL.md step 0).
-lora:
+lora_parameters:
   rank: 16
   scale: 32
   dropout: 0.0
