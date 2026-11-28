@@ -16,7 +16,7 @@ pkill -f "serve --port $PORT" 2>/dev/null; sleep 5
 
 if [ ! -d "$R1" ]; then
   .venv/bin/mlx_lm.fuse --model "$BASE" --adapter-path adapters/round1 \
-    --save-model "$R1" > coding_eval/fuse-round1.log 2>&1 \
+    --save-path "$R1" > coding_eval/fuse-round1.log 2>&1 \
     || { echo "FUSE_FAIL"; tail -15 coding_eval/fuse-round1.log; exit 1; }
   # keep config metadata (chat template, tokenizer) from the base pack
   for f in chat_template.jinja tokenizer.json tokenizer_config.json vocab.json \
