@@ -109,6 +109,10 @@ def main():
     ap.add_argument("--base-url", default="http://127.0.0.1:11234")
     ap.add_argument("--expect", default=None,
                     help="substring the loaded model id must contain (safety against mislabeling)")
+    ap.add_argument("--model-name", default=None,
+                    help="override the model field sent in requests (mlx_lm.server "
+                         "registers the --model path, while /v1/models reports the "
+                         "upstream id — echoing the id back yields 404s)")
     ap.add_argument("--max-tokens", type=int, default=1400)
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--only", default=None)
@@ -162,7 +166,7 @@ def main():
                         break
                     try:
                         resp = post(args.base_url, {
-                            "model": model,
+                            "model": args.model_name or model,
                             "messages": [
                                 {"role": "system", "content": SYSTEM},
                                 {"role": "user", "content": prob["prompt"]},
@@ -219,7 +223,7 @@ def main():
             t0 = time.time()
             try:
                 resp = post(args.base_url, {
-                    "model": model,
+                    "model": args.model_name or model,
                     "messages": [
                         {"role": "system", "content": SYSTEM},
                         {"role": "user", "content": prob["prompt"]},

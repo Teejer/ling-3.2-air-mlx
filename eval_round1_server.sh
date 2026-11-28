@@ -27,7 +27,7 @@ curl -sf "http://127.0.0.1:$PORT/v1/models" >/dev/null 2>&1 \
 echo "mlx_lm.server + adapter up on $PORT"
 
 .venv/bin/python coding_eval/run_eval.py --base-url "http://127.0.0.1:$PORT" \
-  --expect Ling > coding_eval/eval-round1.log 2>&1 \
+  --expect Ling --model-name default_model > coding_eval/eval-round1.log 2>&1 \
   || { echo "EVALR1_FAIL"; tail -10 coding_eval/eval-round1.log; exit 1; }
 
 # retag the result file so compare_round1 sees it as the r1 model, not the
