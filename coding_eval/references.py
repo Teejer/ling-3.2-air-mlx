@@ -438,3 +438,87 @@ def bipartition(n, edges):
                 elif col[v] == col[u]:
                     return None
     return col
+
+
+# --- decode_escaped_fields (intake) ---
+def decode_escaped_fields(s):
+    fields = []
+    current = []
+    escaped = False
+    for ch in s:
+        if escaped:
+            current.append(ch)
+            escaped = False
+        elif ch == "\\":
+            escaped = True
+        elif ch == ",":
+            fields.append("".join(current))
+            current = []
+        else:
+            current.append(ch)
+    if escaped:
+        raise ValueError
+    fields.append("".join(current))
+    return fields
+
+
+# --- shortest_cycle_length (intake) ---
+def shortest_cycle_length(n, edges):
+    from collections import deque
+    if any(not (0 <= u < n and 0 <= v < n) for u, v in edges): raise ValueError
+    if any(u == v for u, v in edges): return 1
+    adj = [set() for _ in range(n)]
+    for u, v in edges:
+        adj[u].add(v)
+        adj[v].add(u)
+    best = float('inf')
+    for root in range(n):
+        dist = [-1] * n
+        parent = [-1] * n
+        dist[root] = 0
+        q = deque([root])
+        while q:
+            u = q.popleft()
+            for v in adj[u]:
+                if dist[v] == -1:
+                    dist[v] = dist[u] + 1
+                    parent[v] = u
+                    q.append(v)
+                elif parent[u] != v:
+                    best = min(best, dist[u] + dist[v] + 1)
+    return -1 if best == float('inf') else best
+
+
+# --- parse_kv_escaped (intake) ---
+def parse_kv(s):
+    BS = chr(92)
+    out = {}
+    key, val, in_val, seen = [], [], False, False
+
+    def flush():
+        nonlocal key, val, in_val, seen
+        if seen:
+            out[''.join(key)] = ''.join(val)
+        key, val, in_val, seen = [], [], False, False
+
+    i = 0
+    while i < len(s):
+        c = s[i]
+        if c == BS:
+            if i + 1 >= len(s):
+                raise ValueError('dangling escape')
+            (val if in_val else key).append(s[i + 1])
+            seen = True
+            i += 2
+            continue
+        if c == ';':
+            flush()
+        elif c == '=' and not in_val:
+            in_val = True
+            seen = True
+        else:
+            (val if in_val else key).append(c)
+            seen = True
+        i += 1
+    flush()
+    return out

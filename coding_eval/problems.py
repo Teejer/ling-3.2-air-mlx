@@ -665,4 +665,64 @@ check(bipartition(5, e2), 5, e2)
 assert bipartition(5, [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0]]) is None
 """,
     ),
+
+    dict(
+        id='decode_escaped_fields', tier=3, intaked=True, tag='parsing',
+        title='Decode escaped delimited fields',
+        prompt="""Implement `decode_escaped_fields(s)` parsing a single line into fields separated by unescaped commas. Backslash escapes the next character, regardless of what it is. An escaped comma belongs to the current field, and an escaped backslash becomes one literal backslash. Empty fields are preserved, including leading, trailing, and consecutive empty fields. An unescaped comma terminates a field. A trailing unmatched backslash raises ValueError. Empty input represents one empty field and returns [""].""",
+        tests="""
+assert decode_escaped_fields("a,b,c") == ["a", "b", "c"]
+assert decode_escaped_fields("") == [""]
+assert decode_escaped_fields(",,") == ["", "", ""]
+assert decode_escaped_fields("a\\\\,b,c") == ["a,b", "c"]
+assert decode_escaped_fields("x\\\\\\\\y,z") == ["x\\\\y", "z"]
+assert decode_escaped_fields("\\\\,a,") == [",a", ""]
+try:
+ decode_escaped_fields("abc\\\\")
+ assert False
+except ValueError:
+ pass
+""",
+    ),
+
+    dict(
+        id='shortest_cycle_length', tier=3, intaked=True, tag='graphs',
+        title='Shortest cycle in an undirected graph',
+        prompt="""Implement `shortest_cycle_length(n, edges)` for an undirected graph with vertices numbered 0 through n-1. Each edge is a pair [u, v]. Return the number of edges in the shortest simple cycle, or -1 if no cycle exists. A self-loop is a cycle of length 1. Duplicate edges are ignored. Raise ValueError if an endpoint is outside the valid vertex range. The graph may be disconnected.""",
+        tests="""
+assert shortest_cycle_length(3, [[0, 1], [1, 2], [2, 0]]) == 3
+assert shortest_cycle_length(1, []) == -1
+assert shortest_cycle_length(2, [[0, 1], [0, 1]]) == -1
+assert shortest_cycle_length(3, [[0, 0], [0, 1]]) == 1
+assert shortest_cycle_length(5, [[0, 1], [1, 2], [2, 0], [2, 3], [3, 4], [4, 2]]) == 3
+assert shortest_cycle_length(4, [[0, 1], [1, 2], [2, 3]]) == -1
+try: r = shortest_cycle_length(2, [[0, 2]])
+except ValueError: r = "err"
+assert r == "err"
+""",
+    ),
+
+    dict(
+        id='parse_kv_escaped', tier=3, intaked=True, tag='parsing',
+        title='Escaped key-value parser',
+        prompt="""Implement parse_kv(s) that parses a string of entries separated by ';' into a dict of str to str. Rules: within an entry, the FIRST unescaped '=' separates key from value; any later unescaped '=' is an ordinary character of the value. A backslash escapes the next character (any character), which is taken literally and has no special meaning, and the backslash itself is dropped. An entry with zero characters (e.g. from ';;' or a leading/trailing ';') is skipped. An entry with no unescaped '=' maps its key to ''. An entry like '=v' has key ''. If the same key appears again, the later value overwrites. A backslash as the very last character of s raises ValueError. An empty string returns {}.""",
+        tests="""
+BS = chr(92)
+def raises(f, *a):
+    try:
+        f(*a)
+    except ValueError:
+        return True
+    return False
+assert parse_kv('a=1;b=2') == {'a': '1', 'b': '2'}
+assert parse_kv('a=x' + BS + ';y;b=p' + BS + '=q=r') == {'a': 'x;y', 'b': 'p=q=r'}
+assert parse_kv('') == {}
+assert parse_kv(';;a;;') == {'a': ''}
+assert parse_kv('k=1;k=2') == {'k': '2'}
+assert parse_kv('p' + BS + BS + 'q=' + BS + BS) == {'p' + BS + 'q': BS}
+assert parse_kv('a==b') == {'a': '=b'}
+assert parse_kv('=v') == {'': 'v'}
+assert raises(parse_kv, 'a=b' + BS)
+""",
+    ),
 ]
