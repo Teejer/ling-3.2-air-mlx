@@ -71,7 +71,30 @@ because the answer is non-unique):
 }
 
 AVOID — these ids already exist, no duplicates or near-duplicates:
-anagrams, assign_rooms, balanced, balanced_code, base_neg2_conversion, bipartition_coloring, canonical_fraction, case_convert, closest_sum_pair, coin_change, combo_sum_once, count_coprime_inclusion_exclusion, count_digit_occurrences, count_divisible_subsets, count_domino_tilings, count_islands, count_n_queens, course_order, csv_line, daily_temperatures, deadline_dispatch, decode_escaped_fields, decode_nested_repeat, deduplicate_stable, directed_euler_walk, edit_distance, egyptian_greedy, eulerian_trail, eval_expr, excel_column_title, expand_counted_pattern, flatten, fraction_add, glob_full_match, grid_wall_escape, histogram, interval_overlap_count, knapsack_reconstruct, kth_largest_stream, largest_ones_square, lcs_string, lis_reconstruct, longest_bounded_window, longest_consec, longest_k_distinct, longest_unique_window, lru, matrix_chain_multiplication, matrix_diagonal_sums, max_product_after_cut, max_product_slice, merge_intervals, merge_sorted_streams, min_assignment_cost, min_eating_speed, min_join_cost, min_path_effort_grid, min_ragged_wrap, min_stack, min_station_refuels, min_window, minimize_largest_block_sum, next_greater_steps, next_perm, normalize_identifier, normalize_path, palindrome_sub, parse_duration, parse_kv_escaped, predict_the_winner, render_escaped_template, repeating_decimal, restore_ips, retry_decorator, rle, roman, rotate_matrix, rotated_search, running_median, set_zeroes, shortest_cycle_length, shortest_path_with_count, shortest_threshold_slice, solve_linear_congruence, spiral_order, stable_frequency_sort, streaming_kth_largest, subarrays_sum_equals_k, summary_ranges, top_k_words, trap_rain_water, tsp_exact_bitmask, weighted_interval_schedule, word_break, word_pattern_bijection.
+anagrams, assign_rooms, assignment_min_cost_bitmask, balanced, balanced_code,
+base_neg2_conversion, bipartition_coloring, canonical_fraction, case_convert,
+closest_sum_pair, coin_change, combo_sum_once, count_coprime_inclusion_exclusion,
+count_digit_occurrences, count_divisible_subsets, count_domino_tilings,
+count_grid_independent_sets, count_islands, count_n_queens, course_order, csv_line,
+daily_temperatures, deadline_dispatch, decode_escaped_fields, decode_nested_repeat,
+deduplicate_stable, directed_euler_walk, edit_distance, egyptian_greedy, eulerian_trail,
+eval_expr, excel_column_title, expand_counted_pattern, first_winning_subtraction_move,
+flatten, fraction_add, glob_full_match, grid_keys_shortest_path, grid_wall_escape,
+histogram, interval_overlap_count, knapsack_reconstruct, kth_largest_stream,
+largest_ones_square, lcs_string, lis_reconstruct, longest_bounded_window, longest_consec,
+longest_k_distinct, longest_unique_window, lru, matrix_chain_multiplication,
+matrix_diagonal_sums, max_product_after_cut, max_product_slice, merge_intervals,
+merge_sorted_streams, min_assignment_cost, min_capacity_for_days, min_eating_speed,
+min_join_cost, min_path_effort_grid, min_ragged_wrap, min_stack, min_station_refuels,
+min_swaps_to_sorted, min_window, minimize_largest_block_sum, minimum_max_lateness,
+next_greater_steps, next_perm, normalize_identifier, normalize_path, palindrome_sub,
+parse_duration, parse_kv_escaped, predict_the_winner, render_escaped_template,
+repeating_decimal, repeating_positional_cycle_length, restore_ips, retry_decorator, rle,
+roman, rotate_matrix, rotated_search, running_median, set_zeroes, shortest_cycle_length,
+shortest_path_with_count, shortest_threshold_slice, smallest_fixed_digit_sum,
+solve_linear_congruence, spiral_order, stable_frequency_sort, streaming_kth_largest,
+subarrays_sum_equals_k, summary_ranges, top_k_words, trap_rain_water, tsp_exact_bitmask,
+weighted_interval_schedule, word_break, word_pattern_bijection.
 
 TASK: 10 problems as one JSON array. At least 6 distinct tags. 6 tier-2, 4 tier-3.
 Before returning, mentally execute EVERY assert against its ref; drop any pair you

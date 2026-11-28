@@ -1284,3 +1284,157 @@ def expand_counted_pattern(s):
             i += 1
     if stack: raise ValueError("unclosed [")
     return current
+
+
+# --- min_capacity_for_days (intake) ---
+def min_capacity_for_days(weights, days):
+    lo, hi = max(weights), sum(weights)
+    while lo < hi:
+        cap = (lo + hi) // 2
+        used, load = 1, 0
+        for w in weights:
+            if load + w > cap:
+                used += 1
+                load = w
+            else:
+                load += w
+        if used <= days:
+            hi = cap
+        else:
+            lo = cap + 1
+    return lo
+
+# --- smallest_fixed_digit_sum (intake) ---
+def smallest_fixed_digit_sum(d, s):
+    if d == 1 and s == 0: return 0
+    if s < 1 or s > 9 * d: return -1
+    out = []
+    for pos in range(d):
+        left = d - pos - 1
+        low = 1 if pos == 0 else 0
+        for digit in range(low, 10):
+            rem = s - digit
+            if 0 <= rem <= 9 * left:
+                out.append(str(digit))
+                s = rem
+                break
+    return int("".join(out))
+
+# --- assignment_min_cost_bitmask (intake) ---
+def assignment_min_cost_bitmask(cost):
+    n = len(cost)
+    dp = {0: 0}
+    for i in range(n):
+        nxt = {}
+        for mask, value in dp.items():
+            for j in range(n):
+                if mask & (1 << j): continue
+                new_mask = mask | (1 << j)
+                candidate = value + cost[i][j]
+                nxt[new_mask] = min(nxt.get(new_mask, 10 ** 30), candidate)
+                dp = nxt
+    return dp[(1 << n) - 1]
+
+# --- grid_keys_shortest_path (intake) ---
+def grid_keys_shortest_path(grid):
+    from collections import deque
+    rows, cols = len(grid), len(grid[0])
+    start = target = None
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == "S": start = (r, c)
+            if grid[r][c] == "T": target = (r, c)
+            q = deque([(start[0], start[1], 0, 0)])
+            seen = {(start[0], start[1], 0)}
+            while q:
+                r, c, mask, dist = q.popleft()
+                for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    nr, nc = r + dr, c + dc
+                    if not (0 <= nr < rows and 0 <= nc < cols): continue
+                    ch = grid[nr][nc]
+                    if ch == "#": continue
+                    if ch in "ABC" and not (mask & (1 << (ord(ch) - 65))): continue
+                    new_mask = mask
+                    if ch in "abc": new_mask |= 1 << (ord(ch) - 97)
+                    state = (nr, nc, new_mask)
+                    if state in seen: continue
+                    if (nr, nc) == target: return dist + 1
+                    seen.add(state)
+                    q.append((nr, nc, new_mask, dist + 1))
+        return -1
+
+# --- count_grid_independent_sets (intake) ---
+def count_grid_independent_sets(rows, cols):
+    mod = 1000000007
+    masks = [m for m in range(1 << cols) if (m & (m << 1)) == 0]
+    dp = {0: 1}
+    for _ in range(rows):
+        nxt = {}
+        for mask in masks:
+            total = 0
+            for prev, value in dp.items():
+                if not (mask & prev): total = (total + value) % mod
+                if total: nxt[mask] = total
+        dp = nxt
+    return sum(dp.values()) % mod
+
+# --- first_winning_subtraction_move (intake) ---
+def first_winning_subtraction_move(stones, moves):
+    ordered = sorted(moves)
+    winning = [False] * (stones + 1)
+    first = [-1] * (stones + 1)
+    for n in range(1, stones + 1):
+        for move in ordered:
+            if move > n: break
+            if not winning[n - move]:
+                winning[n] = True
+                first[n] = move
+                break
+    return first[stones]
+
+# --- minimum_max_lateness (intake) ---
+def minimum_max_lateness(jobs):
+    time = 0
+    worst = None
+    for duration, deadline in sorted(jobs, key=lambda job: (job[1], job[0])):
+        time += duration
+        lateness = time - deadline
+        worst = lateness if worst is None else max(worst, lateness)
+    return 0 if worst is None else worst
+
+# --- repeating_positional_cycle_length (intake) ---
+def repeating_positional_cycle_length(numerator, denominator, base):
+    from math import gcd
+    if numerator == 0: return 0
+    d = denominator // gcd(numerator, denominator)
+    b, p = base, 2
+    while p * p <= b:
+        if b % p == 0:
+            while d % p == 0: d //= p
+            while b % p == 0: b //= p
+            p += 1
+            if b > 1:
+                while d % b == 0: d //= b
+                if d == 1: return 0
+    value = 1
+    for k in range(1, d + 1):
+        value = value * base % d
+        if value == 1: return k
+    return 0
+
+
+# --- min_swaps_to_sorted (intake) ---
+def min_swaps_to_sorted(nums):
+    rank = {v: i for i, v in enumerate(sorted(nums))}
+    perm = [rank[v] for v in nums]
+    seen = [False] * len(perm)
+    swaps = 0
+    for start in range(len(perm)):
+        if seen[start]: continue
+        size, j = 0, start
+        while not seen[j]:
+            seen[j] = True
+            size += 1
+            j = perm[j]
+        swaps += max(0, size - 1)
+    return swaps

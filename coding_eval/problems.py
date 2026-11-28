@@ -1540,4 +1540,125 @@ def rejects_pattern(s):
 assert all(rejects_pattern(s) for s in ("[a]", "2a", "1[a", "a]", "\\\\", "0[2a]"))
 """,
     ),
+
+    dict(
+        id='min_capacity_for_days', tier=2, intaked=True, tag='math',
+        title='Minimum shipping capacity',
+        prompt="""Implement min_capacity_for_days(weights, days). The nonempty list weights contains at most 1000 positive integers, and days is between 1 and len(weights). Items must be shipped in their given order, and each day ships one nonempty contiguous group whose total weight does not exceed the capacity. Return the minimum integer capacity that ships every item within days days.""",
+        tests="""
+assert min_capacity_for_days([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5) == 15
+assert min_capacity_for_days([3, 2, 2, 4, 1, 4], 3) == 6
+assert min_capacity_for_days([7], 1) == 7
+assert min_capacity_for_days([2, 2, 2], 3) == 2
+assert min_capacity_for_days([5, 1, 5], 2) == 6
+assert min_capacity_for_days([1, 1, 1, 1], 2) == 2
+""",
+    ),
+    dict(
+        id='smallest_fixed_digit_sum', tier=2, intaked=True, tag='math',
+        title='Smallest integer with fixed length and digit sum',
+        prompt="""Implement smallest_fixed_digit_sum(d, s). Return the smallest nonnegative integer whose decimal representation has exactly d digits and whose digits sum to s, or -1 if no such integer exists. Here 1 <= d <= 1000 and s >= 0. Except for the one-digit integer 0, leading zeros are forbidden. Thus d=1 and s=0 returns 0, while d>1 and s=0 returns -1.""",
+        tests="""
+assert smallest_fixed_digit_sum(3, 15) == 159
+assert smallest_fixed_digit_sum(2, 10) == 19
+assert smallest_fixed_digit_sum(1, 0) == 0
+assert smallest_fixed_digit_sum(2, 0) == -1
+assert smallest_fixed_digit_sum(3, 28) == -1
+assert smallest_fixed_digit_sum(4, 10) == 1009
+""",
+    ),
+    dict(
+        id='assignment_min_cost_bitmask', tier=3, intaked=True, tag='dp',
+        title='Minimum-cost square assignment',
+        prompt="""Implement assignment_min_cost_bitmask(cost), where cost is an n by n matrix, 0 <= n <= 8, and every entry is an integer from 0 through 1000000. Assign each row to a distinct column, using every column exactly once, so that the sum of the selected entries is minimized. Return only that minimum sum. The empty 0 by 0 matrix returns 0.""",
+        tests="""
+assert assignment_min_cost_bitmask([[9, 2, 7, 8], [6, 4, 3, 7], [5, 8, 1, 8], [7, 6, 9, 4]]) == 13
+assert assignment_min_cost_bitmask([[4, 1, 3], [2, 0, 5], [3, 2, 2]]) == 5
+assert assignment_min_cost_bitmask([]) == 0
+assert assignment_min_cost_bitmask([[7]]) == 7
+assert assignment_min_cost_bitmask([[5, 1], [1, 5]]) == 2
+assert assignment_min_cost_bitmask([[0, 0], [0, 0]]) == 0
+""",
+    ),
+    dict(
+        id='grid_keys_shortest_path', tier=3, intaked=True, tag='graphs',
+        title='Shortest grid path with keys and doors',
+        prompt="""Implement grid_keys_shortest_path(grid). The nonempty rectangular grid contains exactly one S and one T; other cells are . open space, # wall, keys a through c, or doors A through C. Moving orthogonally to an adjacent cell costs 1. Stepping on a key collects it permanently, and each key opens every door of the corresponding uppercase letter. A door cannot be entered before its key is collected. Return the minimum number of moves from S to T, or -1 if T is unreachable. The grid has at most 1000 cells.""",
+        tests="""
+assert grid_keys_shortest_path(["S.a.A.T"]) == 6
+assert grid_keys_shortest_path(["ST"]) == 1
+assert grid_keys_shortest_path(["SAT"]) == -1
+assert grid_keys_shortest_path(["SAT", "a.."]) == 4
+assert grid_keys_shortest_path(["SaAAT"]) == 4
+assert grid_keys_shortest_path(["S#", "#T"]) == -1
+""",
+    ),
+    dict(
+        id='count_grid_independent_sets', tier=3, intaked=True, tag='dp',
+        title='Count independent sets on a grid',
+        prompt="""Implement count_grid_independent_sets(rows, cols), where 0 <= rows, cols <= 8. Consider the rows by cols rectangular grid graph, whose edges join cells sharing a side. Return the number of subsets of cells containing no edge's two endpoints, modulo 1000000007. Different subsets are counted separately, and the empty subset counts. If either dimension is 0, there are no cells and the answer is 1.""",
+        tests="""
+assert count_grid_independent_sets(2, 2) == 7
+assert count_grid_independent_sets(1, 1) == 2
+assert count_grid_independent_sets(1, 3) == 5
+assert count_grid_independent_sets(0, 4) == 1
+assert count_grid_independent_sets(3, 0) == 1
+assert count_grid_independent_sets(2, 3) == 17
+""",
+    ),
+    dict(
+        id='first_winning_subtraction_move', tier=3, intaked=True, tag='algorithms',
+        title='First winning move in a subtraction game',
+        prompt="""Implement first_winning_subtraction_move(stones, moves), where 0 <= stones <= 1000 and moves is a nonempty list of distinct positive integers. Players alternate removing exactly one listed number of stones, provided that many remain; a player unable to move loses. Assuming optimal play, return the smallest first move that guarantees a win for the initial player. Return -1 if the initial position is losing, including when stones is 0. The input order of moves does not affect the answer.""",
+        tests="""
+assert first_winning_subtraction_move(10, [1, 3, 4]) == 1
+assert first_winning_subtraction_move(7, [1, 3, 4]) == -1
+assert first_winning_subtraction_move(2, [1, 3, 4]) == -1
+assert first_winning_subtraction_move(3, [4, 1, 3]) == 1
+assert first_winning_subtraction_move(0, [1, 3, 4]) == -1
+assert first_winning_subtraction_move(4, [2]) == -1
+assert first_winning_subtraction_move(6, [2]) == 2
+""",
+    ),
+    dict(
+        id='minimum_max_lateness', tier=3, intaked=True, tag='algorithms',
+        title='Minimize maximum job lateness',
+        prompt="""Implement minimum_max_lateness(jobs). Each of at most 1000 jobs is a (duration, deadline) pair with positive integer duration and an integer deadline. All jobs are available at time 0 and must run without overlap on one machine; idle time is allowed. A job finishing at time t has lateness t-deadline, which may be negative. Return the minimum possible value of the maximum lateness over all jobs. For an empty job list, return 0.""",
+        tests="""
+assert minimum_max_lateness([(3, 6), (2, 8), (1, 9), (4, 9), (3, 14), (2, 15)]) == 1
+assert minimum_max_lateness([]) == 0
+assert minimum_max_lateness([(5, 3)]) == 2
+assert minimum_max_lateness([(1, 10), (1, 20)]) == -9
+assert minimum_max_lateness([(4, 100), (1, 1)]) == 0
+assert minimum_max_lateness([(2, 5), (3, 5)]) == 0
+""",
+    ),
+    dict(
+        id='repeating_positional_cycle_length', tier=3, intaked=True, tag='math',
+        title='Cycle length of a positional fraction',
+        prompt="""Implement repeating_positional_cycle_length(numerator, denominator, base), with 0 <= numerator <= 1000, 1 <= denominator <= 1000, and 2 <= base <= 36. Write the rational numerator/denominator in the given positional base. Return the length of the repeating cycle in its fractional part after any nonrepeating prefix. Return 0 if the expansion terminates or the numerator is 0. The integer part does not affect the answer.""",
+        tests="""
+assert repeating_positional_cycle_length(1, 6, 10) == 1
+assert repeating_positional_cycle_length(1, 7, 10) == 6
+assert repeating_positional_cycle_length(1, 8, 10) == 0
+assert repeating_positional_cycle_length(1, 3, 2) == 2
+assert repeating_positional_cycle_length(2, 4, 10) == 0
+assert repeating_positional_cycle_length(5, 5, 10) == 0
+assert repeating_positional_cycle_length(1, 12, 10) == 1
+""",
+    ),
+
+    dict(
+        id='min_swaps_to_sorted', tier=2, intaked=True, tag='lists',
+        title='Swaps to sort a permutation',
+        prompt="""Implement min_swaps_to_sorted(nums), where nums is a list of distinct integers with length at most 1000. In one swap, any two positions may be exchanged. Return the minimum number of swaps needed to sort the list in ascending order. The empty permutation requires 0 swaps.""",
+        tests="""
+assert min_swaps_to_sorted([4, 3, 2, 1]) == 2
+assert min_swaps_to_sorted([1, 0, 2, 3, 4]) == 1
+assert min_swaps_to_sorted([]) == 0
+assert min_swaps_to_sorted([0]) == 0
+assert min_swaps_to_sorted([2, 0, 1]) == 2
+assert min_swaps_to_sorted([1, 2, 0, 4, 3]) == 3
+""",
+    ),
 ]

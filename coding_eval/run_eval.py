@@ -44,10 +44,16 @@ def post(url, payload, timeout=600):
         return json.loads(r.read().decode())
 
 
-def loaded_model(base):
+def loaded_model(base, expect=None):
+    """Pick the model to drive. mlx-serve can hold several models resident, so
+    prefer an id matching --expect when given, else the loaded one."""
     with urllib.request.urlopen(base + "/v1/models", timeout=10) as r:
         data = json.loads(r.read().decode())["data"]
     ready = [m for m in data if m.get("loaded")] or data
+    if expect:
+        hit = [m for m in ready if expect.lower() in m["id"].lower()]
+        if hit:
+            return hit[0]["id"]
     return ready[0]["id"]
 
 
@@ -113,6 +119,10 @@ def main():
                     help="override the model field sent in requests (mlx_lm.server "
                          "registers the --model path, while /v1/models reports the "
                          "upstream id — echoing the id back yields 404s)")
+    ap.add_argument("--extra", default=None,
+                    help="JSON object merged into every request payload — mlx-serve "
+                         "knobs such as {\"reasoning_budget\": 4096} or "
+                         "{\"thinking\": {\"type\": \"disabled\"}}")
     ap.add_argument("--max-tokens", type=int, default=1400)
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--only", default=None)
@@ -130,15 +140,16 @@ def main():
     ap.add_argument("--keep-holdout", action="store_true",
                     help="harvest held-out problems too (NOT recommended)")
     args = ap.parse_args()
+    extra = json.loads(args.extra) if args.extra else {}
     if args.harvest and args.temperature == 0.0:
         args.temperature = 0.8  # sampling needs heat; greedy harvest = 1 unique trace
         print("harvest: defaulting temperature to 0.8")
 
-    model = loaded_model(args.base_url)
+    model = loaded_model(args.base_url, args.expect)
     if args.expect and args.expect.lower() not in model.lower():
         sys.exit(f"loaded model {model!r} does not contain {args.expect!r} — refusing")
     slug = re.sub(r"[^a-zA-Z0-9.+-]", "_", model)
-    print(f"model: {model}")
+    print(f"model: {model}" + (f"  extra: {extra}" if extra else ""))
 
     probs = PROBLEMS
     if args.tier:
@@ -174,6 +185,7 @@ def main():
                             "temperature": args.temperature,
                             "max_tokens": args.max_tokens,
                             "stream": False,
+                            **extra,
                         })
                     except Exception as e:
                         consec_err += 1
@@ -231,6 +243,7 @@ def main():
                     "temperature": args.temperature,
                     "max_tokens": args.max_tokens,
                     "stream": False,
+                    **extra,
                 })
             except Exception as e:
                 consec_err += 1
@@ -270,7 +283,7 @@ def main():
     path = outdir / f"{slug}-{stamp}.json"
     path.write_text(json.dumps(dict(
         model=model, base_url=args.base_url, temperature=args.temperature,
-        max_tokens=args.max_tokens, passed=passed, total=len(results),
+        max_tokens=args.max_tokens, extra=extra, passed=passed, total=len(results),
         results=results,
     ), indent=2))
     print(f"\n{passed}/{len(results)} passed -> {path}")
