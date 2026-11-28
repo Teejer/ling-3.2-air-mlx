@@ -87,6 +87,18 @@ implementation on CUDA. Only worth it if Phase 0–2 plateau.
 4. **Unranked locals (GLM-5.3-Flash, laya, MiniMax-H3)** — serve on :11250,
    run the 30-problem eval, promote whichever actually beats Qwen.
 
+**Curriculum-author standings (first-pass validated rate, batches 1-1):**
+Claude 9/10 then 10/10 with corrections — most reliable author.
+Kimi K3 (via ChatHub) **8/10** — best *design* rate of any teacher (its
+math/tier-3 TASK variant delivered tsp_exact_bitmask, matrix_chain, etc.),
+but ChatHub flattens every `ref` (repaired by the DFS ladder, so score
+post-repair) and its 2 misses were genuine assert errors, hand-fixed per
+the established curation rule.
+ChatGPT 4/10 → 6/10 — good designs, chronically sloppy expected values.
+For trace *donors* (Phase 1), note Kimi K3's license is permissive below
+the MaaS/attribution gates (verified 2026-11-27), unlike ChatGPT/Claude
+consumer terms.
+
 Honest ceiling: LoRA transfers style, consistency and edge-case discipline —
 not pretraining knowledge. Expect tier-2 movement and token-economy gains,
 not a frontier leap. The 12 coding-specialist expert layers identified by
