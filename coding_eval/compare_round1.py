@@ -21,6 +21,9 @@ LABELS = {
 
 def newest(slug):
     files = sorted(glob.glob(f"coding_eval/results/{slug}-*.json"))
+    if "-r1" not in slug:
+        # the base-pack glob also matches the retagged -r1 runs; exclude them
+        files = [f for f in files if "-r1-" not in f]
     return files[-1] if files else None
 
 def main():
