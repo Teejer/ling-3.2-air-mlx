@@ -5,3 +5,6 @@ __pycache__/
 *.log
 *.npy
 Ling-3.2-air-MLX-4bit-VL/
+Ling-3.2-air-MLX-mixed-4-8bit/
+Ling-3.2-air-MLX-mixed-4-8bit-VL/
+coding_eval/results-rejected/

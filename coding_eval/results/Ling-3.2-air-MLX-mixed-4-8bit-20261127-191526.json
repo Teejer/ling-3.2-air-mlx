@@ -1,0 +1,154 @@
+{
+  "model": "Ling-3.2-air-MLX-mixed-4-8bit",
+  "base_url": "http://127.0.0.1:11250",
+  "temperature": 0.0,
+  "max_tokens": 1400,
+  "passed": 16,
+  "total": 16,
+  "results": [
+    {
+      "id": "merge_intervals",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 689,
+      "seconds": 6.1,
+      "detail": ""
+    },
+    {
+      "id": "top_k_words",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 482,
+      "seconds": 4.0,
+      "detail": ""
+    },
+    {
+      "id": "balanced",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 195,
+      "seconds": 1.8,
+      "detail": ""
+    },
+    {
+      "id": "rle",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1199,
+      "seconds": 9.0,
+      "detail": ""
+    },
+    {
+      "id": "flatten",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1315,
+      "seconds": 11.1,
+      "detail": ""
+    },
+    {
+      "id": "closest_sum_pair",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 299,
+      "seconds": 2.8,
+      "detail": ""
+    },
+    {
+      "id": "roman",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 828,
+      "seconds": 6.4,
+      "detail": ""
+    },
+    {
+      "id": "lru",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1144,
+      "seconds": 8.8,
+      "detail": ""
+    },
+    {
+      "id": "csv_line",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 12.2,
+      "detail": ""
+    },
+    {
+      "id": "rotated_search",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 468,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "rotate_matrix",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 516,
+      "seconds": 4.3,
+      "detail": ""
+    },
+    {
+      "id": "palindrome_sub",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1191,
+      "seconds": 9.7,
+      "detail": ""
+    },
+    {
+      "id": "retry_decorator",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1022,
+      "seconds": 8.1,
+      "detail": ""
+    },
+    {
+      "id": "anagrams",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 226,
+      "seconds": 1.8,
+      "detail": ""
+    },
+    {
+      "id": "min_stack",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 719,
+      "seconds": 5.7,
+      "detail": ""
+    },
+    {
+      "id": "case_convert",
+      "rep": 0,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 12.6,
+      "detail": ""
+    }
+  ]
+}

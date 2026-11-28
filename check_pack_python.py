@@ -15,6 +15,21 @@ q = cfg["quantization"]
 args = ModelArgs.from_dict(cfg)
 model = Model(args)
 
+weights = {}
+for f in sorted(PACK.glob("model-*.safetensors")):
+    weights.update(mx.load(str(f)))
+
+def infer_bits(prefix):
+    """Bits of a packed tensor from its geometry (mixed 4/8-bit packs vary
+    bits per tensor; this build packs into uint32 words)."""
+    w = weights.get(f"{prefix}.weight")
+    s = weights.get(f"{prefix}.scales")
+    if w is None or s is None:
+        return q["bits"]
+    in_dim = s.shape[-1] * q["group_size"]
+    per_elem = {mx.uint8: 8, mx.uint16: 16, mx.uint32: 32}.get(w.dtype, 8)
+    return w.shape[-1] * per_elem // in_dim
+
 # Build quantized modules where the pack stores packed weights (as mlx-lm's
 # quantize_model does), so load_weights fills them natively.
 import mlx.nn as nn
@@ -25,14 +40,10 @@ def class_predicate(path, mod):
     if not hasattr(mod, "to_quantized"):
         return False
     p = vp(path, mod)
-    return p if p is not True else {"group_size": q["group_size"], "bits": q["bits"]}
+    return p if p is not True else {"group_size": q["group_size"], "bits": infer_bits(path)}
 
 nn.quantize(model, group_size=q["group_size"], bits=q["bits"], mode="affine",
             class_predicate=class_predicate)
-
-weights = {}
-for f in sorted(PACK.glob("model-*.safetensors")):
-    weights.update(mx.load(str(f)))
 
 # v3 modules want absorbed embed_q/unembed_out; drop the NextN head (no module).
 n = args.num_hidden_layers
@@ -48,7 +59,9 @@ for li in range(n):
         continue
     kw = w2.pop(f"{pre}.kv_b_proj.weight")
     ks, kb = w2.pop(f"{pre}.kv_b_proj.scales", None), w2.pop(f"{pre}.kv_b_proj.biases", None)
-    kvb = kw if ks is None else mx.dequantize(kw, ks, kb, group_size=q["group_size"], bits=q["bits"], mode="affine")
+    kvb = kw if ks is None else mx.dequantize(
+        kw, ks, kb, group_size=q["group_size"],
+        bits=infer_bits(f"{pre}.kv_b_proj"), mode="affine")
     heads, nope, vd = args.num_attention_heads, args.qk_nope_head_dim, args.v_head_dim
     v = kvb.reshape(heads, nope + vd, -1)
     w2[f"{pre}.embed_q.weight"] = mx.contiguous(v[:, :nope, :].swapaxes(-1, -2))
@@ -57,7 +70,10 @@ for li in range(n):
 missing = model.load_weights(list(w2.items()), strict=False)
 missing = list(missing) if missing else []
 print("missing/unexpected:", missing[:8], "total", len(missing))
-mx.eval(model.parameters())
+# eval per layer so a big pack doesn't trip the Metal command-buffer watchdog
+for layer in model.model.layers:
+    mx.eval(layer.parameters())
+mx.eval(model.model.word_embeddings.parameters(), model.lm_head.parameters())
 
 from transformers import AutoTokenizer
 

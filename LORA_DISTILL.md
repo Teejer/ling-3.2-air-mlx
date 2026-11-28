@@ -1,0 +1,104 @@
+# LoRA distillation plan — making Ling-3.2-air code like (or better than) its betters
+
+Status: plan (2026-11-27). Baseline that motivated it: mixed-4-8bit pack hits
+16/16 tier-1, Qwen3.8-Flash-Next hits 16/16 tier-1, base 4-bit hits 13/16 —
+tier-1 is saturated, so `coding_eval` gained 14 tier-2 problems
+(`validate_problems.py` proves the asserts against reference solutions).
+
+## What the 2026 literature says (this is load-bearing, not decoration)
+
+1. **Imitating frontier API teachers can *hurt*.** [compete-then-collaborate]
+   (arXiv 2607.08255, github.com/shawnkim678/compete-then-collaborate) ranked
+   Claude, Codex, Grok, Gemini as teachers with an execution judge, then SFT'd
+   an already-competent coder on their *verified* solutions: MBPP pass@1 went
+   **76.7% → 72.7%** (7B) and 82.0% → 80.0% (32B). The same problems used as a
+   **GRPO/RLVR reward environment** instead improved the student (5.9% → 8.8%
+   on held-out competition). They release the task bank, verifier, and LoRA.
+2. **The verifier is the curriculum.** (arXiv 2607.09709) Rejection-sampling
+   *self*-distillation gated by a strict deterministic verifier compounds
+   across rounds (clean-launch 8.8% → 42.2% in 3 rounds, fresh LoRA from base
+   each round). Verifier **precision** is what matters: admitting 25% false
+   positives costs −1.58pp; *missing* 75% of good candidates costs −0.03pp.
+   Our assert-harness is exactly this kind of verifier.
+3. **Small verified sets work.** s1K (github.com/simplescaling/s1): 1,000
+   curated traces. MapCoder-Lite (EACL'26 findings): teacher trajectories beat
+   self-generated ones for *algorithmic diversity*, and only end-to-end
+   execution-passing trajectories should be kept.
+4. **Fully open distillation data exists.** OpenThoughts (github.com/open-thoughts/open-thoughts):
+   1.2M reasoning rows incl. 250k code, fully open, trained OpenThinker3-7B
+   past R1-distill. distilabel (argilla-io/distilabel) is the standard
+   pipeline framework (generation + feedback + rejection sampling) if we want
+   one, though this kit already implements ~80% of the loop.
+
+## Pipeline for this box (M3 Ultra, 512 GB, mlx-serve + mlx-lm)
+
+**Phase 0 — self-distillation, zero teacher, zero ToS questions.**
+Ling-mixed serves on :11250; for each problem sample k=8 at temp 0.8; the
+harness gates every candidate; passing (prompt, solution) pairs become JSONL.
+Anchor pool from open data (OpenThoughts3 code subset, s1K). LoRA SFT via
+mlx-lm, fresh adapter per round, re-eval tiers 1+2 between rounds. This is the
+literature's best-evidenced move for an already-competent student, and every
+byte of data is ours.
+
+**Phase 1 — open local teacher.** Qwen3.8-Flash-Next generates the same
+problems ×variants (rename functions, permute constants, mutate tests, dedupe
+by hash): it is at parity on tier-1, so it won't teach raw capability, but it
+teaches *token economy* (230 vs 818 tok/q) and edge-case discipline. Measure
+the other locals first (GLM-5.3-Flash, laya, MiniMax-H3 are already on the
+NVMe): whichever beats Qwen on the 30-problem eval becomes the Phase-1
+generator. Generation-based KD does not care about tokenizer mismatch — we
+train on text.
+
+**Phase 2 — Claude / ChatGPT (the "work accounts" question).**
+Technically: yes, trivially — their outputs are just text; no logits needed.
+Two real constraints and the way around them:
+- **Terms**: both labs' consumer terms prohibit using outputs to train
+  competing models; a *work* account adds corporate data governance on top.
+  If the account is API/enterprise with training-permissive terms, run Phase 1
+  with Claude as the generator and keep only execution-passing traces.
+- **Evidence**: even ToS-cleared, *imitation* of frontier style is the
+  degrading direction for a competent student (finding 1 above).
+- **The ToS-clean *and* evidence-aligned use**: frontier models as **curriculum
+  authors, not output donors** — ask Claude/ChatGPT for new problems + hidden
+  tests (like compete-then-collaborate's task bank, which deliberately
+  redistributes no teacher outputs), validate their tests are executable and
+  unambiguous through `validate_problems.py`, then train the student on
+  **Ling's own execution-passing solutions** to those harder problems. That is
+  Phase 0 with an infinitely creative problem generator.
+
+**Phase 3 — RLVR (parked).** The task bank + asserts is already a GRPO reward
+environment. mlx-lm has no GRPO for this MoE; compete-then-collaborate's
+TRL+PEFT path (their repo ships GB10/bleeding-edge patches) is the reference
+implementation on CUDA. Only worth it if Phase 0–2 plateau.
+
+## Which teacher is "even more capable"? (ranked for this student)
+
+1. **Ling-3.2 flagship (inclusionAI, same family/tokenizer)** — the only
+   teacher enabling *logit-level* KD (KL over shared vocab) and native chat
+   style; "air" almost certainly descends from it, so the ceiling is what
+   distillation is for. Won't fit in 512 GB for fast serving, but mlx-serve's
+   in-tree expert-streamer (`kit.streamed`) can run it slowly for overnight
+   trace generation. Availability to check: HF inclusionAI.
+2. **Claude / ChatGPT (frontier)** — strongest coders available; use as
+   curriculum authors (+ verifiers) per Phase 2; direct output distillation
+   only under permissive account terms.
+3. **Qwen3.8-Flash-Next** — parity, not more capable; the right teacher for
+   efficiency/consistency, wrong one for a capability jump.
+4. **Unranked locals (GLM-5.3-Flash, laya, MiniMax-H3)** — serve on :11250,
+   run the 30-problem eval, promote whichever actually beats Qwen.
+
+Honest ceiling: LoRA transfers style, consistency and edge-case discipline —
+not pretraining knowledge. Expect tier-2 movement and token-economy gains,
+not a frontier leap. The 12 coding-specialist expert layers identified by
+`expert_profile_coding.json` are the natural LoRA target layers, which makes
+the quant story and the training story point at the same tensors.
+
+## Immediate next steps
+
+1. `--harvest` mode in run_eval.py: emit JSONL of passing traces
+   (messages-formatted with Ling's chat template) for Phase 0 data.
+2. mlx-lm LoRA support check for `bailing_moe_v3` (adapter targets: attention,
+   shared experts, routed experts of the 12 promoted layers if supported).
+3. Rank the local teachers on the 30-problem eval (serve, `--expect`, one
+   run each).
+4. Round 1: ~2–5k verified traces, LoRA SFT, re-eval tier-2.

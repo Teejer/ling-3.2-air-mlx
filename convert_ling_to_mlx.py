@@ -100,11 +100,17 @@ def quantize2d(w: mx.array, bits: int, group: int):
 
 class Plan:
     """Which tensors quantize, mirroring mlx-lm bailing_moe_v3.quant_predicate
-    with the released checkpoint's layer-type rule."""
+    with the released checkpoint's layer-type rule. Layers listed in
+    `expert8` store their stacked routed experts at `expert_bits` (mixed
+    4/8-bit pack); the engine solves bits per tensor from the packed
+    geometry, so the config keeps the base bits as the default."""
 
-    def __init__(self, cfg: dict, bits: int, group: int):
+    def __init__(self, cfg: dict, bits: int, group: int,
+                 expert8: frozenset[int] = frozenset(), expert_bits: int = 8):
         self.bits = bits
         self.group = group
+        self.expert8 = expert8
+        self.expert_bits = expert_bits
         self.n_layers = cfg["num_hidden_layers"]
         self.group_size_layers = cfg["layer_group_size"]
         self.num_experts = cfg["num_experts"]
@@ -115,6 +121,9 @@ class Plan:
         if self.force_mla is not None:
             return self.force_mla
         return (layer + 1) % self.group_size_layers == 0
+
+    def expert_bits_for(self, layer: int) -> int:
+        return self.expert_bits if layer in self.expert8 else self.bits
 
     def quantize(self, key: str) -> bool:
         if not key.endswith(".weight"):
@@ -212,6 +221,8 @@ def process_layer(b: dict, L: int, cfg: dict, plan: Plan, out: ShardWriter):
     is_mla = plan.is_mla(L)
 
     # 1. routed experts: dequant -> stack -> quantize per expert
+    #    (mixed 4/8-bit: a promoted layer's whole stack lands at expert_bits)
+    ebits = plan.expert_bits_for(L)
     for proj in ("gate_proj", "up_proj", "down_proj"):
         first = f"{p}mlp.experts.0.{proj}.weight"
         if first not in b:
@@ -224,7 +235,7 @@ def process_layer(b: dict, L: int, cfg: dict, plan: Plan, out: ShardWriter):
             if s is not None:
                 w = dequant_fp8(w, s)
             if plan.quantize(base):
-                qw, qs, qb = quantize2d(w, plan.bits, plan.group)
+                qw, qs, qb = quantize2d(w, ebits, plan.group)
                 ws.append(qw), ss.append(qs), bs.append(qb)
             else:
                 ws.append(w.astype(mx.bfloat16))
@@ -270,7 +281,23 @@ def main():
     ap.add_argument("--vl", action="store_true",
                     help="VL pack: keep the vision tower (bf16) + linear_proj, keep vision_config/"
                          "mrope/token ids, declare model_type bailing_moe_v3_vl")
+    ap.add_argument("--expert-bits", type=int, default=8,
+                    help="bits for the stacked experts of --expert8-layers layers")
+    ap.add_argument("--expert8-layers", default=None,
+                    help="comma-separated layer indices whose routed experts take --expert-bits")
+    ap.add_argument("--expert8-profile", default=None,
+                    help="expert_profile_coding.json from profile_expert_coding.py; "
+                         "takes --expert8-top layers by score (or its recommended_8bit_layers)")
+    ap.add_argument("--expert8-top", type=int, default=12)
     args = ap.parse_args()
+
+    expert8 = frozenset()
+    if args.expert8_layers:
+        expert8 = frozenset(int(x) for x in args.expert8_layers.split(","))
+    elif args.expert8_profile:
+        prof = json.loads(Path(args.expert8_profile).read_text())
+        ranked = sorted(prof["layers"], key=lambda d: -d["score"])
+        expert8 = frozenset(d["layer"] for d in ranked[: args.expert8_top])
 
     hf, out = find_hf_dir(args.hf_dir), Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -311,7 +338,10 @@ def main():
         cfg["num_nextn_predict_layers"] = 0
     (out / "config.json").write_text(json.dumps(cfg, indent=2) + "\n")
 
-    plan = Plan(src, args.bits, args.group_size)
+    plan = Plan(src, args.bits, args.group_size, expert8, args.expert_bits)
+    if expert8:
+        print(f"mixed pack: experts at {args.expert_bits}-bit on layers "
+              f"{sorted(expert8)}, {args.bits}-bit elsewhere", flush=True)
     writer = ShardWriter(out)
 
     shards = sorted(hf.glob("model-*.safetensors")) or [hf / "model.safetensors"]
@@ -377,6 +407,16 @@ def main():
 
     total = writer.finish(total_params)
     print(f"\nwrote {len(writer.index)} tensors, {total / 1e9:.1f} GB -> {out}")
+
+    if expert8:
+        # provenance sidecar (config.json keeps the base quantization dict;
+        # the engine solves per-tensor bits from the packed geometry)
+        (out / "mixed-quant.json").write_text(json.dumps({
+            "base": {"bits": args.bits, "group_size": args.group_size, "mode": "affine"},
+            "expert_bits": args.expert_bits,
+            "expert8_layers": sorted(expert8),
+            "profile": args.expert8_profile,
+        }, indent=2) + "\n")
 
     # tokenizer + generation files
     for f in (
