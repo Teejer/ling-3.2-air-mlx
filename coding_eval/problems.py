@@ -725,4 +725,62 @@ assert parse_kv('=v') == {'': 'v'}
 assert raises(parse_kv, 'a=b' + BS)
 """,
     ),
+
+    dict(
+        id='longest_bounded_window', tier=2, intaked=True, tag='algorithms',
+        title='Longest bounded-range window',
+        prompt="""Implement `longest_bounded_window(nums, limit)` returning the length of the longest contiguous subarray whose maximum minus minimum is at most limit. An empty input returns 0. If limit is negative, return 0. Only the length is returned, so ties need no special handling. All values and limit are integers.""",
+        tests="""
+assert longest_bounded_window([8, 2, 4, 7], 4) == 2
+assert longest_bounded_window([], 3) == 0
+assert longest_bounded_window([1, 1, 1], 0) == 3
+assert longest_bounded_window([1, 5, 9], -1) == 0
+assert longest_bounded_window([10, 1, 2, 4, 7, 2], 5) == 4
+assert longest_bounded_window([1, 9, 2, 8], 7) == 3
+""",
+    ),
+    dict(
+        id='matrix_diagonal_sums', tier=2, intaked=True, tag='matrix',
+        title='Matrix diagonal sums',
+        prompt="""Implement `matrix_diagonal_sums(matrix)` for an n by n square matrix of integers. Return `[primary_sum, secondary_sum]`. The primary diagonal runs from top-left to bottom-right; the secondary diagonal runs from top-right to bottom-left. For a 1 by 1 matrix, the same element contributes to both sums. An empty matrix returns [0, 0]. Raise ValueError if the matrix is not square.""",
+        tests="""
+assert matrix_diagonal_sums([[1, 2], [3, 4]]) == [5, 5]
+assert matrix_diagonal_sums([]) == [0, 0]
+assert matrix_diagonal_sums([[7]]) == [7, 7]
+assert matrix_diagonal_sums([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [15, 15]
+assert matrix_diagonal_sums([[1, 0, 0], [0, 2, 0], [0, 0, 3]]) == [6, 2]
+try: r = matrix_diagonal_sums([[1, 2], [3]])
+except ValueError: r = "err"
+assert r == "err"
+""",
+    ),
+    dict(
+        id='normalize_identifier', tier=2, intaked=True, tag='strings',
+        title='Strict identifier normalization',
+        prompt="""Implement `normalize_identifier(s)`. First strip all leading and trailing ASCII space characters. Then convert ASCII uppercase letters A-Z to lowercase. Replace each maximal run of remaining internal ASCII spaces with one underscore. Tabs and all other characters are ordinary characters and are preserved unchanged. Empty or whitespace-only ASCII-space input returns an empty string.""",
+        tests="""
+assert normalize_identifier(" Hello WORLD ") == "hello_world"
+assert normalize_identifier("") == ""
+assert normalize_identifier(" ") == ""
+assert normalize_identifier("A\\t B") == "a\\t_b"
+assert normalize_identifier("A B C") == "a_b_c"
+assert normalize_identifier("BC ") == "bc"
+""",
+    ),
+
+    dict(
+        id='streaming_kth_largest', tier=3, intaked=True, tag='data-structures',
+        title='Streaming kth largest',
+        prompt="""Implement `streaming_kth_largest(nums, k)` returning a list containing the kth largest value after each insertion, starting with the kth insertion. Duplicates count as separate values. If fewer than k values have been inserted, emit nothing. Raise ValueError if k is less than 1. The input is processed in its given order.""",
+        tests="""
+assert streaming_kth_largest([3, 1, 5, 12, 2, 11], 3) == [1, 3, 3, 5]
+assert streaming_kth_largest([], 1) == []
+assert streaming_kth_largest([4, 4, 4], 2) == [4, 4]
+assert streaming_kth_largest([1, 2, 3, 4], 1) == [1, 2, 3, 4]
+assert streaming_kth_largest([9, 8, 7], 4) == []
+try: r = streaming_kth_largest([1], 0)
+except ValueError: r = "err"
+assert r == "err"
+""",
+    ),
 ]

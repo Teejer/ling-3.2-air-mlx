@@ -522,3 +522,46 @@ def parse_kv(s):
         i += 1
     flush()
     return out
+
+
+# --- longest_bounded_window (intake) ---
+def longest_bounded_window(nums, limit):
+    if limit < 0: return 0
+    from collections import deque
+    mx, mn, left, best = deque(), deque(), 0, 0
+    for right, x in enumerate(nums):
+        while mx and nums[mx[-1]] <= x: mx.pop()
+        mx.append(right)
+        while mn and nums[mn[-1]] >= x: mn.pop()
+        mn.append(right)
+        while nums[mx[0]] - nums[mn[0]] > limit:
+            left += 1
+            if mx[0] < left: mx.popleft()
+            if mn[0] < left: mn.popleft()
+        best = max(best, right - left + 1)
+    return best
+
+# --- matrix_diagonal_sums (intake) ---
+def matrix_diagonal_sums(matrix):
+    n = len(matrix)
+    if n == 0: return [0, 0]
+    for row in matrix:
+        if len(row) != n: raise ValueError("not square")
+    return [sum(matrix[i][i] for i in range(n)), sum(matrix[i][n - 1 - i] for i in range(n))]
+
+# --- normalize_identifier (intake) ---
+def normalize_identifier(s):
+    import re
+    return re.sub(" +", "_", s.strip(" ").lower())
+
+
+# --- streaming_kth_largest (intake) ---
+def streaming_kth_largest(nums, k):
+    if k < 1: raise ValueError("k must be >= 1")
+    import heapq
+    heap, out = [], []
+    for x in nums:
+        heapq.heappush(heap, x)
+        if len(heap) > k: heapq.heappop(heap)
+        if len(heap) == k: out.append(heap[0])
+    return out
