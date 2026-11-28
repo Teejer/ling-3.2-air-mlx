@@ -95,6 +95,17 @@ the quant story and the training story point at the same tensors.
 
 ## Immediate next steps
 
+0. **mlx-lm training support: VERIFIED with one local patch.** mlx-lm
+   0.32.2 ships `bailing_moe_v3` and trains LoRA on quantized layers
+   natively, but its `sanitize()` hard-refuses quantized `kv_b_proj`
+   because the MLA reparameterization (kv_b_proj -> embed_q/unembed_out)
+   cannot split packed tensors. Patched site-packages to dequantize ONLY
+   that tensor at load time (everything else trains QLoRA-style on the
+   quantized pack, matching serving). Adapters must therefore target
+   shared experts + attention projections that keep their serving names —
+   NOT embed_q/unembed_out (the Zig engine serves kv_b_proj directly), and
+   NOT the SwitchGLU routed-expert stacks (not nn.Linear; needs a custom
+   adapter patch for a future round).
 1. `--harvest` mode in run_eval.py: emit JSONL of passing traces
    (messages-formatted with Ling's chat template) for Phase 0 data.
 2. mlx-lm LoRA support check for `bailing_moe_v3` (adapter targets: attention,
