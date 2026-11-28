@@ -86,8 +86,9 @@ implementation on CUDA. Only worth it if Phase 0–2 plateau.
    efficiency/consistency, wrong one for a capability jump.
 4. **Unranked locals (GLM-5.3-Flash, MiniMax-M3)** — serve on :11250, run the
    suite eval, promote whichever actually beats Qwen. **laya is excluded** (user:
-   it's a decision model, not a general chat/coding model, so it can't author or
-   solve the suite). Note the HF cache spells it MiniMax-M3-oQ3, not H3.
+   it cannot chat at all — pure decision model, so it can neither author nor
+   solve nor donate traces; no eval run is worth its time). Note the HF cache
+   spells it MiniMax-M3-oQ3, not H3.
 
 **Curriculum-author standings (first-pass validated rate, batches 1-1):**
 Claude 9/10 then 10/10 with corrections — most reliable author.
