@@ -2,25 +2,26 @@
 
 The coding story (expert_profile_coding.json) puts the action at layers
 {11,12,17,20,23,24,27,29,30,32,35,36}, but mlx-lm's CLI only wraps the last
---num-layers blocks. Strategy: snapshot every Linear/QuantizedLinear's
-parameters (lazy arrays — cheap), let mlx-lm wrap ALL layers, then rebuild
-the non-target layers from their snapshots (dropping the LoRA params), and
-train via mlx_lm.lora.run with num_layers = all.
+--num-layers blocks. Strategy: keep references to the ORIGINAL Linear /
+QuantizedLinear modules outside the target set, let mlx-lm wrap ALL layers,
+then put the untouched originals back (their LoRA wrappers are discarded
+before the optimizer is built, so no params train there), and train via
+mlx_lm.lora's entrypoint.
 
 Usage (same flags as mlx_lm.lora, plus --layers):
   python train_round2.py --model DIR --train --data DIR --adapter-path DIR \
-      --iters 250 --layers 11,12,17,20,23,24,27,29,30,32,35,36
+      --iters 250 [--layers 11,12,...]
 """
-import argparse
 import sys
 
-import mlx.core as mx
 import mlx.nn as nn
 import mlx_lm.lora as lora_mod
 from mlx_lm.tuner.utils import linear_to_lora_layers as _orig_apply
 
 DEFAULT_LAYERS = [11, 12, 17, 20, 23, 24, 27, 29, 30, 32, 35, 36]
 ALLOWED = set(DEFAULT_LAYERS)
+RANK = 16   # mlx-lm 0.32.2 silently ignored the yaml rank (round 1 got 8)
+SCALE = 32
 
 
 def _layer_index(module_path):
@@ -34,46 +35,72 @@ def _layer_index(module_path):
     return None
 
 
+def _unwrap_lora(module):
+    """Return the plain Linear/QuantizedLinear underlying a LoRA wrapper."""
+    base = getattr(module, "linear", None)
+    if base is not None:
+        return base  # mlx-lm 0.32.2: LoRA wraps by composition (.linear)
+    params = dict(module.parameters())
+    params = {k: v for k, v in params.items() if k not in ("lora_a", "lora_b")}
+    if "scales" in params:  # quantized
+        w, s = params["weight"], params["scales"]
+        out, packed = w.shape
+        group_size = getattr(module, "group_size", 64)
+        in_features = s.shape[-1] * group_size
+        bits = (32 * packed) // in_features
+        new = nn.QuantizedLinear(in_features, out, bias=False,
+                                 group_size=group_size, bits=bits)
+    else:
+        out, in_features = params["weight"].shape
+        new = nn.Linear(in_features, out, bias="bias" in params)
+    new.update(params)
+    return new
+
+
 def selective_apply(model, num_layers, config, use_dora=False):
-    """Wrap all, then restore non-target layers from snapshots."""
-    # snapshot originals of every leaf linear under model.layers
-    snapshots = {}
+    """Wrap all, then restore non-target layers to their original modules."""
+    config = dict(config)
+    config["rank"] = RANK
+    config["scale"] = SCALE
+    print(f"[round2] forcing rank={RANK} scale={SCALE} (yaml rank ignored upstream)")
+
+    originals = {}
     for path, mod in list(model.named_modules()):
-        if not path.startswith("layers."):
-            continue
         li = _layer_index(path)
         if li is None or li in ALLOWED:
             continue
-        if isinstance(mod, nn.QuantizedLinear):
-            snapshots[path] = ("q", mod.asdict())
-        elif isinstance(mod, nn.Linear):
-            snapshots[path] = ("l", mod.asdict())
+        if isinstance(mod, (nn.Linear, nn.QuantizedLinear)):
+            originals[path] = mod
 
     _orig_apply(model, len(model.layers), config, use_dora)
 
-    # rebuild non-target layers from snapshots (drops LoRA params)
     restored = 0
-    for path, (kind, d) in snapshots.items():
+    for path, mod in originals.items():
         parent_path, attr = path.rsplit(".", 1)
         parent = model
         for part in parent_path.split("."):
-            parent = getattr(parent, part) if not part.isdigit() else parent[int(part)]
-        cls = nn.QuantizedLinear if kind == "q" else nn.Linear
-        d.pop("lora_a", None)
-        d.pop("lora_b", None)
-        d.pop("scale", None)
-        d.pop("dropout", None)
-        try:
-            new = cls(**{k: v for k, v in d.items()
-                         if k in ("bias", "weight", "scales", "biases",
-                                  "group_size", "bits", "mode")})
-        except TypeError:
-            # older/newer ctor: build bare and set params
-            new = cls(d.get("weight", d.get("scales")).shape[-1], 0) if kind == "l" else cls()
-        setattr(parent, attr, new)
+            parent = parent[int(part)] if part.isdigit() else getattr(parent, part)
+        setattr(parent, attr, mod)  # unwrapped original; wrapper dropped
         restored += 1
+
+    # Deterministic second sweep: anything LoRA'd outside ALLOWED (e.g.
+    # shared_experts whose restore-by-path missed) gets unwrapped from params.
+    swept = 0
+    for path, mod in list(model.named_modules()):
+        if not hasattr(mod, "lora_a"):
+            continue
+        li = _layer_index(path)
+        if li is not None and li in ALLOWED:
+            continue
+        parent_path, attr = path.rsplit(".", 1)
+        parent = model
+        for part in parent_path.split("."):
+            parent = parent[int(part)] if part.isdigit() else getattr(parent, part)
+        setattr(parent, attr, _unwrap_lora(mod))
+        swept += 1
+
     kept = sum(1 for _, m in model.named_modules() if hasattr(m, "lora_a"))
-    print(f"[round2] LoRA kept on {kept} modules; restored {restored} non-target modules")
+    print(f"[round2] LoRA kept on {kept} modules; restored {restored}, swept {swept}")
     return model
 
 

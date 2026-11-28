@@ -1,0 +1,670 @@
+{
+  "model": "inclusionAI/Ling-3.2-air",
+  "base_url": "http://127.0.0.1:11250",
+  "temperature": 0.0,
+  "max_tokens": 1400,
+  "passed": 54,
+  "total": 66,
+  "results": [
+    {
+      "id": "merge_intervals",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 703,
+      "seconds": 21.3,
+      "detail": ""
+    },
+    {
+      "id": "top_k_words",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 247,
+      "seconds": 5.5,
+      "detail": ""
+    },
+    {
+      "id": "balanced",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 363,
+      "seconds": 6.5,
+      "detail": ""
+    },
+    {
+      "id": "rle",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 895,
+      "seconds": 15.7,
+      "detail": ""
+    },
+    {
+      "id": "flatten",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1340,
+      "seconds": 23.5,
+      "detail": ""
+    },
+    {
+      "id": "closest_sum_pair",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 435,
+      "seconds": 7.7,
+      "detail": ""
+    },
+    {
+      "id": "roman",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 467,
+      "seconds": 8.2,
+      "detail": ""
+    },
+    {
+      "id": "lru",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR invalid syntax (sol.py, line 48)",
+      "ok": false,
+      "completion_tokens": 1333,
+      "seconds": 23.3,
+      "detail": "SYNTAX_ERROR invalid syntax (sol.py, line 48)\n--code-head--\nclass LRU:\n    \"\"\"Least-recently-used cache with O(1) amortized get/put.\n\n    Backed by a hash map plus a doubly linked list ordered from most\n    recently used (near the head sentinel) to least recently used (near\n    the tail sentinel).\n    \"\"\"\n\n    class _Node:\n        __slots__ = (\"key\", \"value\", \"prev\", \"next\")\n\n        def __init__(self, key=None, value=None):\n            self.key = key\n    "
+    },
+    {
+      "id": "csv_line",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR invalid syntax (sol.py, line 17)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.4,
+      "detail": "SYNTAX_ERROR invalid syntax (sol.py, line 17)\n--code-head--\ndef parse_csv(line, delim=','):\n    fields = []\n    field = []\n    i = 0\n    n = len(line)\n    in_quotes = False\n    at_field_start = True  # whether we're at the start of a field (for quote detection)\n    \n    while i < n:\n        ch = line[i]\n        if in_quotes:\n            if ch == '\"':\n                if i + 1 < n and line[i+1] == '\"':\n                    field.append('\"')\n                  "
+    },
+    {
+      "id": "rotated_search",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 412,
+      "seconds": 7.3,
+      "detail": ""
+    },
+    {
+      "id": "rotate_matrix",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 171,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "palindrome_sub",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR invalid syntax. Perhaps you forgot a comma? (sol.py, line 26)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.3,
+      "detail": "SYNTAX_ERROR invalid syntax. Perhaps you forgot a comma? (sol.py, line 26)\n--code-head--\ndef longest_palindrome(s):\n    if not s:\n        return \"\"\n    # Transform s into t with separators\n    t = '#' + '#'.join(s) + '#'\n    n = len(t)\n    p = [0] * n\n    center = right = 0\n    best_center = best_len = 0\n    for i in range(n):\n        mirror = 2 * center - i\n        if i < right:\n            p[i] = min(right - i, p[mirror])\n        # expand\n        a, b = i + p[i] + 1, i - p[i] - 1\n  "
+    },
+    {
+      "id": "retry_decorator",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 478,
+      "seconds": 8.4,
+      "detail": ""
+    },
+    {
+      "id": "anagrams",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 221,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "min_stack",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 629,
+      "seconds": 11.0,
+      "detail": ""
+    },
+    {
+      "id": "case_convert",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 24.4,
+      "detail": ""
+    },
+    {
+      "id": "next_perm",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 837,
+      "seconds": 14.6,
+      "detail": ""
+    },
+    {
+      "id": "word_break",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 604,
+      "seconds": 10.6,
+      "detail": ""
+    },
+    {
+      "id": "edit_distance",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 466,
+      "seconds": 8.2,
+      "detail": ""
+    },
+    {
+      "id": "histogram",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 718,
+      "seconds": 12.5,
+      "detail": ""
+    },
+    {
+      "id": "course_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 602,
+      "seconds": 10.6,
+      "detail": ""
+    },
+    {
+      "id": "running_median",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1179,
+      "seconds": 20.5,
+      "detail": ""
+    },
+    {
+      "id": "coin_change",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR invalid decimal literal (sol.py, line 16)",
+      "ok": false,
+      "completion_tokens": 349,
+      "seconds": 6.1,
+      "detail": "SYNTAX_ERROR invalid decimal literal (sol.py, line 16)\n--code-head--\ndef coin_change(coins, amount):\n    \"\"\"Return the fewest coins needed to make up `amount` using unlimited\n    supply of denominations in `coins`, or -1 if it is impossible.\n    \"\"\"\n    if amount < 0:\n        return -1\n    if amount == 0:\n        return 0\n\n    coins = [c for c in coins if c > 0]\n    if not coins:\n        return -1\n\n    INF = amount + 1\n    dp = [INF] * (amount + 1)\n    dp[0aux] = 0"
+    },
+    {
+      "id": "balanced_code",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 721,
+      "seconds": 12.6,
+      "detail": ""
+    },
+    {
+      "id": "eval_expr",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1245,
+      "seconds": 21.7,
+      "detail": ""
+    },
+    {
+      "id": "longest_consec",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 500,
+      "seconds": 8.8,
+      "detail": ""
+    },
+    {
+      "id": "parse_duration",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 24.4,
+      "detail": ""
+    },
+    {
+      "id": "restore_ips",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1075,
+      "seconds": 18.7,
+      "detail": ""
+    },
+    {
+      "id": "spiral_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 714,
+      "seconds": 12.5,
+      "detail": ""
+    },
+    {
+      "id": "min_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 652,
+      "seconds": 11.4,
+      "detail": ""
+    },
+    {
+      "id": "interval_overlap_count",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR invalid character '\u2014' (U+2014) (sol.py, line 3)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.4,
+      "detail": "SYNTAX_ERROR invalid character '\u2014' (U+2014) (sol.py, line 3)\n--code-head--\nWe need to implement `interval_overlap_count(intervals)` where intervals is a list of closed integer intervals `[start, end]`. Return the maximum number of intervals containing the same integer point. Intervals with equal endpoints overlap. An empty list returns 0. Raise ValueError if any interval has start > end. The result counts duplicate intervals separately\u638c\u4e2d.\n\nClassic sweep line: for each in"
+    },
+    {
+      "id": "canonical_fraction",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1074,
+      "seconds": 18.8,
+      "detail": ""
+    },
+    {
+      "id": "deduplicate_stable",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 206,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "lis_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_CODE",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.4,
+      "detail": "\n--code-head--\n"
+    },
+    {
+      "id": "longest_k_distinct",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 278,
+      "seconds": 4.9,
+      "detail": ""
+    },
+    {
+      "id": "egyptian_greedy",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR 'return' outside function (sol.py, line 18)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.4,
+      "detail": "SYNTAX_ERROR 'return' outside function (sol.py, line 18)\n--code-head--\ndef egyptian(num, den):\n    if den <= 0:\n        raise ValueError(...)\n    if num < 0 or num >= den:\n        raise ValueError(...)\n    if num == 0:\n        return []\n    result = []\n    while num:\n        t = (den + num - 1) // num\n        result.append(t)\n        num, den = num * t - den, den * t\n        g = math.gcd(num, den)\n        num //= g; den //= g\n    return result\n\nif num == 0:\n    retur"
+    },
+    {
+      "id": "combo_sum_once",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 876,
+      "seconds": 15.4,
+      "detail": ""
+    },
+    {
+      "id": "set_zeroes",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 364,
+      "seconds": 6.4,
+      "detail": ""
+    },
+    {
+      "id": "kth_largest_stream",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 586,
+      "seconds": 10.4,
+      "detail": ""
+    },
+    {
+      "id": "lcs_string",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 868,
+      "seconds": 15.2,
+      "detail": ""
+    },
+    {
+      "id": "assign_rooms",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 841,
+      "seconds": 14.8,
+      "detail": ""
+    },
+    {
+      "id": "bipartition_coloring",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 554,
+      "seconds": 9.9,
+      "detail": ""
+    },
+    {
+      "id": "decode_escaped_fields",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 722,
+      "seconds": 12.8,
+      "detail": ""
+    },
+    {
+      "id": "shortest_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "RUNTIME_ERROR NameError name 'u\u638c' is not defined",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.5,
+      "detail": "RUNTIME_ERROR NameError name 'u\u638c' is not defined\n--code-head--\nfrom collections import deque\n\ndef shortest_cycle_length(n, edges):\n    # Build adjacency, dedupe, validate\n    adj = [set() for _ in range(n)]\n    min_cycle = float('inf')\n    seen_edges = set()\n    for e in edges:\n        u, v = e[0], e[1]\n        if not (0 <= u < n) or not (0 <= v < n):\n            raise ValueError(...)\n        if u == v:\n            min_cycle = 1  # self-loop\n            conti"
+    },
+    {
+      "id": "parse_kv_escaped",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR invalid syntax (sol.py, line 1)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.7,
+      "detail": "SYNTAX_ERROR invalid syntax (sol.py, line 1)\n--code-head--\nLet me carefully parse the requirements:\n\n1. `parse_kv(s)` parses a string of entries separated by `;` into a dict of str to str.\n2. Within an entry, the FIRST unescaped `=` separates key from value; any later unescaped `=` is an ordinary character of the value/of the value.\n3. A backslash escapes the next character (any character), which is taken literally and has no special meaning, and the back"
+    },
+    {
+      "id": "longest_bounded_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 731,
+      "seconds": 12.9,
+      "detail": ""
+    },
+    {
+      "id": "matrix_diagonal_sums",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 385,
+      "seconds": 6.9,
+      "detail": ""
+    },
+    {
+      "id": "normalize_identifier",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 24.5,
+      "detail": ""
+    },
+    {
+      "id": "streaming_kth_largest",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 704,
+      "seconds": 12.5,
+      "detail": ""
+    },
+    {
+      "id": "fraction_add",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1070,
+      "seconds": 18.9,
+      "detail": ""
+    },
+    {
+      "id": "stable_frequency_sort",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 557,
+      "seconds": 9.9,
+      "detail": ""
+    },
+    {
+      "id": "merge_sorted_streams",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1041,
+      "seconds": 18.3,
+      "detail": ""
+    },
+    {
+      "id": "weighted_interval_schedule",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_CODE",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.7,
+      "detail": "\n--code-head--\n"
+    },
+    {
+      "id": "shortest_path_with_count",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1110,
+      "seconds": 19.6,
+      "detail": ""
+    },
+    {
+      "id": "normalize_path",
+      "rep": 0,
+      "tier": 3,
+      "status": "RUNTIME_ERROR NameError name 'components\u638c\u4e2d\u5f69' is not defined",
+      "ok": false,
+      "completion_tokens": 482,
+      "seconds": 8.6,
+      "detail": "RUNTIME_ERROR NameError name 'components\u638c\u4e2d\u5f69' is not defined\n--code-head--\ndef normalize_path(path):\n    components = []\n    for part in path.split('/'):\n        if part == '' or part == '.':\n            continue\n        elif part == '..':\n            if components:\n                components.pop()\n        else:\n            components.append(part)\n    return '/' + '/'.join(components\u638c\u4e2d\u5f69)"
+    },
+    {
+      "id": "longest_unique_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 424,
+      "seconds": 7.6,
+      "detail": ""
+    },
+    {
+      "id": "count_coprime_inclusion_exclusion",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1124,
+      "seconds": 19.8,
+      "detail": ""
+    },
+    {
+      "id": "min_eating_speed",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 314,
+      "seconds": 5.7,
+      "detail": ""
+    },
+    {
+      "id": "tsp_exact_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 759,
+      "seconds": 13.5,
+      "detail": ""
+    },
+    {
+      "id": "predict_the_winner",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 712,
+      "seconds": 12.6,
+      "detail": ""
+    },
+    {
+      "id": "base_neg2_conversion",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 774,
+      "seconds": 13.7,
+      "detail": ""
+    },
+    {
+      "id": "min_path_effort_grid",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 867,
+      "seconds": 15.4,
+      "detail": ""
+    },
+    {
+      "id": "matrix_chain_multiplication",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 566,
+      "seconds": 10.1,
+      "detail": ""
+    },
+    {
+      "id": "subarrays_sum_equals_k",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 385,
+      "seconds": 6.9,
+      "detail": ""
+    },
+    {
+      "id": "min_station_refuels",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 701,
+      "seconds": 12.5,
+      "detail": ""
+    },
+    {
+      "id": "render_escaped_template",
+      "rep": 0,
+      "tier": 3,
+      "status": "IMPORT_ERROR NameError name 'tpl' is not defined",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 24.7,
+      "detail": "IMPORT_ERROR NameError name 'tpl' is not defined\n--code-head--\ni = 0\nresult = []\nwhile i < len(tpl):\n    c = tpl[i]\n    if c == '\\\\':\n        if i + 1 >= len(tpl):\n            raise ValueError(\"trailing backslash\")\n        result.append(tpl[i+1])\n        i += 2\n    elif c == '{':\n        if i + 1 < len(tpl) and tpl[i+1] == '{':\n            # start field\n            # find first '}}' after position i+2\n            end = tpl.find('}}', i+2)\n            if end ="
+    }
+  ]
+}

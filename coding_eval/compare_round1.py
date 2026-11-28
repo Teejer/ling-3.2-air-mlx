@@ -15,15 +15,18 @@ from problems import HOLDOUT_IDS  # noqa: E402
 LABELS = {
     "ddalcu_Qwen3.8-Flash-Next-MLX-Serve-mixed-4-8bit": "Qwen3.8-Flash",
     "Ling-3.2-air-MLX-mixed-4-8bit": "Ling-mixed",
+    "Ling-3.2-air-MLX-mixed-4-8bit-pyserver": "Ling-mixed (py-server)",
     "Ling-3.2-air-MLX-mixed-4-8bit-r1": "Ling-mixed-r1 (LoRA)",
+    "Ling-3.2-air-MLX-mixed-4-8bit-r2": "Ling-mixed-r2 (LoRA2)",
     "Ling-3.2-air-MLX-4bit": "Ling-4bit",
 }
 
 def newest(slug):
     files = sorted(glob.glob(f"coding_eval/results/{slug}-*.json"))
-    if "-r1" not in slug:
-        # the base-pack glob also matches the retagged -r1 runs; exclude them
-        files = [f for f in files if "-r1-" not in f]
+    if slug == "Ling-3.2-air-MLX-mixed-4-8bit":
+        # the base-pack glob also matches tagged runs; keep only plain ones
+        files = [f for f in files
+                 if not any(t in f for t in ("-r1-", "-r2-", "-pyserver-"))]
     return files[-1] if files else None
 
 def main():
@@ -59,16 +62,21 @@ def main():
         scores[name] = data[name]
         print(f"{name:<{w}} {tot:<9} {h:<9} {p:<11} {tiers}")
 
-    if "Ling-mixed-r1 (LoRA)" in scores and "Ling-mixed" in scores:
-        a, b = scores["Ling-mixed"], scores["Ling-mixed-r1 (LoRA)"]
+    def ab(name_a, name_b, label):
+        if name_a not in scores or name_b not in scores:
+            return
+        a, b = scores[name_a], scores[name_b]
         common = set(a) & set(b)
         gained = [i for i in sorted(common) if b[i][0] and not a[i][0]]
         lost = [i for i in sorted(common) if a[i][0] and not b[i][0]]
-        print(f"\nvs pre-LoRA mixed:  GAINED {gained or '-'}")
-        print(f"                    LOST   {lost or '-'}")
-        hg = [i for i in gained if i in HOLDOUT_IDS]
-        hl = [i for i in lost if i in HOLDOUT_IDS]
-        print(f"held-out gained: {hg or '-'}   held-out lost: {hl or '-'}")
+        print(f"\n{label}:  GAINED {gained or '-'}")
+        print(f"           LOST   {lost or '-'}")
+        print(f"           held-out gained: {[i for i in gained if i in HOLDOUT_IDS] or '-'}"
+              f"   held-out lost: {[i for i in lost if i in HOLDOUT_IDS] or '-'}")
+
+    ab("Ling-mixed (py-server)", "Ling-mixed-r1 (LoRA)", "r1 vs py-server control")
+    ab("Ling-mixed (py-server)", "Ling-mixed-r2 (LoRA2)", "r2 vs py-server control")
+    ab("Ling-mixed-r1 (LoRA)", "Ling-mixed-r2 (LoRA2)", "r2 vs r1")
 
 if __name__ == "__main__":
     main()
