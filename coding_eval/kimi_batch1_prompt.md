@@ -2,16 +2,17 @@
 
 Contract is byte-identical to `curriculum_seed_prompt.md` for every teacher
 (that comparability IS the teacher ranking); only the TASK paragraph is swapped
-for Kimi's math/tier-3 variant. Save the reply as `batches/batch1kimi.json`
+for Kimi's math/tier-3 variant. Save the reply as `batches/batchNkimi.json`
 (raw array, no fences), then:
 
 ```
-python coding_eval/intake.py coding_eval/batches/batch1kimi.json            # validate
-python coding_eval/intake.py coding_eval/batches/batch1kimi.json --promote  # survivors only
+python coding_eval/intake.py coding_eval/batches/batchNkimi.json            # validate
+python coding_eval/intake.py coding_eval/batches/batchNkimi.json --promote  # survivors only
 ```
 
 If anything is BROKEN, paste the correction message from
 `curriculum_seed_prompt.md` → *Daily follow-up* back into the same Kimi chat.
+Note: ChatHub flattens ref indentation — intake's repair ladder handles it.
 
 ## First message (paste everything between the fences)
 
@@ -80,7 +81,7 @@ because the answer is non-unique):
 }
 
 AVOID — these ids already exist, no duplicates or near-duplicates:
-merge_intervals, top_k_words, balanced, rle, flatten, closest_sum_pair, roman, lru, csv_line, rotated_search, rotate_matrix, palindrome_sub, retry_decorator, anagrams, min_stack, case_convert, next_perm, word_break, edit_distance, histogram, course_order, running_median, coin_change, balanced_code, eval_expr, longest_consec, parse_duration, restore_ips, spiral_order, min_window, interval_overlap_count, canonical_fraction, deduplicate_stable, lis_reconstruct, longest_k_distinct, egyptian_greedy, combo_sum_once, set_zeroes, kth_largest_stream, lcs_string, assign_rooms, bipartition_coloring, decode_escaped_fields, shortest_cycle_length, parse_kv_escaped, longest_bounded_window, matrix_diagonal_sums, normalize_identifier, streaming_kth_largest.
+merge_intervals, top_k_words, balanced, rle, flatten, closest_sum_pair, roman, lru, csv_line, rotated_search, rotate_matrix, palindrome_sub, retry_decorator, anagrams, min_stack, case_convert, next_perm, word_break, edit_distance, histogram, course_order, running_median, coin_change, balanced_code, eval_expr, longest_consec, parse_duration, restore_ips, spiral_order, min_window, interval_overlap_count, canonical_fraction, deduplicate_stable, lis_reconstruct, longest_k_distinct, egyptian_greedy, combo_sum_once, set_zeroes, kth_largest_stream, lcs_string, assign_rooms, bipartition_coloring, decode_escaped_fields, shortest_cycle_length, parse_kv_escaped, longest_bounded_window, matrix_diagonal_sums, normalize_identifier, streaming_kth_largest, fraction_add, stable_frequency_sort, merge_sorted_streams, weighted_interval_schedule, shortest_path_with_count, normalize_path, longest_unique_window, count_coprime_inclusion_exclusion, min_eating_speed, tsp_exact_bitmask, predict_the_winner, base_neg2_conversion, min_path_effort_grid, matrix_chain_multiplication, subarrays_sum_equals_k, min_station_refuels, render_escaped_template.
 
 TASK: 10 problems as one JSON array. At least 6 distinct tags. 3 tier-2, 7 tier-3.
 Lean into mathematically flavored algorithms with EXACT INTEGER answers:
