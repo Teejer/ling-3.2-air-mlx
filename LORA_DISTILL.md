@@ -105,6 +105,28 @@ not a frontier leap. The 12 coding-specialist expert layers identified by
 `expert_profile_coding.json` are the natural LoRA target layers, which makes
 the quant story and the training story point at the same tensors.
 
+## Round-1 results (2026-11-27 night)
+
+Data: 247 executor-verified self-harvest traces (mixed pack, temp 0.8, 42
+problems, cap 6/problem), 12-problem held-out split excluded at harvest.
+Train: rank 8 (config rank silently ignored), last-16 layers, attention +
+shared experts + SwitchGLU per-expert, 250 iters = 1 epoch, ~12 min.
+Eval: mlx_lm.server + adapter, full suite (66 problems at the time).
+
+Scoreboard: r1 59/66; vs engine baseline on the shared 49-problem subset
+45/49 = 45/49, but GAINED `eval_expr` + `shortest_cycle_length` (both
+held-out) and LOST `case_convert` + `egyptian_greedy`. Held-out 8/12 ->
+9/12. Adapter probe: load_adapters takes train-seq loss 1.4220 -> 0.0617
+— adapter fully ACTIVE; the memorization is verbatim and transfer is
+~nil, which is the expected small-n outcome. A py-server control run
+(no adapter) is pending to split adapter effect from serving drift.
+
+Round-2 levers, ranked: (1) more traces — round-2 harvest armed for the
+12 new problems, and k-sampling more problems; (2) target the 12 promoted
+coding layers via train_round2.py (snapshot-restore selective LoRA —
+written, needs supervised smoke); (3) fewer iters or lower scale to trade
+memorization for generalization; (4) rank 16 actually applied.
+
 ## Immediate next steps
 
 0. **mlx-lm training support: VERIFIED with one local patch.** mlx-lm
