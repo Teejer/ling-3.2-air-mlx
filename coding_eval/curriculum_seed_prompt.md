@@ -71,17 +71,40 @@ because the answer is non-unique):
 }
 
 AVOID — these ids already exist, no duplicates or near-duplicates:
-merge_intervals, top_k_words, balanced, rle, flatten, closest_sum_pair, roman, lru, csv_line, rotated_search, rotate_matrix, palindrome_sub, retry_decorator, anagrams, min_stack, case_convert, next_perm, word_break, edit_distance, histogram, course_order, running_median, coin_change, balanced_code, eval_expr, longest_consec, parse_duration, restore_ips, spiral_order, min_window
-
-PREFER these under-covered families: parsers with escape/state machines, interval
-overlap counting, sliding-window optimization, stream/heap invariants, modular
-arithmetic and exact fractions, string transforms with strict normalization rules,
-DP that must reconstruct the actual sequence, graph properties verified by checkers.
+merge_intervals, top_k_words, balanced, rle, flatten, closest_sum_pair, roman, lru, csv_line, rotated_search, rotate_matrix, palindrome_sub, retry_decorator, anagrams, min_stack, case_convert, next_perm, word_break, edit_distance, histogram, course_order, running_median, coin_change, balanced_code, eval_expr, longest_consec, parse_duration, restore_ips, spiral_order, min_window, interval_overlap_count, canonical_fraction, deduplicate_stable, lis_reconstruct, longest_k_distinct, egyptian_greedy, combo_sum_once, set_zeroes, kth_largest_stream, lcs_string, assign_rooms, bipartition_coloring, decode_escaped_fields, shortest_cycle_length, parse_kv_escaped, longest_bounded_window, matrix_diagonal_sums, normalize_identifier, streaming_kth_largest.
 
 TASK: 10 problems as one JSON array. At least 6 distinct tags. 6 tier-2, 4 tier-3.
 Before returning, mentally execute EVERY assert against its ref; drop any pair you
 are not 100% certain passes and replace it until all 10 are certain.
 ```
+
+## Teacher-specific task lines
+
+Keep everything above byte-identical across teachers (the contract is what
+makes first-pass validation rates comparable — that IS the teacher ranking).
+Swap only the TASK paragraph at the end:
+
+- **Claude** (best first-pass correctness): default task line — broad coverage,
+  6 tier-2 + 4 tier-3. Spend its scarce flagship messages on tier-3 authoring.
+- **ChatGPT** (good designs, sloppy expected values): default task line; expect
+  to run the correction round.
+- **Kimi K3.x** (competition/math strength): replace the TASK paragraph with:
+
+```
+TASK: 10 problems as one JSON array. At least 6 distinct tags. 3 tier-2, 7 tier-3.
+Lean into mathematically flavored algorithms with EXACT INTEGER answers:
+modular arithmetic and counting, greedy algorithms with a provable exchange
+argument, binary search over the answer with a monotone predicate, small-n
+bitmask DP, game/turn-based invariants, positional/base arithmetic, shortest
+paths on small explicit grids. Integer expected values make every assert
+hand-verifiable and dodge tie-break ambiguity entirely. Write all output in
+English. Before returning, mentally execute EVERY assert against its ref;
+drop any pair you are not 100% certain passes and replace it until all 10
+are certain.
+```
+
+Integer-answer problems are deliberately requested: they eliminate the
+float/tie-break bug classes that cost the most curation time in batches 1-2.
 
 ## Daily follow-up (correction message)
 
