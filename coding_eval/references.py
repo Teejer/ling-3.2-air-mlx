@@ -678,3 +678,171 @@ def longest_unique_window(s):
         if length > best_len:
             best_start, best_len = left, length
     return best_start, best_len
+
+
+# --- count_coprime_inclusion_exclusion (intake) ---
+def count_coprime(n, m):
+    factors = set()
+    t = m
+    p = 2
+    while p * p <= t:
+        while t % p == 0:
+            factors.add(p)
+            t //= p
+        p += 1
+    if t > 1:
+        factors.add(t)
+    primes = sorted(factors)
+    k = len(primes)
+    total = 0
+    for mask in range(1 << k):
+        prod = 1
+        bits = 0
+        for i in range(k):
+            if mask >> i & 1:
+                prod *= primes[i]
+                bits += 1
+        total += (n // prod) * (1 if bits % 2 == 0 else -1)
+    return total
+
+# --- min_eating_speed (intake) ---
+def min_eating_speed(piles, h):
+    lo, hi = 1, max(piles)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if sum((p + mid - 1) // mid for p in piles) <= h:
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo
+
+# --- tsp_exact_bitmask (intake) ---
+def tsp_length(dist):
+    n = len(dist)
+    FULL = 1 << n
+    INF = float('inf')
+    dp = [[INF] * n for _ in range(FULL)]
+    dp[1][0] = 0
+    for mask in range(FULL):
+        for u in range(n):
+            if not mask >> u & 1 or dp[mask][u] == INF:
+                continue
+            for v in range(n):
+                if mask >> v & 1:
+                    continue
+                m2 = mask | 1 << v
+                c = dp[mask][u] + dist[u][v]
+                if c < dp[m2][v]:
+                    dp[m2][v] = c
+    return min(dp[FULL - 1][v] + dist[v][0] for v in range(n))
+
+# --- predict_the_winner (intake) ---
+def predict_winner(nums):
+    n = len(nums)
+    dp = list(nums)
+    for length in range(2, n + 1):
+        for i in range(0, n - length + 1):
+            j = i + length - 1
+            dp[i] = max(nums[i] - dp[i + 1], nums[j] - dp[i])
+    return dp[0] >= 0
+
+# --- base_neg2_conversion (intake) ---
+def base_neg2(n):
+    if n == 0:
+        return "0"
+    digits = []
+    while n != 0:
+        r = n & 1
+        digits.append(str(r))
+        n = (n - r) // -2
+    return "".join(reversed(digits))
+
+# --- min_path_effort_grid (intake) ---
+def min_effort(heights):
+    import heapq
+    rows, cols = len(heights), len(heights[0])
+    INF = float('inf')
+    best = [[INF] * cols for _ in range(rows)]
+    best[0][0] = 0
+    heap = [(0, 0, 0)]
+    while heap:
+        d, r, c = heapq.heappop(heap)
+        if (r, c) == (rows - 1, cols - 1):
+            return d
+        if d > best[r][c]:
+            continue
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols:
+                nd = max(d, abs(heights[nr][nc] - heights[r][c]))
+                if nd < best[nr][nc]:
+                    best[nr][nc] = nd
+                    heapq.heappush(heap, (nd, nr, nc))
+
+# --- matrix_chain_multiplication (intake) ---
+def matrix_chain(dims):
+    n = len(dims) - 1
+    dp = [[0] * n for _ in range(n)]
+    for L in range(2, n + 1):
+        for i in range(0, n - L + 1):
+            j = i + L - 1
+            dp[i][j] = min(dp[i][k] + dp[k + 1][j] + dims[i] * dims[k + 1] * dims[j + 1] for k in range(i, j))
+    return dp[0][n - 1]
+
+# --- subarrays_sum_equals_k (intake) ---
+def count_subarrays_k(nums, k):
+    from collections import defaultdict
+    seen = defaultdict(int)
+    seen[0] = 1
+    s = 0
+    cnt = 0
+    for x in nums:
+        s += x
+        cnt += seen[s - k]
+        seen[s] += 1
+    return cnt
+
+
+# --- min_station_refuels (intake) ---
+def min_refuels(start_fuel, target, stations):
+    import heapq
+    heap = []
+    fuel = start_fuel
+    ans = 0
+    i = 0
+    pos = 0
+    stations = sorted(stations)
+    while fuel < target - pos:
+        while i < len(stations) and stations[i][0] - pos <= fuel:
+            heapq.heappush(heap, -stations[i][1])
+            i += 1
+        if not heap:
+            return -1
+        fuel += -heapq.heappop(heap)
+        ans += 1
+    return ans
+
+# --- render_escaped_template (intake) ---
+def render(tpl, env):
+    out = []
+    i = 0
+    while i < len(tpl):
+        c = tpl[i]
+        if c == "~":
+            if i + 1 >= len(tpl):
+                raise ValueError("dangling escape")
+            out.append(tpl[i + 1])
+            i += 2
+        elif c == "{" and i + 1 < len(tpl) and tpl[i + 1] == "{":
+            j = tpl.find("}}", i + 2)
+            if j < 0:
+                raise ValueError("unclosed field")
+            name = tpl[i + 2:j]
+            if name not in env:
+                raise KeyError(name)
+            out.append(env[name])
+            i = j + 2
+        else:
+            out.append(c)
+            i += 1
+    return "".join(out)

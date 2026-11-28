@@ -906,4 +906,142 @@ assert longest_unique_window("abba") == (0, 2)
 assert longest_unique_window("abcdef") == (0, 6)
 """,
     ),
+
+    dict(
+        id='count_coprime_inclusion_exclusion', tier=3, intaked=True, tag='math',
+        title='Coprime counter via inclusion-exclusion',
+        prompt="""Implement count_coprime(n, m): return how many integers in [1, n] are coprime to m. Use the inclusion-exclusion principle over the distinct prime factors of m (n <= 1012 in principle, but keep inputs small). Edge semantics: count_coprime(0, m) == 0; m == 1 means every integer in [1, n] counts (1 is coprime to 1).""",
+        tests="""
+assert count_coprime(10, 12) == 3
+assert count_coprime(1, 1) == 1
+assert count_coprime(0, 5) == 0
+assert count_coprime(20, 1) == 20
+assert count_coprime(12, 6) == 4
+assert count_coprime(36, 30) == 9
+""",
+    ),
+    dict(
+        id='min_eating_speed', tier=2, intaked=True, tag='algorithms',
+        title="Binary search on the answer: Koko's eating speed",
+        prompt="""Implement min_eating_speed(piles, h): piles is a list of positive integers, h >= len(piles). Koko eats at integer speed k (k >= 1); each pile takes ceil(pile / k) hours and piles are eaten one at a time. Return the minimum k such that total hours <= h. The predicate is monotone in k, so binary search over [1, max(piles)]. Empty piles is not allowed (h >= len(piles) >= 1 guaranteed).""",
+        tests="""
+assert min_eating_speed([3, 6, 7, 11], 8) == 4
+assert min_eating_speed([30, 11, 23, 4, 20], 6) == 23
+assert min_eating_speed([7], 5) == 2
+assert min_eating_speed([2, 2], 2) == 2
+assert min_eating_speed([1000000], 1000000) == 1
+""",
+    ),
+    dict(
+        id='tsp_exact_bitmask', tier=3, intaked=True, tag='dp',
+        title='Exact TSP tour length with bitmask DP',
+        prompt="""Implement tsp_length(dist): dist is an n x n symmetric matrix of non-negative integers (n <= 10) where dist[i][i] == 0. Return the minimum total length of a tour that starts at city 0, visits every city exactly once, and returns to city 0, using the classic bitmask DP over subsets. For n == 1 the answer is 0 (stay at city 0). The answer is unique because it is a minimum.""",
+        tests="""
+assert tsp_length([[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]) == 80
+assert tsp_length([[0]]) == 0
+assert tsp_length([[0, 5], [5, 0]]) == 10
+assert tsp_length([[0, 1, 100], [1, 0, 1], [100, 1, 0]]) == 102
+assert tsp_length([[0, 3, 3, 3], [3, 0, 3, 3], [3, 3, 0, 3], [3, 3, 3, 0]]) == 12
+""",
+    ),
+    dict(
+        id='predict_the_winner', tier=2, intaked=True, tag='dp',
+        title='Turn-based game: Predict the Winner',
+        prompt="""Implement predict_winner(nums): two players take turns picking a number from either end of the list nums (non-empty list of non-negative integers). Player 1 moves first. Both play optimally to maximize their own total minus the opponent's. Return True if Player 1 can tie or win (i.e. Player 1's final total >= Player 2's total), else False. Use interval DP where dp of a range is the best score difference the mover can achieve.""",
+        tests="""
+assert predict_winner([1, 5, 2]) == False
+assert predict_winner([1, 5, 233, 7]) == True
+assert predict_winner([0]) == True
+assert predict_winner([1, 1]) == True
+assert predict_winner([7, 1, 1, 7]) == True
+""",
+    ),
+    dict(
+        id='base_neg2_conversion', tier=2, intaked=True, tag='math',
+        title='Convert integer to base -2',
+        prompt="""Implement base_neg2(n): return the representation of the integer n (n may be negative, zero, or positive; |n| <= 109) in base -2 as a string of '0'/'1' digits with no leading zeros, except the representation of 0 is exactly "0". The digit loop is: r = n mod 2 in {0, 1}; emit r; n = (n - r) // -2; repeat while n != 0, then reverse the digits.""",
+        tests="""
+assert base_neg2(2) == "110"
+assert base_neg2(3) == "111"
+assert base_neg2(-1) == "11"
+assert base_neg2(0) == "0"
+assert base_neg2(6) == "11010"
+assert base_neg2(-3) == "1101"
+assert base_neg2(1) == "1"
+""",
+    ),
+    dict(
+        id='min_path_effort_grid', tier=3, intaked=True, tag='graphs',
+        title='Path with minimum effort on a grid (Dijkstra)',
+        prompt="""Implement min_effort(heights): heights is a rectangular grid of non-negative integers, at least 1x1. Starting at the top-left cell and ending at the bottom-right cell, you may move up, down, left, or right. The effort of a path is the maximum absolute height difference between consecutive cells along it. Return the minimum possible effort. A 1x1 grid has effort 0. Use Dijkstra where the edge weight between adjacent cells is their absolute difference and the path cost is the max.""",
+        tests="""
+assert min_effort([[1, 2, 2], [3, 8, 2], [5, 3, 5]]) == 2
+assert min_effort([[1, 2, 3], [3, 8, 4], [5, 3, 5]]) == 1
+assert min_effort([[5]]) == 0
+assert min_effort([[1, 10]]) == 9
+assert min_effort([[1, 1, 1], [1, 1, 1], [1, 1, 1]]) == 0
+""",
+    ),
+    dict(
+        id='matrix_chain_multiplication', tier=3, intaked=True, tag='dp',
+        title='Matrix chain multiplication minimum scalar multiplications',
+        prompt="""Implement matrix_chain(dims): dims is a list of d+1 positive integers describing d matrices A_1..A_d where A_i has shape dims[i-1] x dims[i]. Return the minimum total number of scalar multiplications needed to fully multiply the chain, computed by interval DP. If d == 1 (len(dims) == 2) the answer is 0. All intermediate values are exact integers.""",
+        tests="""
+assert matrix_chain([40, 20, 30, 10, 30]) == 26000
+assert matrix_chain([10, 20, 30]) == 6000
+assert matrix_chain([10, 20, 30, 40, 30]) == 30000
+assert matrix_chain([5, 10]) == 0
+assert matrix_chain([1, 2, 3, 4]) == 18
+""",
+    ),
+    dict(
+        id='subarrays_sum_equals_k', tier=2, intaked=True, tag='lists',
+        title='Count subarrays with sum exactly k',
+        prompt="""Implement count_subarrays_k(nums, k): count contiguous subarrays of the integer list nums whose elements sum to exactly k. Integers may be negative or zero, so sliding window does not work; use prefix sums with a hash map counting occurrences of each prefix sum. Edge semantics: an empty list returns 0; an empty subarray is never counted (subarrays are non-empty).""",
+        tests="""
+assert count_subarrays_k([1, 1, 1], 2) == 2
+assert count_subarrays_k([1, 2, 3], 3) == 2
+assert count_subarrays_k([3, 4, 7, 2, -3, 1, 4, 2], 7) == 4
+assert count_subarrays_k([], 0) == 0
+assert count_subarrays_k([0, 0], 0) == 3
+assert count_subarrays_k([5], 3) == 0
+""",
+    ),
+
+    dict(
+        id='min_station_refuels', tier=3, intaked=True, tag='data-structures',
+        title='Minimum refueling stops',
+        prompt="""Implement min_refuels(start_fuel, target, stations): you start with start_fuel liters, drive along a line toward position target (start is position 0), and stations is a list of [position, capacity] pairs. When at a station you may add up to its capacity to your tank (assume unlimited tank size). Return the minimum number of stops needed to reach target, or -1 if impossible. Greedy: drive as far as possible, then retroactively 'use' the largest-capacity passed station via a max-heap. If start_fuel >= target, return 0 even with no stations. Stations may be given in any order; positions are strictly positive.""",
+        tests="""
+assert min_refuels(10, 100, [[10, 60], [20, 30], [30, 30], [60, 40]]) == 2
+assert min_refuels(1, 1, []) == 0
+assert min_refuels(1, 100, [[10, 1]]) == -1
+assert min_refuels(1, 100, []) == -1
+assert min_refuels(50, 100, [[20, 100]]) == 1
+""",
+    ),
+    dict(
+        id='render_escaped_template', tier=3, intaked=True, tag='parsing',
+        title='Template renderer with tilde escapes',
+        prompt="""Implement render(tpl, env): tpl is a string, env is a dict mapping field names to strings. Scan left to right. A backslash-like escape character '' escapes the next single character literally (so '' yields one '', '{' yields '{'). The sequence '{{' begins a field which must be closed by the nearest '}}'; its content is the field name, looked up in env and replaced by its string value. Rules: if '' is the last character of tpl (nothing to escape), raise ValueError. If a field is never closed, raise ValueError. If a field name is missing from env, raise KeyError. A single '{' or '}' (not doubled) is a literal character. Note '{{' inside a field's name text is not special; the first '}}' after the opening '{{' closes the field. Return the rendered string.""",
+        tests="""
+assert render("Hi {{name}}!", {"name": "Bob"}) == "Hi Bob!"
+assert render("{{name}}", {"name": "Bob"}) == "Bob"
+assert render("x", {}) == "x"
+assert render("{{a}}{{b}}", {"a": "1", "b": "2"}) == "12"
+try:
+ render("{{z}}", {})
+ r = "noerr"
+except KeyError:
+ r = "err"
+assert r == "err"
+try:
+ render("abc~", {})
+ r = "noerr"
+except ValueError:
+ r = "err"
+assert r == "err"
+assert render("a{b}c", {}) == "a{b}c"
+""",
+    ),
 ]
