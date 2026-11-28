@@ -1,0 +1,310 @@
+{
+  "model": "Ling-3.2-air-MLX-4bit",
+  "base_url": "http://127.0.0.1:11250",
+  "temperature": 0.0,
+  "max_tokens": 1400,
+  "passed": 27,
+  "total": 30,
+  "results": [
+    {
+      "id": "merge_intervals",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 505,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "top_k_words",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 250,
+      "seconds": 2.0,
+      "detail": ""
+    },
+    {
+      "id": "balanced",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 206,
+      "seconds": 1.8,
+      "detail": ""
+    },
+    {
+      "id": "rle",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 709,
+      "seconds": 5.0,
+      "detail": ""
+    },
+    {
+      "id": "flatten",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1250,
+      "seconds": 9.8,
+      "detail": ""
+    },
+    {
+      "id": "closest_sum_pair",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 449,
+      "seconds": 3.5,
+      "detail": ""
+    },
+    {
+      "id": "roman",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 437,
+      "seconds": 3.0,
+      "detail": ""
+    },
+    {
+      "id": "lru",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1153,
+      "seconds": 8.0,
+      "detail": ""
+    },
+    {
+      "id": "csv_line",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR expected 'else' after 'if' expression (sol.py, line 37)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 9.8,
+      "detail": "SYNTAX_ERROR expected 'else' after 'if' expression (sol.py, line 37)\n--code-head--\ndef parse_csv(line, delim=','):\n    fields = []\n    i = 0\n    n = len(line)\n    while True:\n        # parse one field\n        if i < n and line[i] == '\"':\n            # quoted field\n            i += 1\n            buf = []\n            while i < n:\n                c = line[i]\n                if c == '\"':\n                    if i + 1 < n and line[i+1] == '\"':\n                        buf.append('\"')\n "
+    },
+    {
+      "id": "rotated_search",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 490,
+      "seconds": 3.6,
+      "detail": ""
+    },
+    {
+      "id": "rotate_matrix",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 594,
+      "seconds": 4.5,
+      "detail": ""
+    },
+    {
+      "id": "palindrome_sub",
+      "rep": 0,
+      "tier": 1,
+      "status": "RUNTIME_ERROR NameError name 'expand' is not defined",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 10.9,
+      "detail": "RUNTIME_ERROR NameError name 'expand' is not defined\n--code-head--\ndef longest_palindrome(s):\n    if not s:\n        return \"\"\n    # Transform s into T with separators\n    t = '#' + '#'.join(s) + '#'\n    n = len(t)\n    p = [0] * n\n    c = r = 0  # center and right boundary\n    for i in range(n):\n        mirror = 2 * c - i\n        if i < r:\n            p[i] = min(r - i, p[mirror])\n        # expand\n        while i + p[i] + 1 < n and i - p[i] - 1 >= 0 and t[i + p[i] "
+    },
+    {
+      "id": "retry_decorator",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 719,
+      "seconds": 5.2,
+      "detail": ""
+    },
+    {
+      "id": "anagrams",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 213,
+      "seconds": 1.6,
+      "detail": ""
+    },
+    {
+      "id": "min_stack",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 466,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "case_convert",
+      "rep": 0,
+      "tier": 1,
+      "status": "NO_CODE",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 11.9,
+      "detail": "\n--code-head--\n"
+    },
+    {
+      "id": "next_perm",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 822,
+      "seconds": 6.1,
+      "detail": ""
+    },
+    {
+      "id": "word_break",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 806,
+      "seconds": 6.0,
+      "detail": ""
+    },
+    {
+      "id": "edit_distance",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 601,
+      "seconds": 4.3,
+      "detail": ""
+    },
+    {
+      "id": "histogram",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 516,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "course_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 689,
+      "seconds": 5.2,
+      "detail": ""
+    },
+    {
+      "id": "running_median",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 764,
+      "seconds": 5.4,
+      "detail": ""
+    },
+    {
+      "id": "coin_change",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 329,
+      "seconds": 2.4,
+      "detail": ""
+    },
+    {
+      "id": "balanced_code",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 633,
+      "seconds": 4.8,
+      "detail": ""
+    },
+    {
+      "id": "eval_expr",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1294,
+      "seconds": 9.0,
+      "detail": ""
+    },
+    {
+      "id": "longest_consec",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 589,
+      "seconds": 4.6,
+      "detail": ""
+    },
+    {
+      "id": "parse_duration",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1104,
+      "seconds": 8.5,
+      "detail": ""
+    },
+    {
+      "id": "restore_ips",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1386,
+      "seconds": 11.1,
+      "detail": ""
+    },
+    {
+      "id": "spiral_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 579,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "min_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 592,
+      "seconds": 4.4,
+      "detail": ""
+    }
+  ]
+}

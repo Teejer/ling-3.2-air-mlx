@@ -4,6 +4,18 @@ Each problem: id, title, tag, prompt (what the model sees), tests (executed
 against the model's solution module `sol`).
 """
 
+# Held-out test split — never in LoRA training data; run_eval --harvest
+# excludes these by default. Carved 2026-11-27 before distillation began:
+# tier mix + the shared failure ceiling (parse_kv_escaped, lis_reconstruct).
+# The scoreboard's honest generalization number = held-out subset only.
+# (Kept above the list: intake.py --promote requires PROBLEMS at EOF.)
+HOLDOUT_IDS = {
+    "eval_expr", "running_median", "histogram", "word_break",
+    "min_window", "egyptian_greedy", "combo_sum_once", "kth_largest_stream",
+    "canonical_fraction", "parse_kv_escaped", "lis_reconstruct",
+    "shortest_cycle_length",
+}
+
 PROBLEMS = [
     dict(
         id="merge_intervals", tag="lists",
@@ -880,15 +892,18 @@ assert normalize_path("/a/../../..") == "/"
 assert normalize_path("/a\\\\b/../c") == "/c"
 """,
     ),
-]
 
-# Held-out test split — never in LoRA training data; run_eval --harvest
-# excludes these by default. Carved 2026-11-27 before distillation began:
-# tier mix + the shared failure ceiling (parse_kv_escaped, lis_reconstruct).
-# The scoreboard's honest generalization number = held-out subset only.
-HOLDOUT_IDS = {
-    "eval_expr", "running_median", "histogram", "word_break",
-    "min_window", "egyptian_greedy", "combo_sum_once", "kth_largest_stream",
-    "canonical_fraction", "parse_kv_escaped", "lis_reconstruct",
-    "shortest_cycle_length",
-}
+    dict(
+        id='longest_unique_window', tier=2, intaked=True, tag='strings',
+        title='Longest unique-character window',
+        prompt="""Implement `longest_unique_window(s)` returning a pair `(start, length)` describing the longest contiguous substring containing no repeated characters. Indices are zero-based. If multiple windows have the same maximum length, return the one with the smallest start index. For an empty string return (0, 0). Characters are compared exactly, without normalization.""",
+        tests="""
+assert longest_unique_window("abcabcbb") == (0, 3)
+assert longest_unique_window("") == (0, 0)
+assert longest_unique_window("aaaa") == (0, 1)
+assert longest_unique_window("abcaef") == (1, 5)
+assert longest_unique_window("abba") == (0, 2)
+assert longest_unique_window("abcdef") == (0, 6)
+""",
+    ),
+]

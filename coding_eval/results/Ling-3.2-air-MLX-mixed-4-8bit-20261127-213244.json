@@ -1,0 +1,500 @@
+{
+  "model": "Ling-3.2-air-MLX-mixed-4-8bit",
+  "base_url": "http://127.0.0.1:11250",
+  "temperature": 0.0,
+  "max_tokens": 1400,
+  "passed": 45,
+  "total": 49,
+  "results": [
+    {
+      "id": "merge_intervals",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 689,
+      "seconds": 15.9,
+      "detail": ""
+    },
+    {
+      "id": "top_k_words",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 482,
+      "seconds": 6.2,
+      "detail": ""
+    },
+    {
+      "id": "balanced",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 195,
+      "seconds": 4.1,
+      "detail": ""
+    },
+    {
+      "id": "rle",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1199,
+      "seconds": 14.6,
+      "detail": ""
+    },
+    {
+      "id": "flatten",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1315,
+      "seconds": 17.3,
+      "detail": ""
+    },
+    {
+      "id": "closest_sum_pair",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 299,
+      "seconds": 4.2,
+      "detail": ""
+    },
+    {
+      "id": "roman",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 828,
+      "seconds": 9.9,
+      "detail": ""
+    },
+    {
+      "id": "lru",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1144,
+      "seconds": 14.1,
+      "detail": ""
+    },
+    {
+      "id": "csv_line",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 18.7,
+      "detail": ""
+    },
+    {
+      "id": "rotated_search",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 468,
+      "seconds": 4.4,
+      "detail": ""
+    },
+    {
+      "id": "rotate_matrix",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 516,
+      "seconds": 4.4,
+      "detail": ""
+    },
+    {
+      "id": "palindrome_sub",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1191,
+      "seconds": 11.6,
+      "detail": ""
+    },
+    {
+      "id": "retry_decorator",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1022,
+      "seconds": 12.5,
+      "detail": ""
+    },
+    {
+      "id": "anagrams",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 226,
+      "seconds": 2.8,
+      "detail": ""
+    },
+    {
+      "id": "min_stack",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 719,
+      "seconds": 9.1,
+      "detail": ""
+    },
+    {
+      "id": "case_convert",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 19.9,
+      "detail": ""
+    },
+    {
+      "id": "next_perm",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 787,
+      "seconds": 9.4,
+      "detail": ""
+    },
+    {
+      "id": "word_break",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 730,
+      "seconds": 6.8,
+      "detail": ""
+    },
+    {
+      "id": "edit_distance",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 572,
+      "seconds": 4.6,
+      "detail": ""
+    },
+    {
+      "id": "histogram",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 830,
+      "seconds": 6.9,
+      "detail": ""
+    },
+    {
+      "id": "course_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 656,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "running_median",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 799,
+      "seconds": 7.9,
+      "detail": ""
+    },
+    {
+      "id": "coin_change",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 423,
+      "seconds": 5.7,
+      "detail": ""
+    },
+    {
+      "id": "balanced_code",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 976,
+      "seconds": 10.4,
+      "detail": ""
+    },
+    {
+      "id": "eval_expr",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR invalid syntax (sol.py, line 1)",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 16.1,
+      "detail": "SYNTAX_ERROR invalid syntax (sol.py, line 1)\n--code-head--\n```python\ndef eval_expr(s):\n    # Tokenize: integers, operators, parentheses; skip spaces.\n    tokens = []\n    i, n = 0, len(s)\n    while i < n:\n        c = s[i]\n        if c == ' ':\n            i += 1\n        elif c.isdigit():\n            j = i\n            while j < n and s[j].isdigit():\n                j += 1\n            tokens.append(int(s[i:j]))\n            i = j\n        elif c in '+-*/()':\n  "
+    },
+    {
+      "id": "longest_consec",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 311,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "parse_duration",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1263,
+      "seconds": 15.5,
+      "detail": ""
+    },
+    {
+      "id": "restore_ips",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1060,
+      "seconds": 15.3,
+      "detail": ""
+    },
+    {
+      "id": "spiral_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 510,
+      "seconds": 6.2,
+      "detail": ""
+    },
+    {
+      "id": "min_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 671,
+      "seconds": 8.2,
+      "detail": ""
+    },
+    {
+      "id": "interval_overlap_count",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 976,
+      "seconds": 13.7,
+      "detail": ""
+    },
+    {
+      "id": "canonical_fraction",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 925,
+      "seconds": 11.6,
+      "detail": ""
+    },
+    {
+      "id": "deduplicate_stable",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 224,
+      "seconds": 2.9,
+      "detail": ""
+    },
+    {
+      "id": "lis_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_CODE",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 20.7,
+      "detail": "\n--code-head--\n"
+    },
+    {
+      "id": "longest_k_distinct",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 283,
+      "seconds": 4.0,
+      "detail": ""
+    },
+    {
+      "id": "egyptian_greedy",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 972,
+      "seconds": 14.7,
+      "detail": ""
+    },
+    {
+      "id": "combo_sum_once",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1126,
+      "seconds": 13.6,
+      "detail": ""
+    },
+    {
+      "id": "set_zeroes",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 568,
+      "seconds": 4.7,
+      "detail": ""
+    },
+    {
+      "id": "kth_largest_stream",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 452,
+      "seconds": 3.5,
+      "detail": ""
+    },
+    {
+      "id": "lcs_string",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 846,
+      "seconds": 6.6,
+      "detail": ""
+    },
+    {
+      "id": "assign_rooms",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 500,
+      "seconds": 7.2,
+      "detail": ""
+    },
+    {
+      "id": "bipartition_coloring",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 674,
+      "seconds": 8.2,
+      "detail": ""
+    },
+    {
+      "id": "decode_escaped_fields",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1208,
+      "seconds": 14.0,
+      "detail": ""
+    },
+    {
+      "id": "shortest_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 19.3,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert shortest_cycle_length(3, [[0, 1], [1, 2], [2, 0]]) == 3\\nassert shortest_cycle_length(1, []) == -1\\nassert shortest_cycle_length(2, [[0, 1], [0, 1]]) == -1\\nassert shortest_cycle_length(3, [[0, 0], [0, 1]]) == 1\\nassert shortest_cycle_length(5, [[0, 1], [1, 2], [2, 0], [2, 3], [3, 4], [4, 2]]) == 3\\nassert shortest_cycle_length(4, [[0, 1], [1, 2], [2, 3]]) == -1\\ntry\n--code-head--\nfrom collections import deque\n\ndef shortest_cycle_length(n, edges):\n    adj = [[] for _ in range(n)]\n    seen_edges = set()\n    for e in edges:\n        u, v = e[0], e[1]\n        if not (0 <= u < n) or not (0 <= v < n):\n            raise ValueError(\"endpoint out of range\")\n        if u == v:\n            # self-loop\n            adj[u].append(v)  # but careful about dedup\n            ...\n\ndef bfs(sta"
+    },
+    {
+      "id": "parse_kv_escaped",
+      "rep": 0,
+      "tier": 3,
+      "status": "NO_CODE",
+      "ok": false,
+      "completion_tokens": 1400,
+      "seconds": 15.0,
+      "detail": "\n--code-head--\n"
+    },
+    {
+      "id": "longest_bounded_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 672,
+      "seconds": 5.2,
+      "detail": ""
+    },
+    {
+      "id": "matrix_diagonal_sums",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 491,
+      "seconds": 4.1,
+      "detail": ""
+    },
+    {
+      "id": "normalize_identifier",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 1400,
+      "seconds": 11.5,
+      "detail": ""
+    },
+    {
+      "id": "streaming_kth_largest",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 426,
+      "seconds": 3.0,
+      "detail": ""
+    }
+  ]
+}
