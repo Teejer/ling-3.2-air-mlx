@@ -1,0 +1,391 @@
+{
+  "model": "inclusionAI/Ling-3.2-air",
+  "base_url": "http://127.0.0.1:11250",
+  "temperature": 0.0,
+  "max_tokens": 1400,
+  "extra": {},
+  "passed": 31,
+  "total": 38,
+  "results": [
+    {
+      "id": "solve_linear_congruence",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 200,
+      "seconds": 10.5,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert solve_linear_congruence(3, 4, 7) == 6\\nassert solve_linear_congruence(4, 8, 12) == 2\\nassert solve_linear_congruence(6, 4, 9) == -1\\nassert solve_linear_congruence(5, 0, 10) == 0\\nassert solve_linear_congruence(7, 3, 1) == 0\\nassert solve_linear_congruence(-3, 4, 7) == 1\\nassert solve_linear_congruence(6, 3, 9) == 2\\n', ns)\n  File \"<string>\", line 8, in <module>\nAsse\n--code-head--\ndef solve_linear_congruence(a, b, m):\n    if m == 1:\n        return 0\n    a %= m\n    b %= m\n    # Extended Euclidean algorithm to find gcd(a, m) and a coefficient x0\n    old_r, r = a, m\n    old_s, s = 1, 0\n    while r != 0:\n        q = old_r // r\n        old_r, r = r, old_r - q * r\n        old_s, s = s, old_s - q * s\n    g = old_r\n    if b % g != 0:\n        return -1\n    # x0 * a \u2261 g (mod m); scal"
+    },
+    {
+      "id": "max_product_after_cut",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 94,
+      "seconds": 2.4,
+      "detail": ""
+    },
+    {
+      "id": "count_digit_occurrences",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 50,
+      "seconds": 1.4,
+      "detail": ""
+    },
+    {
+      "id": "count_divisible_subsets",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 125,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "min_assignment_cost",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR expected an indented block after 'if' statement on line 18 (sol.py, line 19)",
+      "ok": false,
+      "completion_tokens": 197,
+      "seconds": 5.0,
+      "detail": "SYNTAX_ERROR expected an indented block after 'if' statement on line 18 (sol.py, line 19)\n--code-head--\ndef min_assignment_cost(cost):\n    n = len(cost)\n    if n == 0:\n        return 0\n    INF = float('inf')\n    dp = [INF] * (1 << n)\n    dp[0] = 0\n    for row in cost:\n        new_dp = [INF] * (1 << n)\n        for mask in range(1 << n):\n            cur = dp[mask]\n            if cur == INF:\n                continue\n            for col in range(n):\n                if not (mask >> col) & 1:\n            "
+    },
+    {
+      "id": "minimize_largest_block_sum",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 142,
+      "seconds": 3.6,
+      "detail": ""
+    },
+    {
+      "id": "count_n_queens",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 236,
+      "seconds": 6.0,
+      "detail": ""
+    },
+    {
+      "id": "grid_wall_escape",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 331,
+      "seconds": 8.4,
+      "detail": ""
+    },
+    {
+      "id": "min_join_cost",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 211,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "count_domino_tilings",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 455,
+      "seconds": 11.4,
+      "detail": ""
+    },
+    {
+      "id": "excel_column_title",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 89,
+      "seconds": 2.4,
+      "detail": ""
+    },
+    {
+      "id": "trap_rain_water",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 184,
+      "seconds": 4.7,
+      "detail": ""
+    },
+    {
+      "id": "daily_temperatures",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 101,
+      "seconds": 2.7,
+      "detail": ""
+    },
+    {
+      "id": "word_pattern_bijection",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 131,
+      "seconds": 3.4,
+      "detail": ""
+    },
+    {
+      "id": "count_islands",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 255,
+      "seconds": 6.4,
+      "detail": ""
+    },
+    {
+      "id": "summary_ranges",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 127,
+      "seconds": 3.3,
+      "detail": ""
+    },
+    {
+      "id": "knapsack_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 347,
+      "seconds": 8.8,
+      "detail": ""
+    },
+    {
+      "id": "eulerian_trail",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 319,
+      "seconds": 8.1,
+      "detail": ""
+    },
+    {
+      "id": "decode_nested_repeat",
+      "rep": 0,
+      "tier": 3,
+      "status": "RUNTIME_ERROR TypeError sequence item 0: expected str instance, list found",
+      "ok": false,
+      "completion_tokens": 251,
+      "seconds": 6.5,
+      "detail": "RUNTIME_ERROR TypeError sequence item 0: expected str instance, list found\n--code-head--\ndef decode_nested_repeat(s):\n    def parse(s, i):\n        result = []\n        n = len(s)\n        while i < n:\n            c = s[i]\n            if c == '\\\\':\n                if i + 1 >= n:\n                    raise ValueError(\"Trailing backslash\")\n                result.append(s[i + 1])\n                i += 2\n            elif c == ']':\n                return result, i + 1\n            elif c == '[':"
+    },
+    {
+      "id": "shortest_threshold_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 426,
+      "seconds": 10.7,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert shortest_threshold_slice([2, -1, 2], 3) == 3\\nassert shortest_threshold_slice([], 0) == 0\\nassert shortest_threshold_slice([1, 2], 4) == 0\\nassert shortest_threshold_slice([1, 2, 3], 3) == 1\\nassert shortest_threshold_slice([84, -37, 32, 40, 95], 167) == 3\\nassert shortest_threshold_slice([-5], -5) == 1\\nassert shortest_threshold_slice([-2, -3], 0) == 0\\n', ns)\n  Fil\n--code-head--\ndef shortest_threshold_slice(nums, threshold):\n    \"\"\"Return the length of the shortest nonempty contiguous slice of nums\n    whose sum is at least `threshold`. Return 0 if no such slice exists.\n\n    The input list is not modified. Time: O(n), Space: O(n).\n    \"\"\"\n    n = len(nums)\n    if n == 0:\n        return 0\n\n    # prefix[i] = sum of nums[:i]\n    prefix = [0] * (n + 1)\n    for i in range(n):\n"
+    },
+    {
+      "id": "glob_full_match",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 325,
+      "seconds": 8.3,
+      "detail": ""
+    },
+    {
+      "id": "max_product_slice",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 357,
+      "seconds": 9.0,
+      "detail": ""
+    },
+    {
+      "id": "largest_ones_square",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 268,
+      "seconds": 6.9,
+      "detail": ""
+    },
+    {
+      "id": "next_greater_steps",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 129,
+      "seconds": 3.4,
+      "detail": ""
+    },
+    {
+      "id": "repeating_decimal",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 340,
+      "seconds": 8.7,
+      "detail": ""
+    },
+    {
+      "id": "directed_euler_walk",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 290,
+      "seconds": 7.4,
+      "detail": "ASSERT_FAIL\n    exec('\\ndef valid_euler_walk(walk, n, edges):\\n    from collections import Counter\\n    if not edges: return walk == ([0] if n else [])\\n    if not isinstance(walk, list) or len(walk) != len(edges) + 1: return False\\n    if any(not isinstance(v, int) or not 0 <= v < n for v in walk): return False\\n    return Counter(zip(walk, walk[1:])) == Counter(map(tuple, edges))\\nassert valid_e\n--code-head--\ndef directed_euler_walk(n, edges):\n    if not edges:\n        return [0] if n > 0 else []\n\n    adj = [[] for _ in range(n)]\n    indeg = [0] * n\n    outdeg = [0] * n\n    for u, v in edges:\n        adj[u].append(v)\n        outdeg[u] += 1\n        indeg[v] += 1\n\n    start = None\n    for i in range(n):\n        diff = outdeg[i] - indeg[i]\n        if diff == 1:\n            start = i\n        elif diff != 0"
+    },
+    {
+      "id": "min_ragged_wrap",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 370,
+      "seconds": 9.4,
+      "detail": ""
+    },
+    {
+      "id": "deadline_dispatch",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 606,
+      "seconds": 15.3,
+      "detail": ""
+    },
+    {
+      "id": "expand_counted_pattern",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 288,
+      "seconds": 7.5,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert expand_counted_pattern(\"2[a3[b]]\") == \"abbbabbb\"\\nassert expand_counted_pattern(\"\") == \"\"\\nassert expand_counted_pattern(\"0[abc]2[]x\") == \"x\"\\nassert expand_counted_pattern(r\"2[a\\\\]b]\\\\3\\\\\\\\\") == \"a]ba]b3\\\\\\\\\"\\nassert expand_counted_pattern(\"02[a] 1[b]\") == \"aa b\"\\nassert expand_counted_pattern(\"10[z]\") == \"zzzzzzzzzz\"\\ndef rejects_pattern(s):\\n    try: expand_counte\n--code-head--\ndef expand_counted_pattern(s):\n    def parse(s, i):\n        parts = []\n        total = 0\n        n = len(s)\n        while i < n:\n            c = s[i]\n            if c == '\\\\':\n                if i + 1 >= n:\n                    raise ValueError(\"Trailing backslash\")\n                parts.append(s[i + 1])\n                total += 1\n                i += 2\n            elif c == ']':\n                re"
+    },
+    {
+      "id": "min_capacity_for_days",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 147,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "smallest_fixed_digit_sum",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 184,
+      "seconds": 4.8,
+      "detail": ""
+    },
+    {
+      "id": "assignment_min_cost_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 200,
+      "seconds": 5.2,
+      "detail": ""
+    },
+    {
+      "id": "grid_keys_shortest_path",
+      "rep": 0,
+      "tier": 3,
+      "status": "RUNTIME_ERROR KeyError 'a'",
+      "ok": false,
+      "completion_tokens": 497,
+      "seconds": 12.6,
+      "detail": "RUNTIME_ERROR KeyError 'a'\n--code-head--\nfrom collections import deque\n\n\ndef grid_keys_shortest_path(grid):\n    rows = len(grid)\n    cols = len(grid[0])\n    start = None\n    target = None\n    key_index = {}\n    for r in range(rows):\n        for c in range(cols):\n            ch = grid[r][c]\n            if ch == 'S':\n                start = (r, c)\n            elif ch == 'T':\n                target = (r, c)\n            elif 'a' <= ch <= 'c'"
+    },
+    {
+      "id": "count_grid_independent_sets",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 298,
+      "seconds": 7.6,
+      "detail": ""
+    },
+    {
+      "id": "first_winning_subtraction_move",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 144,
+      "seconds": 3.8,
+      "detail": ""
+    },
+    {
+      "id": "minimum_max_lateness",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 230,
+      "seconds": 6.0,
+      "detail": ""
+    },
+    {
+      "id": "repeating_positional_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 340,
+      "seconds": 8.7,
+      "detail": ""
+    },
+    {
+      "id": "min_swaps_to_sorted",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 155,
+      "seconds": 4.0,
+      "detail": ""
+    }
+  ]
+}
