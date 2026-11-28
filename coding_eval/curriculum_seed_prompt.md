@@ -86,8 +86,8 @@ Swap only the TASK paragraph at the end:
 
 - **Claude** (best first-pass correctness): default task line — broad coverage,
   6 tier-2 + 4 tier-3. Spend its scarce flagship messages on tier-3 authoring.
-- **ChatGPT** (good designs, sloppy expected values): default task line; expect
-  to run the correction round.
+- **ChatGPT** (good designs, sloppy expected values): default task line; its
+  broken asserts are usually provable arithmetic — hand-fix or drop, don't correct.
 - **Kimi K3.x** (competition/math strength): replace the TASK paragraph with:
 
 ```
@@ -106,9 +106,19 @@ are certain.
 Integer-answer problems are deliberately requested: they eliminate the
 float/tie-break bug classes that cost the most curation time in batches 1-2.
 
-## Daily follow-up (correction message)
+## Correction message (exception path — forward-only is the default)
 
-Run `python coding_eval/intake.py batchN.json`, then paste:
+The seed message costs the same paste-effort and returns ~10 fresh problems;
+a correction round recovers 1-3, and intake's near-dup filter rejects many of
+them. With 3 teachers the suite grows faster than the harvest loop can absorb,
+so **skip corrections by default**: broken items are hand-fixed only when the
+expected value is provably wrong, otherwise dropped. Tomorrow's batch replaces
+them.
+
+Spend a correction message only when the BROKEN block contains a problem whose
+**mechanism no current suite problem covers** — one message per batch max, and
+never a second round in the same chat. When you do, run
+`python coding_eval/intake.py batchN.json` and paste:
 
 ```
 These problems you authored failed execution verification. For each, decide whether
@@ -129,9 +139,10 @@ git -C /Volumes/NVME/ling-3.2-air diff coding_eval/problems.py   # eyeball befor
 ```
 
 Notes
-- Free-tier flagship message budget: spend it on the FIRST message's 10-problem
-  batches and one correction message per day; the mini fallback is fine for retagging
-  or reformatting but writes too many broken asserts for authoring.
+- Free-tier flagship message budget: spend it ALL on the FIRST message's
+  10-problem batches (forward-only); corrections are the rare exception above.
+  The mini fallback is fine for retagging or reformatting but writes too many
+  broken asserts for authoring.
 - Claude free tier can run the same first message in parallel for teacher diversity;
   intake dedupes by id and the harness decides the rest.
 - After promoting, ids in the AVOID list auto-update: intake.py reads them from
