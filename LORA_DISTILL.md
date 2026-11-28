@@ -127,6 +127,22 @@ coding layers via train_round2.py (snapshot-restore selective LoRA —
 written, needs supervised smoke); (3) fewer iters or lower scale to trade
 memorization for generalization; (4) rank 16 actually applied.
 
+## Round-2 results (2026-11-28 ~05:15): NEGATIVE — targeting backfired
+
+r2 (12 promoted layers, rank 16/scale 32, per-expert adapters, 307 traces):
+**44/66, held-out 3/12** — 16 regressions vs r1, 5 held-out losses. Same
+stack: control 54, r1 59, r2 44. Interpretation: adapter capacity
+(3.3 GB trainable incl. per-expert LoRA on EARLY layers) wildly exceeded
+the data (307 traces); the model memorized answer shapes and lost
+general skills (roman, rle, rotate_matrix, histogram...). Round-1's
+smaller footprint (last-16, rank 8, scale 20) was already at the
+capacity/data edge; going deeper+heavier crossed it.
+
+Round-3 plan (single-variable): r1's EXACT recipe (last 16 layers, rank 8,
+scale 20, lr 5e-5) on the larger 307-trace set — tests whether data volume
+alone buys held-out transfer. If yes, scale data (teacher traces for the
+zero-trace problems) rather than adapter capacity.
+
 ## Immediate next steps
 
 0. **mlx-lm training support: VERIFIED with one local patch.** mlx-lm

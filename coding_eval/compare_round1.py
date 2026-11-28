@@ -18,6 +18,7 @@ LABELS = {
     "Ling-3.2-air-MLX-mixed-4-8bit-pyserver": "Ling-mixed (py-server)",
     "Ling-3.2-air-MLX-mixed-4-8bit-r1": "Ling-mixed-r1 (LoRA)",
     "Ling-3.2-air-MLX-mixed-4-8bit-r2": "Ling-mixed-r2 (LoRA2)",
+    "Ling-3.2-air-MLX-mixed-4-8bit-r3": "Ling-mixed-r3 (LoRA3)",
     "Ling-3.2-air-MLX-4bit": "Ling-4bit",
 }
 
@@ -26,7 +27,7 @@ def newest(slug):
     if slug == "Ling-3.2-air-MLX-mixed-4-8bit":
         # the base-pack glob also matches tagged runs; keep only plain ones
         files = [f for f in files
-                 if not any(t in f for t in ("-r1-", "-r2-", "-pyserver-"))]
+                 if not any(t in f for t in ("-r1-", "-r2-", "-r3-", "-pyserver-"))]
     return files[-1] if files else None
 
 def main():
@@ -76,7 +77,9 @@ def main():
 
     ab("Ling-mixed (py-server)", "Ling-mixed-r1 (LoRA)", "r1 vs py-server control")
     ab("Ling-mixed (py-server)", "Ling-mixed-r2 (LoRA2)", "r2 vs py-server control")
+    ab("Ling-mixed (py-server)", "Ling-mixed-r3 (LoRA3)", "r3 vs py-server control")
     ab("Ling-mixed-r1 (LoRA)", "Ling-mixed-r2 (LoRA2)", "r2 vs r1")
+    ab("Ling-mixed-r1 (LoRA)", "Ling-mixed-r3 (LoRA3)", "r3 vs r1")
 
 if __name__ == "__main__":
     main()

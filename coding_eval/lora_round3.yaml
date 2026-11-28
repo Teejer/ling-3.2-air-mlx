@@ -1,0 +1,7 @@
+# Round-3 config: EXACT round-1 capacity (the only change is the data).
+# Note the key MUST be lora_parameters (mlx-lm ignores 'lora:').
+lora_parameters:
+  rank: 8
+  scale: 20.0
+  dropout: 0.0
+  layer_keys: ["self_attn", "shared_experts"]

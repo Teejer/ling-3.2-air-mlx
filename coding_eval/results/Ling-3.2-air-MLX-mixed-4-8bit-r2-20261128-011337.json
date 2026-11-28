@@ -1,0 +1,670 @@
+{
+  "model": "inclusionAI/Ling-3.2-air",
+  "base_url": "http://127.0.0.1:11250",
+  "temperature": 0.0,
+  "max_tokens": 1400,
+  "passed": 44,
+  "total": 66,
+  "results": [
+    {
+      "id": "merge_intervals",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 141,
+      "seconds": 10.7,
+      "detail": ""
+    },
+    {
+      "id": "top_k_words",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 97,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "balanced",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 109,
+      "seconds": 4.1,
+      "detail": ""
+    },
+    {
+      "id": "rle",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR '(' was never closed (sol.py, line 30)",
+      "ok": false,
+      "completion_tokens": 209,
+      "seconds": 7.7,
+      "detail": "SYNTAX_ERROR '(' was never closed (sol.py, line 30)\n--code-head--\ndef rle_encode(s):\n    if not s:\n        return \"\"\n    result = []\n    current = s[0]\n    count = 1\n    for ch in s[1:]:\n        if ch == current:\n            count += 1\n        else:\n            result.append(current)\n            result.append(str(count))\n            current = ch\n            count = 1\n    result.append(current)\n    result.append(str(count))\n    return \"\".join(result)\n\n\ndef rle_de"
+    },
+    {
+      "id": "flatten",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 177,
+      "seconds": 6.6,
+      "detail": ""
+    },
+    {
+      "id": "closest_sum_pair",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 138,
+      "seconds": 5.2,
+      "detail": ""
+    },
+    {
+      "id": "roman",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR expression expected after dictionary key and ':' (sol.py, line 2)",
+      "ok": false,
+      "completion_tokens": 91,
+      "seconds": 3.5,
+      "detail": "SYNTAX_ERROR expression expected after dictionary key and ':' (sol.py, line 2)\n--code-head--\ndef roman_to_int(s):\n    values = {'I': , 'V': 5, 'X': 0, 'L0': 0, 'C': 100, 'D': 500, 'M': 1000}\n    total = 0\n    for ch in s:\n        total += values[ch]\n    return total"
+    },
+    {
+      "id": "lru",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 435,
+      "seconds": 15.9,
+      "detail": ""
+    },
+    {
+      "id": "csv_line",
+      "rep": 0,
+      "tier": 1,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 129,
+      "seconds": 4.8,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert parse_csv(\\'a,b,\"c,d\"\\') == [\"a\", \"b\", \"c,d\"]\\nassert parse_csv(\\'x,\"y\"\"z\",1\\') == [\"x\", \\'y\"z\\', \"1\"]\\nassert parse_csv(\"\") == [\"\"]\\nassert parse_csv(\\'\"only\"\\') == [\"only\"]\\nassert parse_csv(\"a;b;c\", delim=\\';\\') == [\"a\", \"b\", \"c\"]\\n', ns)\n  File \"<string>\", line 3, in <module>\nAssertionError\n--code-head--\ndef parse_csv(line, delim=','):\n    fields = []\n    buf = []\n    in_quotes = False\n    for ch in line:\n        if in_quotes:\n            if ch == '\"':\n                in_quotes = False\n            else:\n                buf.append(ch)\n        elif ch == '\"':\n            in_quotes = True\n        elif ch == delim:\n            fields.append(''.join(buf))\n            buf = []\n        else:\n            "
+    },
+    {
+      "id": "rotated_search",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 288,
+      "seconds": 10.6,
+      "detail": ""
+    },
+    {
+      "id": "rotate_matrix",
+      "rep": 0,
+      "tier": 1,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 56,
+      "seconds": 2.2,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert rotate([[1,2],[3,4]]) == [[3,1],[4,2]]\\nassert rotate([[1,2,3],[4,5,6],[7,8,9]]) == [[7,4,1],[8,5,2],[9,6,3]]\\nassert rotate([[5]]) == [[5]]\\n', ns)\n  File \"<string>\", line 2, in <module>\nAssertionError\n--code-head--\ndef rotate(m):\n    \"\"\"Return a new n x n matrix rotated 90 degrees clockwise.\"\"\"\n    if not m:\n        return []\n    return [list(col) for col in zip(m[::-1])]"
+    },
+    {
+      "id": "palindrome_sub",
+      "rep": 0,
+      "tier": 1,
+      "status": "SYNTAX_ERROR unmatched ']' (sol.py, line 19)",
+      "ok": false,
+      "completion_tokens": 234,
+      "seconds": 8.6,
+      "detail": "SYNTAX_ERROR unmatched ']' (sol.py, line 19)\n--code-head--\ndef longest_palindrome(s):\n    if not s:\n        return \"\"\n    n = len(s)\n    # dp[i][j] is True if s[i..j] is a palindrome\n    dp = [[False] * n for _ in range(n)]\n    for i in range(n):\n        dp[i][i] = True\n    for length in range(2, n + 1):\n        for i in range(n - length + 1):\n            j = i + length - 1\n            if s[i] == s[j] and dp[i + 1][j - 1]:\n                dp[i][j] = True\n"
+    },
+    {
+      "id": "retry_decorator",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 85,
+      "seconds": 3.2,
+      "detail": ""
+    },
+    {
+      "id": "anagrams",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 57,
+      "seconds": 2.2,
+      "detail": ""
+    },
+    {
+      "id": "min_stack",
+      "rep": 0,
+      "tier": 1,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 175,
+      "seconds": 6.4,
+      "detail": ""
+    },
+    {
+      "id": "case_convert",
+      "rep": 0,
+      "tier": 1,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 109,
+      "seconds": 4.1,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert snake_to_camel(\"get_http_code\") == \"getHttpCode\"\\nassert snake_to_camel(\"one\") == \"one\"\\nassert camel_to_snake(\"getHttpCode\") == \"get_http_code\"\\nassert camel_to_snake(\"getHTTPCode\") == \"get_http_code\"\\nassert camel_to_snake(\"one\") == \"one\"\\nassert camel_to_snake(\"HTTPCode\") == \"http_code\"\\n', ns)\n  File \"<string>\", line 5, in <module>\nAssertionError\n--code-head--\ndef snake_to_camel(s):\n    parts = s.split(\"_\")\n    return parts[0] + \"\".join(p.capitalize() for p in parts[1:])\n\n\ndef camel_to_snake(s):\n    result = []\n    for ch in s:\n        if ch.isupper():\n            if result:\n                result.append(\"_\")\n            result.append(ch.lower())\n        else:\n            result.append(ch)\n    return \"\".join(result)"
+    },
+    {
+      "id": "next_perm",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 126,
+      "seconds": 4.7,
+      "detail": ""
+    },
+    {
+      "id": "word_break",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 105,
+      "seconds": 3.9,
+      "detail": ""
+    },
+    {
+      "id": "edit_distance",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 175,
+      "seconds": 6.4,
+      "detail": ""
+    },
+    {
+      "id": "histogram",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 182,
+      "seconds": 6.7,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert largest_rectangle([2, 1, 5, 6, 2, 3]) == 10\\nassert largest_rectangle([2, 4]) == 4\\nassert largest_rectangle([]) == 0\\nassert largest_rectangle([3, 3, 3]) == 9\\nassert largest_rectangle([1]) == 1\\n', ns)\n  File \"<string>\", line 2, in <module>\nAssertionError\n--code-head--\ndef largest_rectangle(heights):\n    \"\"\"Return the area of the largest axis-aligned rectangle in a\n    histogram of bar heights (widths 1).\"\"\"\n    stack = []\n    max_area = 0\n    for i, h in enumerate(heights):\n        while stack and stack[-1][1] >= h:\n            _, height = stack.pop()\n            width = i - stack[-1][0] if stack else i\n            max_area = max(max_area, height * width)\n     "
+    },
+    {
+      "id": "course_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 201,
+      "seconds": 7.4,
+      "detail": ""
+    },
+    {
+      "id": "running_median",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR closing parenthesis ')' does not match opening parenthesis '[' (sol.py, line 33)",
+      "ok": false,
+      "completion_tokens": 358,
+      "seconds": 13.1,
+      "detail": "SYNTAX_ERROR closing parenthesis ')' does not match opening parenthesis '[' (sol.py, line 33)\n--code-head--\nimport heapq\n\n\nclass RunningMedian:\n    \"\"\"Maintain a running median of all values added so far.\n\n    add(x) inserts a value; median() returns the median as a float.\n    When the count is even, the median is the mean of the two middle\n    values. median() is only called when non-empty.\n    \"\"\"\n\n    def __init__(self):\n        self._low = []   # max-heap (via negated values) of the lower half\n     "
+    },
+    {
+      "id": "coin_change",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 163,
+      "seconds": 6.0,
+      "detail": ""
+    },
+    {
+      "id": "balanced_code",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 183,
+      "seconds": 6.8,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert is_balanced_code(\\'f(\"([)]\")\\') is True\\nassert is_balanced_code(\\'f(\"[{]\")\\') is True\\nassert is_balanced_code(\\'a[{]\\') is False\\nassert is_balanced_code(\\'if (a[0] == \"]\") { b(); }\\') is True\\nassert is_balanced_code(\"f(\\'a)\\', b\") is False\\nassert is_balanced_code(\"\\'()\") is True\\nassert is_balanced_code(\"f(\\'\\\\\\\\\\'\\')\") is True\\n', ns)\n  File \"<string>\", line 2,\n--code-head--\ndef is_balanced_code(s):\n    \"\"\"\n    Check whether brackets (), [], {} in pseudo-code text s balance.\n\n    Brackets inside single- or double-quoted string literals are not\n    counted. Inside a literal a backslash escapes the next character;\n    an unterminated literal swallows the rest of the input.\n    \"\"\"\n    pairs = {')': '(', ']': '[', '}': '{'}\n    stack = []\n    i = 0\n    n = len(s)\n    whi"
+    },
+    {
+      "id": "eval_expr",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR '(' was never closed (sol.py, line 29)",
+      "ok": false,
+      "completion_tokens": 443,
+      "seconds": 16.1,
+      "detail": "SYNTAX_ERROR '(' was never closed (sol.py, line 29)\n--code-head--\ndef eval_expr(s):\n    \"\"\"Evaluate an arithmetic expression of non-negative integers with\n    +, -, *, / and parentheses.\n\n    - Standard precedence: * and / bind tighter than + and -.\n    - Division truncates toward zero.\n    - No unary minus appears in the input.\n    \"\"\"\n    tokens = []\n    i = 0\n    n = len(s)\n    while i < n:\n        c = s[i]\n        if c == ' ':\n            i += 1\n        elif"
+    },
+    {
+      "id": "longest_consec",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 97,
+      "seconds": 3.7,
+      "detail": ""
+    },
+    {
+      "id": "parse_duration",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 132,
+      "seconds": 5.0,
+      "detail": ""
+    },
+    {
+      "id": "restore_ips",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR unmatched ')' (sol.py, line 6)",
+      "ok": false,
+      "completion_tokens": 204,
+      "seconds": 7.5,
+      "detail": "SYNTAX_ERROR unmatched ')' (sol.py, line 6)\n--code-head--\ndef restore_ips(s):\n    n = len(s)\n    if n < 4 or n > 12:\n        return []\n    result = []\n    for a in range(1, min(4, n))):\n        for b in range(1, min(4, n - a))):\n            for c in range(1, min(4, n - a - b))):\n                for d in range(1, min(4, n - a - b - c))):\n                    parts = [s[:a], s[a:a + b], s[a + b:a + b + c], s[a + b + c:\n                    if all(1 <= len(p)"
+    },
+    {
+      "id": "spiral_order",
+      "rep": 0,
+      "tier": 2,
+      "status": "SYNTAX_ERROR unmatched ')' (sol.py, line 7)",
+      "ok": false,
+      "completion_tokens": 277,
+      "seconds": 10.1,
+      "detail": "SYNTAX_ERROR unmatched ')' (sol.py, line 7)\n--code-head--\ndef spiral_order(m):\n    \"\"\"Return the elements of matrix m in clockwise spiral order.\"\"\"\n    if not m:\n        return []\n    result = []\n    top, bottom = 0, len(m) - 1\n    left, right = 0, len(m[0]) - 1)\n    while top <= bottom and left <= right:\n        # Traverse top row left -> right\n        for c in range(left, right + 1):\n            result.append(m[top][c])\n        top += 1\n        # Trave"
+    },
+    {
+      "id": "min_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 205,
+      "seconds": 7.5,
+      "detail": ""
+    },
+    {
+      "id": "interval_overlap_count",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 141,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "canonical_fraction",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 65,
+      "seconds": 2.5,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert canonical_fraction(6, 8) == [3, 4]\\nassert canonical_fraction(0, 7) == [0, 1]\\nassert canonical_fraction(-6, 8) == [-3, 4]\\nassert canonical_fraction(6, -8) == [-3, 4]\\nassert canonical_fraction(-12, -18) == [2, 3]\\nassert canonical_fraction(7, 1) == [7, 1]\\ntry:\\n canonical_fraction(1, 0)\\n assert False\\nexcept ZeroDivisionError:\\n pass\\n', ns)\n  File \"<string>\", li\n--code-head--\nimport math\n\n\ndef canonical_fraction(n, d):\n    if d == 0:\n        raise ZeroDivisionError(\"denominator must not be zero\")\n    g = math.gcd(n, d)\n    return [n // g, d // g]"
+    },
+    {
+      "id": "deduplicate_stable",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 57,
+      "seconds": 2.2,
+      "detail": ""
+    },
+    {
+      "id": "lis_reconstruct",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR unmatched ')' (sol.py, line 17)",
+      "ok": false,
+      "completion_tokens": 156,
+      "seconds": 5.8,
+      "detail": "SYNTAX_ERROR unmatched ')' (sol.py, line 17)\n--code-head--\ndef lis_reconstruct(nums):\n    if not nums:\n        return []\n    n = len(nums)\n    dp = [1] * n\n    prev = [-1] * n\n    for i in range(n):\n        for j in range(i):\n            if nums[j] < nums[i] and dp[j] + 1 > dp[i]:\n                dp[i] = dp[j] + 1\n                prev[i] = j\n    max_len = max(dp)\n    idx = dp.index(max_len)\n    result = []\n    while idx != -1:\n        result.append(nums[i"
+    },
+    {
+      "id": "longest_k_distinct",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 150,
+      "seconds": 5.5,
+      "detail": ""
+    },
+    {
+      "id": "egyptian_greedy",
+      "rep": 0,
+      "tier": 2,
+      "status": "NO_OUTPUT",
+      "ok": false,
+      "completion_tokens": 115,
+      "seconds": 4.4,
+      "detail": "\n--code-head--\ndef egyptian(num, den):\n    if den <= 0:\n        raise ValueError(\"denominator must be positive\")\n    if num < 0:\n        raise ValueError(\"numerator must be non-negative\")\n    if num >= den:\n        raise ValueError(\"numerator must be less than denominator\")\n    result = []\n    while num > 0:\n        result.append(den // num)\n        num = num * den - num * (den // num)\n    return result"
+    },
+    {
+      "id": "combo_sum_once",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 218,
+      "seconds": 9.0,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert combo_sum_once([10, 1, 2, 7, 6, 1, 5], 8) == [[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]\\nassert combo_sum_once([2, 5, 2, 1, 2], 5) == [[1, 2, 2], [5]]\\nassert combo_sum_once([1], 0) == [[]]\\nassert combo_sum_once([3], 2) == []\\nassert combo_sum_once([1, 1, 1], 2) == [[1, 1]]\\nassert combo_sum_once([], 4) == []\\n', ns)\n  File \"<string>\", line 2, in <module>\nAssertionError\n--code-head--\ndef combo_sum_once(nums, target):\n    \"\"\"\n    Return all unique combinations (sorted ascending) of elements from\n    nums (each element used at most once) whose sum equals target.\n\n    Two combinations are considered the same if they contain the same\n    multiset of values. The result is sorted lexicographically.\n    If target == 0, the empty combination is included. If no combination\n    exists a"
+    },
+    {
+      "id": "set_zeroes",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 142,
+      "seconds": 5.3,
+      "detail": ""
+    },
+    {
+      "id": "kth_largest_stream",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 113,
+      "seconds": 4.3,
+      "detail": ""
+    },
+    {
+      "id": "lcs_string",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 313,
+      "seconds": 11.5,
+      "detail": ""
+    },
+    {
+      "id": "assign_rooms",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 370,
+      "seconds": 13.7,
+      "detail": ""
+    },
+    {
+      "id": "bipartition_coloring",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 166,
+      "seconds": 6.3,
+      "detail": ""
+    },
+    {
+      "id": "decode_escaped_fields",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 150,
+      "seconds": 5.7,
+      "detail": ""
+    },
+    {
+      "id": "shortest_cycle_length",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 322,
+      "seconds": 11.9,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert shortest_cycle_length(3, [[0, 1], [1, 2], [2, 0]]) == 3\\nassert shortest_cycle_length(1, []) == -1\\nassert shortest_cycle_length(2, [[0, 1], [0, 1]]) == -1\\nassert shortest_cycle_length(3, [[0, 0], [0, 1]]) == 1\\nassert shortest_cycle_length(5, [[0, 1], [1, 2], [2, 0], [2, 3], [3, 4], [4, 2]]) == 3\\nassert shortest_cycle_length(4, [[0, 1], [1, 2], [2, 3]]) == -1\\ntry\n--code-head--\nfrom collections import deque\n\n\ndef shortest_cycle_length(n, edges):\n    \"\"\"Return the number of edges in the shortest simple cycle of the\n    undirected graph with vertices 0..n-1, or -1 if no cycle exists.\n\n    A self-loop is a cycle of length 1. Duplicate edges are ignored.\n    An endpoint outside the valid vertex range raises ValueError.\n    \"\"\"\n    adj = [[] for _ in range(n)]\n    for u, v in"
+    },
+    {
+      "id": "parse_kv_escaped",
+      "rep": 0,
+      "tier": 3,
+      "status": "RUNTIME_ERROR ValueError not enough values to unpack (expected 2, got 1)",
+      "ok": false,
+      "completion_tokens": 61,
+      "seconds": 2.5,
+      "detail": "RUNTIME_ERROR ValueError not enough values to unpack (expected 2, got 1)\n--code-head--\ndef parse_kv(s):\n    result = {}\n    for entry in s.split(';'):\n        if not entry:\n            continue\n        key, value = entry.split('=', 1)\n        result[key] = value\n    return result"
+    },
+    {
+      "id": "longest_bounded_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 254,
+      "seconds": 9.4,
+      "detail": ""
+    },
+    {
+      "id": "matrix_diagonal_sums",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 108,
+      "seconds": 4.1,
+      "detail": ""
+    },
+    {
+      "id": "normalize_identifier",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 121,
+      "seconds": 4.6,
+      "detail": ""
+    },
+    {
+      "id": "streaming_kth_largest",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 116,
+      "seconds": 4.4,
+      "detail": ""
+    },
+    {
+      "id": "fraction_add",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 185,
+      "seconds": 6.9,
+      "detail": ""
+    },
+    {
+      "id": "stable_frequency_sort",
+      "rep": 0,
+      "tier": 2,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 110,
+      "seconds": 4.2,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert stable_frequency_sort([4, 6, 4, 6, 4, 2]) == [4, 4, 4, 6, 6, 2]\\nassert stable_frequency_sort([]) == []\\nassert stable_frequency_sort([3, 2, 1]) == [3, 2, 1]\\nassert stable_frequency_sort([2, 2, 1, 1, 3, 3]) == [2, 2, 1, 1, 3, 3]\\nassert stable_frequency_sort([5, 5, 4, 4, 4, 5]) == [5, 5, 5, 4, 4, 4]\\nassert stable_frequency_sort([-1, 0, -1, 0, -1]) == [-1, -1, -1, 0\n--code-head--\ndef stable_frequency_sort(nums):\n    \"\"\"Return a new list with elements sorted by descending frequency.\n\n    Elements with equal frequencies keep the order in which their values\n    first appeared in the input. Repeated occurrences stay grouped.\n    The input is not modified.\n    \"\"\"\n    counts = {}\n    for num in nums:\n        counts[num] = counts.get(num, 0) + 1\n    return sorted(nums, key=lambd"
+    },
+    {
+      "id": "merge_sorted_streams",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 65,
+      "seconds": 2.6,
+      "detail": ""
+    },
+    {
+      "id": "weighted_interval_schedule",
+      "rep": 0,
+      "tier": 3,
+      "status": "SYNTAX_ERROR unmatched ')' (sol.py, line 30)",
+      "ok": false,
+      "completion_tokens": 260,
+      "seconds": 9.7,
+      "detail": "SYNTAX_ERROR unmatched ')' (sol.py, line 30)\n--code-head--\ndef weighted_interval_schedule(intervals):\n    n = len(intervals)\n    if n == 0:\n        return []\n    order = sorted(range(n), key=lambda i: (intervals[i][0], intervals[i][1], i))\n    dp = [0] * n\n    prev = [-1] * n\n    for i in range(n):\n        start, end, weight = intervals[order[i]]\n        j = i - 1\n        while j >= 0 and intervals[order[j]][1] > start:\n            j -= 1\n        if j >= "
+    },
+    {
+      "id": "shortest_path_with_count",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 244,
+      "seconds": 9.1,
+      "detail": ""
+    },
+    {
+      "id": "normalize_path",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 175,
+      "seconds": 6.6,
+      "detail": ""
+    },
+    {
+      "id": "longest_unique_window",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 184,
+      "seconds": 6.9,
+      "detail": ""
+    },
+    {
+      "id": "count_coprime_inclusion_exclusion",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 274,
+      "seconds": 10.2,
+      "detail": ""
+    },
+    {
+      "id": "min_eating_speed",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 107,
+      "seconds": 4.2,
+      "detail": ""
+    },
+    {
+      "id": "tsp_exact_bitmask",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 288,
+      "seconds": 10.7,
+      "detail": ""
+    },
+    {
+      "id": "predict_the_winner",
+      "rep": 0,
+      "tier": 2,
+      "status": "RUNTIME_ERROR TypeError 'int' object is not subscriptable",
+      "ok": false,
+      "completion_tokens": 124,
+      "seconds": 4.7,
+      "detail": "RUNTIME_ERROR TypeError 'int' object is not subscriptable\n--code-head--\ndef predict_winner(nums):\n    n = len(nums)\n    if n == 0:\n        return True\n    dp = nums[:]\n    for length in range(2, n + 1):\n        for i in range(n - length + 1):\n            j = i + length - 1\n            dp[i][j] = max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1])\n    return dp[0][n - 1] >= 0"
+    },
+    {
+      "id": "base_neg2_conversion",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 78,
+      "seconds": 3.1,
+      "detail": ""
+    },
+    {
+      "id": "min_path_effort_grid",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 442,
+      "seconds": 16.3,
+      "detail": ""
+    },
+    {
+      "id": "matrix_chain_multiplication",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 177,
+      "seconds": 6.6,
+      "detail": ""
+    },
+    {
+      "id": "subarrays_sum_equals_k",
+      "rep": 0,
+      "tier": 2,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 110,
+      "seconds": 4.2,
+      "detail": ""
+    },
+    {
+      "id": "min_station_refuels",
+      "rep": 0,
+      "tier": 3,
+      "status": "PASS",
+      "ok": true,
+      "completion_tokens": 299,
+      "seconds": 11.1,
+      "detail": ""
+    },
+    {
+      "id": "render_escaped_template",
+      "rep": 0,
+      "tier": 3,
+      "status": "ASSERT_FAIL",
+      "ok": false,
+      "completion_tokens": 217,
+      "seconds": 8.2,
+      "detail": "ASSERT_FAIL\n    exec('\\nassert render(\"Hi {{name}}!\", {\"name\": \"Bob\"}) == \"Hi Bob!\"\\nassert render(\"{{name}}\", {\"name\": \"Bob\"}) == \"Bob\"\\nassert render(\"x\", {}) == \"x\"\\nassert render(\"{{a}}{{b}}\", {\"a\": \"1\", \"b\": \"2\"}) == \"12\"\\ntry:\\n render(\"{{z}}\", {})\\n r = \"noerr\"\\nexcept KeyError:\\n r = \"err\"\\nassert r == \"err\"\\ntry:\\n render(\"abc~\", {})\\n r = \"noerr\"\\nexcept ValueError:\\n r = \"err\"\\nassert r\n--code-head--\ndef render(tpl, env):\n    result = []\n    i = 0\n    n = len(tpl)\n    while i < n:\n        ch = tpl[i]\n        if ch == '\\\\':\n            if i + 1 >= n:\n                raise ValueError(\"unterminated escape\")\n            result.append(tpl[i + 1])\n            i += 2\n        elif ch == '{':\n            if i + 1 >= n:\n                raise ValueError(\"unterminated field\")\n            j = tpl.find('}}'"
+    }
+  ]
+}
