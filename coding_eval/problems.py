@@ -468,4 +468,201 @@ assert min_window_len("aab", "aba") == 3
 assert min_window_len("", "a") == -1
 """,
     ),
+
+    dict(
+        id='interval_overlap_count', tier=2, intaked=True, tag='algorithms',
+        title='Maximum interval overlap',
+        prompt="""Implement `interval_overlap_count(intervals)` where intervals is a list of closed integer intervals `[start, end]`. Return the maximum number of intervals containing the same integer point. Intervals with equal endpoints overlap. An empty list returns 0. Raise ValueError if any interval has start > end. The result counts duplicate intervals separately.""",
+        tests="""
+assert interval_overlap_count([[1, 5], [2, 6], [4, 8]]) == 3
+assert interval_overlap_count([]) == 0
+assert interval_overlap_count([[1, 2], [2, 3]]) == 2
+assert interval_overlap_count([[1, 1], [1, 1], [2, 2]]) == 2
+assert interval_overlap_count([[-5, -1], [-3, 0], [1, 4]]) == 2
+try:
+ interval_overlap_count([[3, 2]])
+ assert False
+except ValueError:
+ pass
+""",
+    ),
+    dict(
+        id='canonical_fraction', tier=2, intaked=True, tag='math',
+        title='Canonical fraction',
+        prompt="""Implement `canonical_fraction(n, d)` returning a pair `[numerator, denominator]` representing the reduced fraction n/d. The denominator must always be positive. Divide both values by their greatest common divisor. Zero is represented as [0, 1]. Raise ZeroDivisionError when d is zero. Inputs are integers.""",
+        tests="""
+assert canonical_fraction(6, 8) == [3, 4]
+assert canonical_fraction(0, 7) == [0, 1]
+assert canonical_fraction(-6, 8) == [-3, 4]
+assert canonical_fraction(6, -8) == [-3, 4]
+assert canonical_fraction(-12, -18) == [2, 3]
+assert canonical_fraction(7, 1) == [7, 1]
+try:
+ canonical_fraction(1, 0)
+ assert False
+except ZeroDivisionError:
+ pass
+""",
+    ),
+    dict(
+        id='deduplicate_stable', tier=2, intaked=True, tag='lists',
+        title='Stable deduplication',
+        prompt="""Implement `deduplicate_stable(items)` returning a new list containing each distinct item exactly once, preserving the order of its first occurrence. Items are hashable. An empty input returns an empty list. The original list must not be modified.""",
+        tests="""
+assert deduplicate_stable([3, 1, 3, 2, 1]) == [3, 1, 2]
+assert deduplicate_stable([]) == []
+assert deduplicate_stable([1, 1, 1]) == [1]
+assert deduplicate_stable([0, False, 1, True]) == [0, 1]
+assert deduplicate_stable(["a", "b", "a", "c"]) == ["a", "b", "c"]
+x = [2, 1, 2]
+y = deduplicate_stable(x)
+assert x == [2, 1, 2] and y == [2, 1]
+""",
+    ),
+    dict(
+        id='lis_reconstruct', tier=3, intaked=True, tag='dp',
+        title='Reconstruct a longest increasing subsequence',
+        prompt="""Implement `lis_reconstruct(nums)` returning one longest strictly increasing subsequence as a list of values. The selected indices must be increasing. If multiple longest subsequences exist, return the lexicographically smallest value sequence. An empty input returns []. Values are integers. The input is not modified.""",
+        tests="""
+assert lis_reconstruct([3, 1, 2, 5, 4]) == [1, 2, 4]
+assert lis_reconstruct([]) == []
+assert lis_reconstruct([4, 3, 2, 1]) == [1]
+assert lis_reconstruct([1, 2, 2, 3]) == [1, 2, 3]
+assert lis_reconstruct([2, 1, 3]) == [1, 3]
+assert lis_reconstruct([3, 1, 2, 4, 0, 5]) == [1, 2, 4, 5]
+""",
+    ),
+
+    dict(
+        id='longest_k_distinct', tier=2, intaked=True, tag='strings',
+        title='Longest substring with at most K distinct characters',
+        prompt="""Implement longest_k_distinct(s, k) returning the length of the longest contiguous substring of s containing at most k distinct characters. If k <= 0 or s is empty, return 0.""",
+        tests="""
+assert longest_k_distinct('eceba', 2) == 3
+assert longest_k_distinct('', 3) == 0
+assert longest_k_distinct('aa', 1) == 2
+assert longest_k_distinct('abc', 0) == 0
+assert longest_k_distinct('abaccc', 2) == 4
+assert longest_k_distinct('abc', 5) == 3
+assert longest_k_distinct('aabbcc', 1) == 2
+""",
+    ),
+    dict(
+        id='egyptian_greedy', tier=2, intaked=True, tag='math',
+        title='Greedy Egyptian fraction',
+        prompt="""Implement egyptian(num, den) returning the list of denominators of the greedy Egyptian-fraction expansion of num/den (a sum of distinct unit fractions, always taking the largest unit fraction that does not exceed the remaining value). Input need not be reduced. Use exact integer arithmetic. If num == 0 return []. Raise ValueError if den <= 0, num < 0, or num >= den.""",
+        tests="""
+def raises(*a):
+    try:
+        egyptian(*a)
+    except ValueError:
+        return True
+    return False
+assert egyptian(2, 3) == [2, 6]
+assert egyptian(4, 13) == [4, 18, 468]
+assert egyptian(6, 14) == [3, 11, 231]
+assert egyptian(1, 5) == [5]
+assert egyptian(0, 5) == []
+assert egyptian(3, 4) == [2, 4]
+assert raises(5, 5) and raises(1, 0) and raises(-1, 3)
+""",
+    ),
+    dict(
+        id='combo_sum_once', tier=2, intaked=True, tag='backtracking',
+        title='Combination sum, each element once',
+        prompt="""Implement combo_sum_once(nums, target) where nums is a list of positive integers (may contain duplicates) and target is a non-negative integer. Return all UNIQUE combinations (as lists sorted ascending) whose elements sum to target, using each element of nums at most once. Two combinations are the same if they contain the same multiset of values. Return the list of combinations sorted lexicographically. If target == 0 the empty combination counts, so return [[]]. If no combination exists return [].""",
+        tests="""
+assert combo_sum_once([10, 1, 2, 7, 6, 1, 5], 8) == [[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]
+assert combo_sum_once([2, 5, 2, 1, 2], 5) == [[1, 2, 2], [5]]
+assert combo_sum_once([1], 0) == [[]]
+assert combo_sum_once([3], 2) == []
+assert combo_sum_once([1, 1, 1], 2) == [[1, 1]]
+assert combo_sum_once([], 4) == []
+""",
+    ),
+    dict(
+        id='set_zeroes', tier=2, intaked=True, tag='matrix',
+        title='Zero out rows and columns',
+        prompt="""Implement set_zeroes(matrix) where matrix is a list of equal-length lists of ints. Return a NEW matrix in which every row and every column that contains a 0 in the original is entirely 0. The input must not be mutated. An empty matrix returns [].""",
+        tests="""
+assert set_zeroes([[1, 1, 1], [1, 0, 1], [1, 1, 1]]) == [[1, 0, 1], [0, 0, 0], [1, 0, 1]]
+assert set_zeroes([[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]]) == [[0, 0, 0, 0], [0, 4, 5, 0], [0, 3, 1, 0]]
+assert set_zeroes([]) == []
+assert set_zeroes([[5]]) == [[5]]
+assert set_zeroes([[0]]) == [[0]]
+m = [[0, 1], [1, 1]]
+assert set_zeroes(m) == [[0, 0], [0, 1]]
+assert m == [[0, 1], [1, 1]]
+""",
+    ),
+    dict(
+        id='kth_largest_stream', tier=2, intaked=True, tag='data-structures',
+        title='Kth largest after each element',
+        prompt="""Implement kth_largest_stream(k, nums) that processes nums left to right and returns a list with one entry per element: the k-th largest value among the elements seen so far (duplicates count separately, so [5, 5] has 2nd largest 5). If fewer than k elements have been seen, the entry is None. Raise ValueError if k <= 0. An empty nums returns [].""",
+        tests="""
+def raises(*a):
+    try:
+        kth_largest_stream(*a)
+    except ValueError:
+        return True
+    return False
+assert kth_largest_stream(3, [4, 5, 8, 2, 3, 5, 10, 9, 10]) == [None, None, 4, 4, 4, 5, 5, 8, 9]
+assert kth_largest_stream(1, [3, 1, 4]) == [3, 3, 4]
+assert kth_largest_stream(2, [-1, -5, -3]) == [None, -5, -3]
+assert kth_largest_stream(2, []) == []
+assert kth_largest_stream(2, [5, 5, 5]) == [None, 5, 5]
+assert raises(0, [1])
+""",
+    ),
+    dict(
+        id='lcs_string', tier=3, intaked=True, tag='dp',
+        title='Longest common subsequence (reconstruct)',
+        prompt="""Implement lcs(a, b) returning a longest common subsequence of strings a and b as a string (characters in order, not necessarily contiguous). If several longest common subsequences exist, ANY one is accepted. If there is none, return ''.""",
+        tests="""
+def is_sub(t, s):
+ it = iter(s)
+ return all(c in it for c in t)
+o = lcs('ABCBDAB', 'BDCABA')
+assert len(o) == 4 and is_sub(o, 'ABCBDAB') and is_sub(o, 'BDCABA')
+assert lcs('AGGTAB', 'GXTXAYB') == 'GTAB'
+assert lcs('abc', 'def') == ''
+assert lcs('', 'abc') == ''
+assert lcs('abc', 'abc') == 'abc'
+assert lcs('aXbXc', 'abc') == 'abc'
+""",
+    ),
+    dict(
+        id='assign_rooms', tier=3, intaked=True, tag='data-structures',
+        title='Meeting room assignment',
+        prompt="""Implement assign_rooms(meetings) where meetings is a list of [start, end] pairs with start < end, treated as half-open [start, end) (a room is free again at time end, so a meeting starting exactly at end may reuse it). Process meetings in order of (start, original index). Each meeting is given the free room with the SMALLEST room number; if no room is free, a new room with the next unused number (0, 1, 2, ...) is opened. Return a list where entry i is the room number assigned to meetings[i]. Empty input returns [].""",
+        tests="""
+assert assign_rooms([[0, 30], [5, 10], [15, 20]]) == [0, 1, 1]
+assert assign_rooms([[1, 3], [3, 5]]) == [0, 0]
+assert assign_rooms([]) == []
+assert assign_rooms([[1, 5], [1, 5], [2, 3]]) == [0, 1, 2]
+assert assign_rooms([[2, 4], [0, 2], [2, 6]]) == [0, 0, 1]
+assert assign_rooms([[0, 10], [1, 2], [3, 4], [5, 6]]) == [0, 1, 1, 1]
+""",
+    ),
+    dict(
+        id='bipartition_coloring', tier=3, intaked=True, tag='graphs',
+        title='Two-coloring a graph',
+        prompt="""Implement bipartition(n, edges) for an undirected graph with nodes 0..n-1 and edges given as a list of [u, v] pairs (the graph may be disconnected, may contain duplicate edges, and may contain self-loops). If the graph is bipartite return a list of length n whose entries are 0 or 1 such that every edge connects nodes of different colors; any valid coloring is accepted. If it is not bipartite (including any self-loop) return None. n == 0 returns [].""",
+        tests="""
+def check(col, n, edges):
+    assert isinstance(col, list) and len(col) == n
+    assert all(c in (0, 1) for c in col)
+    for u, v in edges:
+        assert col[u] != col[v]
+
+e1 = [[0, 1], [1, 2], [2, 3], [3, 0]]
+check(bipartition(4, e1), 4, e1)
+assert bipartition(3, [[0, 1], [1, 2], [2, 0]]) is None
+assert bipartition(0, []) == []
+assert bipartition(2, [[1, 1]]) is None
+e2 = [[0, 1], [2, 3], [0, 1]]
+check(bipartition(5, e2), 5, e2)
+assert bipartition(5, [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0]]) is None
+""",
+    ),
 ]

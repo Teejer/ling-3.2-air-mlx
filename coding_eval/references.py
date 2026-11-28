@@ -233,3 +233,208 @@ def min_window_len(s, t):
                 missing += 1
             i += 1
     return best if best <= len(s) else -1
+
+
+# --- interval_overlap_count (intake) ---
+def interval_overlap_count(intervals):
+    events = []
+    for a, b in intervals:
+        if a > b:
+            raise ValueError
+        events.append((a, 1))
+        events.append((b, -1))
+        events.sort(key=lambda x: (x[0], -x[1]))
+    active = best = 0
+    for _, delta in events:
+        active += delta
+        best = max(best, active)
+    return best
+
+# --- canonical_fraction (intake) ---
+def canonical_fraction(n, d):
+    import math
+    if d == 0:
+        raise ZeroDivisionError
+        if n == 0:
+            return [0, 1]
+    g = math.gcd(n, d)
+    n //= g
+    d //= g
+    if d < 0:
+        n, d = -n, -d
+    return [n, d]
+
+# --- deduplicate_stable (intake) ---
+def deduplicate_stable(items):
+    seen = set()
+    result = []
+    for x in items:
+        if x not in seen:
+            seen.add(x)
+            result.append(x)
+    return result
+
+# --- lis_reconstruct (intake) ---
+def lis_reconstruct(nums):
+    n = len(nums)
+    if not n:
+        return []
+    dp = [1] * n
+    for i in range(n - 1, -1, -1):
+        for j in range(i + 1, n):
+            if nums[j] > nums[i]:
+                dp[i] = max(dp[i], 1 + dp[j])
+    remaining = max(dp)
+    result = []
+    start = 0
+    last = None
+    while remaining:
+        candidates = [i for i in range(start, n) if dp[i] >= remaining and (last is None or nums[i] > last)]
+        best_value = min(nums[i] for i in candidates)
+        chosen = next(i for i in candidates if nums[i] == best_value)
+        result.append(nums[chosen])
+        last = nums[chosen]
+        start = chosen + 1
+        remaining -= 1
+    return result
+
+
+# --- longest_k_distinct (intake) ---
+def longest_k_distinct(s, k):
+    if k <= 0:
+        return 0
+    cnt = {}
+    l = 0
+    best = 0
+    for r, c in enumerate(s):
+        cnt[c] = cnt.get(c, 0) + 1
+        while len(cnt) > k:
+            cnt[s[l]] -= 1
+            if cnt[s[l]] == 0:
+                del cnt[s[l]]
+            l += 1
+        best = max(best, r - l + 1)
+    return best
+
+# --- egyptian_greedy (intake) ---
+def egyptian(num, den):
+    from math import gcd
+    if den <= 0 or num < 0 or num >= den:
+        raise ValueError('invalid')
+    out = []
+    while num > 0:
+        d = -(-den // num)
+        out.append(d)
+        num, den = num * d - den, den * d
+        if num:
+            g = gcd(num, den)
+            num //= g
+            den //= g
+    return out
+
+# --- combo_sum_once (intake) ---
+def combo_sum_once(nums, target):
+    nums = sorted(nums)
+    out = []
+    def go(i, rem, cur):
+        if rem == 0:
+            out.append(cur[:])
+            return
+        for j in range(i, len(nums)):
+            if j > i and nums[j] == nums[j - 1]:
+                continue
+            if nums[j] > rem:
+                break
+            cur.append(nums[j])
+            go(j + 1, rem - nums[j], cur)
+            cur.pop()
+    go(0, target, [])
+    return out
+
+# --- set_zeroes (intake) ---
+def set_zeroes(matrix):
+ rows = {i for i, r in enumerate(matrix) for v in r if v == 0}
+ cols = {j for r in matrix for j, v in enumerate(r) if v == 0}
+ return [[0 if i in rows or j in cols else v for j, v in enumerate(r)] for i, r in enumerate(matrix)]
+
+# --- kth_largest_stream (intake) ---
+def kth_largest_stream(k, nums):
+    import heapq
+    if k <= 0:
+        raise ValueError('k must be positive')
+    h = []
+    out = []
+    for x in nums:
+        if len(h) < k:
+            heapq.heappush(h, x)
+        elif x > h[0]:
+            heapq.heapreplace(h, x)
+        out.append(h[0] if len(h) == k else None)
+    return out
+
+# --- lcs_string (intake) ---
+def lcs(a, b):
+    n, m = len(a), len(b)
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n - 1, -1, -1):
+        for j in range(m - 1, -1, -1):
+            if a[i] == b[j]:
+                dp[i][j] = dp[i + 1][j + 1] + 1
+            else:
+                dp[i][j] = max(dp[i + 1][j], dp[i][j + 1])
+    i = j = 0
+    out = []
+    while i < n and j < m:
+        if a[i] == b[j]:
+            out.append(a[i])
+            i += 1
+            j += 1
+        elif dp[i + 1][j] >= dp[i][j + 1]:
+            i += 1
+        else:
+            j += 1
+    return ''.join(out)
+
+# --- assign_rooms (intake) ---
+def assign_rooms(meetings):
+    import heapq
+    order = sorted(range(len(meetings)), key=lambda i: (meetings[i][0], i))
+    free = []
+    busy = []
+    nxt = 0
+    res = [0] * len(meetings)
+    for i in order:
+        s, e = meetings[i]
+        while busy and busy[0][0] <= s:
+            heapq.heappush(free, heapq.heappop(busy)[1])
+        if free:
+            r = heapq.heappop(free)
+        else:
+            r = nxt
+            nxt += 1
+        res[i] = r
+        heapq.heappush(busy, (e, r))
+    return res
+
+# --- bipartition_coloring (intake) ---
+def bipartition(n, edges):
+    from collections import deque
+    adj = [[] for _ in range(n)]
+    for u, v in edges:
+        adj[u].append(v)
+        adj[v].append(u)
+    col = [-1] * n
+    for s in range(n):
+        if col[s] != -1:
+            continue
+        col[s] = 0
+        q = deque([s])
+        while q:
+            u = q.popleft()
+            for v in adj[u]:
+                if col[v] == -1:
+                    col[v] = 1 - col[u]
+                    q.append(v)
+                elif col[v] == col[u]:
+                    return None
+    return col

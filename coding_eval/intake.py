@@ -50,12 +50,16 @@ def check(cand, known):
 
 
 def fmt_problem(c):
+    # tests/prompt are Python SOURCE embedded in a non-raw triple-quoted
+    # literal: backslashes must be doubled or the literal decodes to garbage
+    # (decode_escaped_fields taught us this)
+    esc = lambda s: s.replace("\\", "\\\\")
     tier = f"tier={c.get('tier', 2)}, intaked=True, "
     return (
         f"    dict(\n        id={c['id']!r}, {tier}tag={c['tag']!r},\n"
         f"        title={c['title']!r},\n"
-        f'        prompt="""{c["prompt"].strip()}""",\n'
-        f'        tests="""\n{c["tests"].strip()}\n""",\n    ),\n'
+        f'        prompt="""{esc(c["prompt"].strip())}""",\n'
+        f'        tests="""\n{esc(c["tests"].strip())}\n""",\n    ),\n'
     )
 
 
