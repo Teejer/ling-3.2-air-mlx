@@ -91,18 +91,14 @@ def llm_reindent(src, base_url="http://127.0.0.1:11234"):
 
 
 def fix_tests(tests):
-    """Return a compilable version of (possibly flattened) tests, or None."""
+    """Return a compilable version of (possibly flattened) tests, or None.
+    LLM first (compiling-but-misnestled DFS reconstructions poison every ref
+    test afterwards); DFS as offline fallback."""
     try:
         compile(tests, "<t>", "exec")
         return tests
     except SyntaxError:
         pass
-    for cand in _candidates(tests):
-        try:
-            compile(cand, "<t>", "exec")
-            return cand
-        except SyntaxError:
-            continue
     llm = llm_reindent(tests)
     if llm:
         try:
@@ -110,6 +106,12 @@ def fix_tests(tests):
             return llm
         except SyntaxError:
             pass
+    for cand in _candidates(tests):
+        try:
+            compile(cand, "<t>", "exec")
+            return cand
+        except SyntaxError:
+            continue
     return None
 
 

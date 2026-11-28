@@ -43,6 +43,11 @@ strings — after every \n write the exact literal spaces (4 per nesting level),
 e.g. "def f(xs):\n    total = 0\n    for x in xs:\n        if x > 0:\n            total += x\n    return total"
 A ref whose lines all start with a single space is silently broken and will be
 rejected by the harness without review.
+FLATTEN-SAFE: transport sometimes strips leading spaces, so keep indented lines
+to a minimum — prefer one-line compounds (`if not nums: return 0`), one-line
+try/except pairs (`try: r = f([[3, 2]])` then a new line `except ValueError: r = "err"`
+at column 0, then `assert r == "err"`), and comprehensions over append-loops.
+Where a block body is unavoidable, indent with exactly 4 spaces per level.
 
 EXAMPLES (note how eval_expr pins division semantics, and course_order uses a checker
 because the answer is non-unique):

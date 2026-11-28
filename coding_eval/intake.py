@@ -75,12 +75,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("candidates")
     ap.add_argument("--promote", action="store_true")
+    ap.add_argument("--exclude", default="", help="comma-separated ids to skip (near-duplicates)")
     args = ap.parse_args()
     cands = json.loads(Path(args.candidates).read_text())
     known = {p["id"] for p in PROBLEMS}
+    excluded = {x.strip() for x in args.exclude.split(",") if x.strip()}
 
     ok, broken = [], []
     for c in cands:
+        if c.get("id") in excluded:
+            print(f"{c.get('id', '?'):<20} SKIP excluded (near-duplicate)")
+            continue
         verdict = check(c, known | {x["id"] for x in ok})
         print(f"{c.get('id', '?'):<20} {verdict}")
         if verdict.startswith("OK"):
