@@ -19,6 +19,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+from fix_indent import looks_flattened, repair_ref  # noqa: E402
 from problems import PROBLEMS  # noqa: E402
 from run_eval import run_tests  # noqa: E402
 
@@ -38,11 +39,18 @@ def check(cand, known):
         return "BROKEN no asserts in tests"
     with tempfile.TemporaryDirectory(dir="/private/tmp/opencode") as wd:
         status, detail = run_tests(wd, cand["ref"], cand["tests"])
-    return "OK" if status == "PASS" else f"BROKEN {status} {detail[:250]}"
+    if status == "PASS":
+        return "OK"
+    if "SYNTAX" in status:
+        got = repair_ref(cand["ref"], cand["tests"])
+        if got:
+            cand["ref"], cand["tests"] = got
+            return "OK (reindented)"
+    return f"BROKEN {status} {detail[:250]}"
 
 
 def fmt_problem(c):
-    tier = f"tier={c.get('tier', 2)}, "
+    tier = f"tier={c.get('tier', 2)}, intaked=True, "
     return (
         f"    dict(\n        id={c['id']!r}, {tier}tag={c['tag']!r},\n"
         f"        title={c['title']!r},\n"
@@ -75,7 +83,7 @@ def main():
     for c in cands:
         verdict = check(c, known | {x["id"] for x in ok})
         print(f"{c.get('id', '?'):<20} {verdict}")
-        if verdict == "OK":
+        if verdict.startswith("OK"):
             ok.append(c)
         elif verdict.startswith("BROKEN"):
             broken.append((c, verdict))
