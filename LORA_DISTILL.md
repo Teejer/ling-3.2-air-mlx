@@ -138,10 +138,13 @@ general skills (roman, rle, rotate_matrix, histogram...). Round-1's
 smaller footprint (last-16, rank 8, scale 20) was already at the
 capacity/data edge; going deeper+heavier crossed it.
 
-Round-3 plan (single-variable): r1's EXACT recipe (last 16 layers, rank 8,
-scale 20, lr 5e-5) on the larger 307-trace set — tests whether data volume
-alone buys held-out transfer. If yes, scale data (teacher traces for the
-zero-trace problems) rather than adapter capacity.
+Round-3 result (same night): r1's recipe on 307 traces = **61/66,
+held-out 10/12, tier-2 33/33** — new champion, +7 over control, +2 over
+r1, and it gained a ZERO-TRACE problem (`weighted_interval_schedule`),
+i.e. real transfer, not memorization. Verdict: scale data, not capacity.
+Remaining fails are mechanism-blocked: 2 ceiling problems +
+`render_escaped_template` (zero-trace) → Phase-1 teacher traces;
+`csv_line`/`roman` flaky.
 
 ## Immediate next steps
 

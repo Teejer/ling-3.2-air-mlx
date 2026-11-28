@@ -1,21 +1,30 @@
 # Morning report — 2026-11-28 (overnight autonomous run)
 
-## Scoreboard (py-server stack, identical conditions where noted)
+## FINAL: Round 3 is the new champion — 61/66, held-out 10/12
 
 | model | overall | held-out | train-pool | note |
 |---|---|---|---|---|
 | Qwen3.8-Flash | 47/49 | 10/12 | 37/37 | engine, old 49-suite |
 | Ling-mixed | 45/49 | 8/12 | 37/37 | engine, old 49-suite |
 | Ling-mixed control (py-server) | 54/66 | 8/12 | 46/54 | no adapter |
-| **Ling-mixed-r1 (LoRA)** | **59/66** | **9/12** | 50/54 | **champion** |
+| Ling-mixed-r1 (LoRA) | 59/66 | 9/12 | 50/54 | 247 traces |
 | Ling-mixed-r2 (LoRA2) | 44/66 | 3/12 | 41/54 | negative result |
-| Ling-mixed-r3 (LoRA3) | running | — | — | lands ~07:15 |
+| **Ling-mixed-r3 (LoRA3)** | **61/66** | **10/12** | **51/54** | **307 traces, T2 33/33** |
 
-r1 vs control on identical serving: **+5 net** (gained `csv_line`,
-`palindrome_sub`, `lru`, `coin_change`, `interval_overlap_count`,
-`normalize_path`, `shortest_cycle_length`; lost `case_convert`,
-`fraction_add`). Held-out 8→9. Adapter verified ACTIVE (train-seq loss
-1.42→0.06 via load_adapters).
+r3 vs control: +8 net (gained egyptian_greedy, weighted_interval_schedule
+— a ZERO-TRACE problem, i.e. genuine generalization from neighbors — plus
+the edge-discipline cluster; lost only `roman`).
+r3's five remaining fails decompose by mechanism:
+`lis_reconstruct` + `parse_kv_escaped` (the cross-model ceiling — Phase-1
+teacher-trace targets), `render_escaped_template` (zero-trace, unlearnable
+by self-distillation — Phase-1), `csv_line` + `roman` (flaky regressions).
+
+## The overnight experiment, in one line
+
+Same harness, same capacity, one variable per round:
+control 54 → r1 (247 traces) 59 → r3 (307 traces) 61; while r2 (2× rank,
+deeper layers, same data) fell to 44. **Data scales; capacity doesn't.**
+
 
 ## What happened
 
@@ -55,6 +64,12 @@ r1 vs control on identical serving: **+5 net** (gained `csv_line`,
 - Kimi: no correction message needed (both broken problems hand-fixed).
   ChatGPT: correction optional for `matrix_diagonal_difference` only
   (near-dup, likely skip).
-- When r3 lands: if held-out ≥ r1, next lever is teacher traces (Kimi API
-  key unlocks the two zero-trace problems + volume); if < r1, r1 stands
-  and we push r1 onto the engine via fuse_engine.sh.
+- r3 landed while you slept (above). Next levers, in order:
+  1. **Engine fast-path**: `./fuse_engine.sh adapters/round3
+     Ling-3.2-air-MLX-mixed-4-8bit-r3e r3e` → puts the champion on the
+     Zig engine for engine-comparable numbers + MTP speed (~40 min).
+  2. **Kimi API key** → Phase-1 traces for the 3 mechanism-blocked
+     failures + volume; r3 says volume is the whole game.
+  3. Daily curriculum drip continues (suite is 66; avoid list synced).
+- archpro still unreachable overnight — retry `scp coding_eval/*.md
+  coding_eval/curriculum_seed_prompt.md archpro:~/` when it's back.

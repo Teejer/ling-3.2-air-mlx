@@ -22,9 +22,9 @@ curl -sf "http://127.0.0.1:$PORT/v1/models" >/dev/null 2>&1 \
 
 .venv/bin/python coding_eval/run_eval.py --base-url "http://127.0.0.1:$PORT" \
   --expect Ling --model-name default_model > coding_eval/eval-round3.log 2>&1 \
-  || { echo "EVALR2_FAIL"; tail -10 coding_eval/eval-round3.log; exit 1; }
+  || { echo "EVALR3_FAIL"; tail -10 coding_eval/eval-round3.log; exit 1; }
 
 LAST=$(ls -t coding_eval/results/*.json | head -1)
 STAMP=$(basename "$LAST" | grep -o '[0-9]\{8\}-[0-9]\{6\}')
 mv "$LAST" "coding_eval/results/Ling-3.2-air-MLX-mixed-4-8bit-r3-$STAMP.json"
-echo "EVALR2_OK: $(tail -1 coding_eval/eval-round3.log) -> retagged r2-$STAMP"
+echo "EVALR3_OK: $(tail -1 coding_eval/eval-round3.log) -> retagged r3-$STAMP"
